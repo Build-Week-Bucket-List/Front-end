@@ -14,7 +14,7 @@ export const registerUser = (regInfo, history) => dispatch =>
     dispatch({ type: REGISTER_USER_START })
 
     axios
-        .post(`https://hypedupharris-starthere.herokuapp.com/createnewuser`, regInfo)
+        .post(`https://hypedupharris-bucketlist.herokuapp.com/signup`, regInfo)
         .then(res =>
             {
                 console.log("res from registerUser:", res)
@@ -25,7 +25,7 @@ export const registerUser = (regInfo, history) => dispatch =>
         .catch(err =>
             {
                 console.log("err from registerUser", err)
-                dispatch({ type: REGISTER_USER_FAIL, payload: err })
+                dispatch({ type: REGISTER_USER_FAIL, payload: err.response })
             })
 }
 
@@ -45,6 +45,7 @@ export function loginUser(creds, history) {
             .then(res =>
                 {
                     console.log("res from loginUser:", res)
+                    localStorage.setItem('token', res.data)
                     dispatch({ type: LOGIN_USER_SUCCESS, payload: res })
                     history.push('/home')
                 })
