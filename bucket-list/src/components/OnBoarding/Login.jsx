@@ -40,7 +40,7 @@ const Login = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.loginUser(creds);
+    props.loginUser(creds, props.history);
   };
 
 
