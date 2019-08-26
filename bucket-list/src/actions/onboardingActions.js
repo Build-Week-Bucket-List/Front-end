@@ -22,7 +22,7 @@ export const registerUser = regInfo => dispatch =>
             })
         .catch(err =>
             {
-                console.log("err from registerUser", err)
+                console.log("err from registerUser", err.response)
                 dispatch({ type: REGISTER_USER_FAIL, payload: err })
             })
 }

@@ -52,7 +52,7 @@ export const approveFriend = (username) => {
             dispatch({ type: APPROVE_FRIEND_SUCCESS, payload: res.data })
         })
         .catch(err => {
-            console.log('There was an error in approveFriend', res)
+            console.log('There was an error in approveFriend', err)
             dispatch({ type: APPROVE_FRIEND_FAIL, payload: err.response })
         })
     }

@@ -5,6 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "axios": "^0.19.0",
+    "formik": "^1.5.8",
+    "formik-material-ui": "^0.0.22",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.0",
@@ -12,7 +14,8 @@
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
