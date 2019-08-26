@@ -8,6 +8,16 @@ import {
     GET_LIST_START,
     GET_LIST_SUCCESS,
     GET_LIST_FAIL,
+    SEARCH_FRIEND_START,
+    SEARCH_FRIEND_SUCCESS,
+    SEARCH_FRIEND_FAIL, 
+    REQUEST_FRIEND_START,
+    REQUEST_FRIEND_SUCCESS,
+    REQUEST_FRIEND_FAIL,
+    APPROVE_FRIEND_START,
+    APPROVE_FRIEND_SUCCESS,
+    APPROVE_FRIEND_FAIL,
+
 } from '../actions'
 
 const initialState = {
@@ -15,7 +25,8 @@ const initialState = {
     friends: [],
     isLoading: false,
     error: '',
-
+    curRequestedFriends: [],
+    friendSearchResults: [],
 }
 
 export const reducer = (state = initialState, action) =>
@@ -72,6 +83,63 @@ export const reducer = (state = initialState, action) =>
                 bucketList: action.payload
             }
         case GET_LIST_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case SEARCH_FRIEND_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: ''
+            }
+        case SEARCH_FRIEND_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                friendSearchResults: [action.payload]
+            }
+        case SEARCH_FRIEND_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case REQUEST_FRIEND_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: ''
+            }
+        case REQUEST_FRIEND_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                curRequestedFriends: [...state.curRequestedFriends, action.payload]
+            }
+        case REQUEST_FRIEND_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case APPROVE_FRIEND_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: ''
+            }
+        case APPROVE_FRIEND_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                friends: [...state.friends, action.payload]
+            }
+        case APPROVE_FRIEND_FAIL:
             return {
                 ...state,
                 isLoading: false,
