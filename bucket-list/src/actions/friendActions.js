@@ -26,3 +26,34 @@ export const searchFriend = (username) => {
     }
 }
 
+export const requestFriend = (username) => {
+    return dispatch => {
+        dispatch({ type: REQUEST_FRIEND_START });
+        axiosWithAuth()
+        .get('', username)
+        .then(res => {
+            console.log('response from requestFriend', res)
+            dispatch({ type: REQUEST_FRIEND_SUCCESS, payload: res.data })
+            })
+        .catch(err => {
+            console.log('There was an error in requestFriend', err)
+            dispatch({ type: REQUEST_FRIEND_FAIL, payload: err.response })
+        })
+    }
+}
+
+export const approveFriend = (username) => {
+    return dispatch => {
+        dispatch({ type: APPROVE_FRIEND_START });
+        axiosWithAuth()
+        .put('', username)
+        .then(res => {
+            console.log('response from approveFriend', res)
+            dispatch({ type: APPROVE_FRIEND_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            console.log('There was an error in approveFriend', res)
+            dispatch({ type: APPROVE_FRIEND_FAIL, payload: err.response })
+        })
+    }
+}

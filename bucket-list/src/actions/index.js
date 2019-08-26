@@ -17,7 +17,7 @@ export {
     GET_ITEM_START,
     GET_ITEM_SUCCESS,
     GET_ITEM_FAIL,
-    getBucket,
+    getList,
 } from './bucketActions'
 
 export {
@@ -29,7 +29,7 @@ export {
     REQUEST_FRIEND_FAIL,
     APPROVE_FRIEND_START,
     APPROVE_FRIEND_SUCCESS,
-    APPROVE_FRIEND_FAIL, 
+    APPROVE_FRIEND_FAIL,
     searchFriend,
     requestFriend,
     approveFriend,
