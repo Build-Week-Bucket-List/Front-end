@@ -15,7 +15,7 @@ export const registerUser = regInfo => dispatch =>
     dispatch({ type: REGISTER_USER_START })
 
     axios
-        .post(`${endPoint}/register`, regInfo)
+        .post(`https://hypedupharris-starthere.herokuapp.com/createnewuser`, regInfo)
         .then(res =>
             {
                 console.log("res from registerUser:", res)
@@ -33,7 +33,12 @@ export const loginUser = creds => dispatch =>
     dispatch({ type: LOGIN_USER_START })
 
     axios
-        .post(`${endPoint}/login`, creds)
+        .post(`https://hypedupharris-bucketlist.herokuapp.com/login`, `grant_type=password&username=${formState.username}&password=${formState.password}`, {
+            headers: {
+               Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+               'Content-Type': 'application/x-www-form-urlencoded'
+                }
+          })
         .then(res =>
             {
                 console.log("res from loginUser:", res)
