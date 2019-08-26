@@ -21,7 +21,7 @@ export const registerUser = (regInfo, history) => dispatch =>
                 dispatch({ type: REGISTER_USER_SUCCESS, payload: res })
             })
         .then(dispatch(loginUser(regInfo, history)))
-        
+
         .catch(err =>
             {
                 console.log("err from registerUser", err)
@@ -30,7 +30,7 @@ export const registerUser = (regInfo, history) => dispatch =>
 }
 
 export function loginUser(creds, history) {
-    
+
     return dispatch =>
     {
         dispatch({ type: LOGIN_USER_START })
@@ -45,7 +45,7 @@ export function loginUser(creds, history) {
             .then(res =>
                 {
                     console.log("res from loginUser:", res)
-                    localStorage.setItem('token', res.data)
+                    localStorage.setItem('token', JSON.stringify(res.data))
                     dispatch({ type: LOGIN_USER_SUCCESS, payload: res })
                     history.push('/home')
                 })
