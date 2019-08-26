@@ -5,6 +5,9 @@ import {
     LOGIN_USER_START,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
+    GET_LIST_START,
+    GET_LIST_SUCCESS,
+    GET_LIST_FAIL,
 } from '../actions'
 
 const initialState = {
@@ -48,6 +51,31 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: ''
+            }
+        case LOGIN_USER_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case GET_LIST_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: ''
+            }
+        case GET_LIST_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                bucketList: action.payload
+            }
+        case GET_LIST_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
             }
         default:
             return state
