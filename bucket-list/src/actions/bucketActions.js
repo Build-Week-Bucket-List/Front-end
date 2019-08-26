@@ -13,12 +13,28 @@ export const getList = () => {
         axiosWithAuth()
         .get('')
         .then(res => {
-            console.log('response from getBucket',res);
+            console.log('response from getList', res);
             dispatch({ type: GET_LIST_SUCCESS, payload: res.data })
         })
         .catch(err => {
-            console.log('There was an error in getBucket axios call', err);
+            console.log('There was an error in getList axios call', err);
             dispatch({ type: GET_LIST_FAIL, payload: err.response })
+        })
+    }
+}
+
+export const getItem = () => {
+    return dispatch => {
+        dispatch({ type: GET_ITEM_START });
+        axiosWithAuth()
+        .get('')
+        .then(res => {
+            console.log('resonse from getItem', res);
+            dispatch({ type: GET_ITEM_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            console.log('There was an error in getItem axios call', err);
+            dispatch({ type: GET_ITEM_FAIL, payload: err.response })
         })
     }
 }
