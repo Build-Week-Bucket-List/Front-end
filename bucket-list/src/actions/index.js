@@ -17,5 +17,5 @@ export {
     GET_ITEM_START,
     GET_ITEM_SUCCESS,
     GET_ITEM_FAIL,
-    getBucket,
+    getList,
 } from './bucketActions'
