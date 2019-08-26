@@ -1,15 +1,20 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
-import {action} from "../../actions"
+import ListItem from './ListItem'
+import {getList} from "../../actions"
 
 const BucketList = _ =>
 {
-    const dispatch = useDispatch()
     const state = useSelector(state => state)
+    const dispatch = useDispatch()
+    useEffect(_ =>
+        {
+            dispatch(getList())
+        },[])
 
     return (
         <>
-            Bucket!
+            {state.bucketList.length > 0 ? state.bucketList.map(item => <ListItem key={item.id} item={item} /> ) : null }
         </>
     )
 }
