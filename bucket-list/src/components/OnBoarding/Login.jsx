@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions';
-
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
-import Textfield from '@material-ui/core/Textfield';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 
@@ -46,15 +46,16 @@ const Login = props => {
 
   return (
     <div className={ classes.container }>
+      <Link to="/register">Register</Link>
       <form onSubmit={ e => handleSubmit(e) }>
-        <Textfield
+        <TextField
           id='username'
           name='username'
           label='Username'
           className={ classes.textField }
           onChange={ e => handleChange(e) }
         />
-        <Textfield
+        <TextField
           id='password'
           name='password'
           label='Password'
