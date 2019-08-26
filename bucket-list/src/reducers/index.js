@@ -8,7 +8,10 @@ import {
 } from '../actions'
 
 const initialState = {
-    error: "",
+    bucketList: [],
+    friends: [],
+    isLoading: false,
+    error: '',
 
 }
 
@@ -16,6 +19,25 @@ export const reducer = (state = initialState, action) =>
 {
     switch(action.type)
     {
+        case REGISTER_USER_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: ''
+            }
+        case REGISTER_USER_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: ''
+            }
+        case REGISTER_USER_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+
         default:
             return state
     }
