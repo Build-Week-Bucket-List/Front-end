@@ -76,7 +76,6 @@ const Login = props => {
 };
 
 const mapStateToProps = state => {
-  console.log(state, 'login state')
   return {
     loginUser: state.loginUser
   }
