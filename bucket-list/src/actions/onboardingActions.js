@@ -8,7 +8,6 @@ export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS"
 export const LOGIN_USER_FAIL = "LOGIN_USER_FAIL"
 export const LOGOUT_USER = "LOGOUT_USER"
 
-const endPoint = ""
 
 export const registerUser = regInfo => dispatch =>
 {
@@ -28,21 +27,22 @@ export const registerUser = regInfo => dispatch =>
             })
 }
 
-export const loginUser = creds => dispatch =>
+export const loginUser = (creds, history) => dispatch =>
 {
     dispatch({ type: LOGIN_USER_START })
 
     axios
-        .post(`https://hypedupharris-bucketlist.herokuapp.com/login`, `grant_type=password&username=${formState.username}&password=${formState.password}`, {
+        .post(`https://hypedupharris-bucketlist.herokuapp.com/login`, `grant_type=password&username=${creds.username}&password=${creds.password}`, {
             headers: {
-               Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
-               'Content-Type': 'application/x-www-form-urlencoded'
+                Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
                 }
-          })
+        })
         .then(res =>
             {
                 console.log("res from loginUser:", res)
                 dispatch({ type: LOGIN_USER_SUCCESS, payload: res })
+                history.push('/home')
             })
         .catch(err =>
             {
