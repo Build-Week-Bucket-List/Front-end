@@ -27,7 +27,6 @@ const Register = props => {
     username: "",
     password: ""
   });
-
   const classes = useStyles();
 
   const handleChange = e => {

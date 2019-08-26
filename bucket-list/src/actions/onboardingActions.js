@@ -19,8 +19,9 @@ export const registerUser = (regInfo, history) => dispatch =>
             {
                 console.log("res from registerUser:", res)
                 dispatch({ type: REGISTER_USER_SUCCESS, payload: res })
+                history.push("/")
             })
-        .then(dispatch(loginUser(regInfo, history)))
+        // .then(dispatch(loginUser(regInfo, history)))
 
         .catch(err =>
             {
