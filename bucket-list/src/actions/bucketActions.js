@@ -1,0 +1,7 @@
+export const GET_LIST_START = "GET_LIST_START"
+export const GET_LIST_SUCCESS = "GET_LIST_SUCCESS"
+export const GET_LIST_FAIL = "GET_LIST_FAIL"
+export const GET_ITEM_START = "GET_ITEM_START"
+export const GET_ITEM_SUCCESS = "GET_ITEM_SUCCESS"
+export const GET_ITEM_FAIL = "GET_ITEM_FAIL"
+
