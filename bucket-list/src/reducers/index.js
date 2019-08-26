@@ -21,12 +21,22 @@ import {
 } from '../actions'
 
 const initialState = {
-    bucketList: [],
+    bucketList: [
+        {
+            isCompleted: false,
+            title: "Finish this App",
+            dateCreated: Date.now(),
+            image: "https://i.imgur.com/pBmNhc1.jpg",
+            description:"We will finish this app before Thursday",
+            journal: '',
+            comments: '',
+        }],
     friends: [],
     isLoading: false,
     error: '',
     curRequestedFriends: [],
     friendSearchResults: [],
+    username: 'Qwerty4'
 }
 
 export const reducer = (state = initialState, action) =>

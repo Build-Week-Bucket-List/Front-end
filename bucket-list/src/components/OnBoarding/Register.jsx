@@ -58,6 +58,7 @@ const Register = props => {
           id="password"
           name="password"
           label="Password"
+          type="password"
           className={classes.textField}
           onChange={e => handleChange(e)}
         />
