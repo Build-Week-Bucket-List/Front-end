@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import ListItem from './ListItem'
 import {getList, resetBucketSearch} from "../../actions"
@@ -9,18 +9,26 @@ const BucketList = _ =>
 {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
+    const [localBucket, setLocalBucket] = useState([])
+    const [searchString, setSearchString] = useState('')
     useEffect(_ =>
         {
             dispatch(getList())
-            dispatch(resetBucketSearch())
-        },[])
+            setLocalBucket(state.bucketList)
+            // dispatch(resetBucketSearch())
+        },[state.bucketList, searchString])
 
     return (
         <>
-            <PrimarySearchAppBar searchPlaceholder={'Search List...'} page={`bucket`} />
+            <PrimarySearchAppBar 
+                searchPlaceholder={'Search List...'} 
+                page={`bucket`}  
+                searchString={searchString} 
+                setSearchString={setSearchString}
+            />
             <BucketGrid>
-                {state.bucketList.length > 0 ? state.bucketList
-                    .filter(item => item.itemtitle.toLowerCase().includes(state.searchBucketString.toLowerCase()))
+                {localBucket.length > 0 ? localBucket
+                    .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
                     .map(item => <ListItem key={item.id} item={item} /> ) : null }
             </BucketGrid>
         </>

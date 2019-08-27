@@ -20,8 +20,6 @@ import {
     ADD_ITEM_START,
     ADD_ITEM_SUCCESS,
     ADD_ITEM_FAIL,
-    RESET_BUCKET_SEARCH,
-    SEARCH_BUCKET_LIST,
     SEARCH_FRIENDS_START,
     SEARCH_FRIENDS_SUCCESS,
     SEARCH_FRIENDS_FAIL,
@@ -32,7 +30,6 @@ const initialState = {
     bucketList: [
         {
             id: 0,
-
             completed: false,
             itemtitle: "Finish this App",
             dateCreated: Date.now(),
@@ -98,7 +95,6 @@ const initialState = {
     curRequestedFriends: [],
     friendSearchResults: [],
     username: 'Qwerty4',
-    searchBucketString: ''
 }
 
 export const reducer = (state = initialState, action) =>
@@ -249,16 +245,6 @@ export const reducer = (state = initialState, action) =>
                 }),
                 isLoading: false,
                 error: ''
-            }             
-        case RESET_BUCKET_SEARCH:
-            return {
-                ...state,
-                searchBucketString: ''
-            }
-        case SEARCH_BUCKET_LIST:
-            return {
-                ...state,
-                searchBucketString: action.payload
             }
         default:
             return state
