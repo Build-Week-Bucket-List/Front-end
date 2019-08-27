@@ -11,12 +11,17 @@ const BucketList = _ =>
     const dispatch = useDispatch()
     const [localBucket, setLocalBucket] = useState([])
     const [searchString, setSearchString] = useState('')
-    useEffect(_ =>
+    
+    useEffect(_ => 
         {
             dispatch(getList())
+
+        }, [])
+    useEffect(_ =>
+        {
             setLocalBucket(state.bucketList)
-            // dispatch(resetBucketSearch())
-        },[searchString])
+            
+        },[searchString, state.bucketList])
 
     return (
         <>
