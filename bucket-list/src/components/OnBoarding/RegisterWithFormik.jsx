@@ -33,7 +33,7 @@ const RegisterForm = () => {
       <Form>
         <Field
           name="name"
-          placeholder="Name"
+          label="Name"
           component={TextField}
           margin="normal"
           type="text"
@@ -42,7 +42,7 @@ const RegisterForm = () => {
         <Field
           type="password"
           name="password"
-          placeholder="password"
+          label="password"
           component={TextField}
           className={classes.textField}
         />
