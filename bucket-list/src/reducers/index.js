@@ -17,6 +17,9 @@ import {
     APPROVE_FRIEND_START,
     APPROVE_FRIEND_SUCCESS,
     APPROVE_FRIEND_FAIL,
+    ADD_ITEM_START,
+    ADD_ITEM_SUCCESS,
+    ADD_ITEM_FAIL
 
 } from '../actions'
 
@@ -202,6 +205,25 @@ export const reducer = (state = initialState, action) =>
                 friends: [...state.friends, action.payload]
             }
         case APPROVE_FRIEND_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case ADD_ITEM_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: '',
+            }
+        case ADD_ITEM_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                //TODO: Update bucketList based either on payload or in action
+            }
+        case ADD_ITEM_FAIL:
             return {
                 ...state,
                 isLoading: false,
