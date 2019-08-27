@@ -17,7 +17,14 @@ import {
     APPROVE_FRIEND_START,
     APPROVE_FRIEND_SUCCESS,
     APPROVE_FRIEND_FAIL,
-
+    ADD_ITEM_START,
+    ADD_ITEM_SUCCESS,
+    ADD_ITEM_FAIL,
+    RESET_BUCKET_SEARCH,
+    SEARCH_BUCKET_LIST,
+    SEARCH_FRIENDS_START,
+    SEARCH_FRIENDS_SUCCESS,
+    SEARCH_FRIENDS_FAIL,
 } from '../actions'
 
 const initialState = {
@@ -35,7 +42,7 @@ const initialState = {
         {
             id: 1,
             isCompleted: false,
-            title: "Finish this App",
+            title: "Have a Nap",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -45,7 +52,7 @@ const initialState = {
         {
             id: 2,
             isCompleted: false,
-            title: "Finish this App",
+            title: "Meet at 11",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -55,7 +62,7 @@ const initialState = {
         {
             id: 3,
             isCompleted: false,
-            title: "Finish this App",
+            title: "Be done in a snap",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -65,7 +72,7 @@ const initialState = {
         {
             id: 4,
             isCompleted: false,
-            title: "Finish this App",
+            title: "Testing some more text",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -75,7 +82,7 @@ const initialState = {
         {
             id: 5,
             isCompleted: false,
-            title: "Finish this App",
+            title: "And now this",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -88,7 +95,8 @@ const initialState = {
     error: '',
     curRequestedFriends: [],
     friendSearchResults: [],
-    username: 'Qwerty4'
+    username: 'Qwerty4',
+    searchBucketString: ''
 }
 
 export const reducer = (state = initialState, action) =>
@@ -206,6 +214,35 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: action.payload
+            }
+        case ADD_ITEM_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: '',
+            }
+        case ADD_ITEM_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                //TODO: Update bucketList based either on payload or in action
+            }
+        case ADD_ITEM_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case RESET_BUCKET_SEARCH:
+            return {
+                ...state,
+                searchBucketString: ''
+            }
+        case SEARCH_BUCKET_LIST:
+            return {
+                ...state,
+                searchBucketString: action.payload
             }
         default:
             return state
