@@ -68,6 +68,7 @@ const ModalFormik = withFormik({
   }),
 
   handleSubmit(values, { props }) {
+    console.log('submitted modal', values)
     props.addItem({itemtitle: values.title, itemdesc: values.desc})
     props.setOpen(false)
   }
