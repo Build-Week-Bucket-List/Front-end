@@ -20,7 +20,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 345,
+        width: 345,
     },
     media: {
         height: 0,
@@ -45,14 +45,16 @@ const ListItem = props =>
 {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    
     const state = useSelector(state => state)
 
     function handleExpandClick() {
+
     setExpanded(!expanded);
     }
 
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} style={{ maxHeight: expanded ? '' : '382px'}}>
             <CardHeader
             avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
@@ -69,7 +71,7 @@ const ListItem = props =>
             />
             <CardMedia
             className={classes.media}
-            image={props.item.image ? props.item.image : null}
+            image={props.item.image ? props.item.image : 'https://i.imgur.com/pBmNhc1.jpg'}
             />
             <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
