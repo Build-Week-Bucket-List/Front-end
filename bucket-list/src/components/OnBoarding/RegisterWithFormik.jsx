@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     margin: "0 10px",
-    padding: "25px 0"
   }
 }));
 
