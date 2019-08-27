@@ -25,13 +25,14 @@ import {
     SEARCH_FRIENDS_START,
     SEARCH_FRIENDS_SUCCESS,
     SEARCH_FRIENDS_FAIL,
+    TOGGLE_COMPLETE,
 } from '../actions'
 
 const initialState = {
     bucketList: [
         {
             id: 0,
-            isCompleted: false,
+            completed: false,
             title: "Finish this App",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
@@ -41,7 +42,7 @@ const initialState = {
         },
         {
             id: 1,
-            isCompleted: false,
+            completed: false,
             title: "Have a Nap",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
@@ -51,7 +52,7 @@ const initialState = {
         },
         {
             id: 2,
-            isCompleted: false,
+            completed: false,
             title: "Meet at 11",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
@@ -61,7 +62,7 @@ const initialState = {
         },
         {
             id: 3,
-            isCompleted: false,
+            completed: false,
             title: "Be done in a snap",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
@@ -71,7 +72,7 @@ const initialState = {
         },
         {
             id: 4,
-            isCompleted: false,
+            completed: false,
             title: "Testing some more text",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
@@ -81,7 +82,7 @@ const initialState = {
         },
         {
             id: 5,
-            isCompleted: false,
+            completed: false,
             title: "And now this",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
@@ -233,7 +234,21 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: action.payload
-            }
+            }        
+        case TOGGLE_COMPLETE: 
+            return {
+                ...state.map(item => {
+                    if (item.id === action.payload) {
+                        item.completed = !item.completed;
+                        return item;
+                    }
+                    else {
+                        return item;
+                    }
+                }),
+                isLoading: false,
+                error: ''
+            }             
         case RESET_BUCKET_SEARCH:
             return {
                 ...state,
