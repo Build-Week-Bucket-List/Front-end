@@ -9,6 +9,9 @@ export const GET_ITEM_FAIL = "GET_ITEM_FAIL"
 export const ADD_ITEM_START = "ADD_ITEM_START"
 export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS"
 export const ADD_ITEM_FAIL = "ADD_ITEM_FAIL"
+export const EDIT_ITEM_START = "EDIT_ITEM_START"
+export const EDIT_ITEM_SUCCESS = "EDIT_ITEM_SUCCESS"
+export const EDIT_ITEM_FAIL = "EDIT_ITEM_FAIL"
 export const TOGGLE_COMPLETE = "TOGGLE_COMPLETE"
 
 
@@ -43,6 +46,23 @@ export const addItem = (item) => dispatch =>
                 {
                     console.log("err from addItem", err)
                     dispatch({ type: ADD_ITEM_FAIL, payload: err.response })
+                })
+}
+export const editItem = (item) => dispatch =>
+{
+    dispatch({ type: EDIT_ITEM_START })
+    console.log('item from editItem', item)
+    axiosWithAuth()
+        .put('https://hypedupharris-bucketlist.herokuapp.com/list/item', item)
+            .then(res =>
+                {
+                    console.log("res from editItem", res)
+                    dispatch({ type: EDIT_ITEM_SUCCESS, payload: res })
+                })
+            .catch(err =>
+                {
+                    console.log("err from editItem", err)
+                    dispatch({ type: EDIT_ITEM_FAIL, payload: err.response })
                 })
 }
 

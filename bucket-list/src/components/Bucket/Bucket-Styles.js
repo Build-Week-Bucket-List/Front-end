@@ -20,3 +20,12 @@ export const BucketGrid = styled.div`
         margin: 20px auto;
     }
 `;
+
+export const ItemButton = styled.button`
+// align-text: center;
+// padding-right: 10px;
+// background: none;
+// border: none;
+// width: 20px;
+// height: 20px;
+`
