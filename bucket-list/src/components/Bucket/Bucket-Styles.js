@@ -29,3 +29,8 @@ export const ItemButton = styled.button`
 // width: 20px;
 // height: 20px;
 `
+export const MenuItem = styled.div`
+border-bottom: 1px solid grey;
+padding: 10px;
+cursor: pointer;
+`

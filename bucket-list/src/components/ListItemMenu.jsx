@@ -5,7 +5,9 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { grey } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { ItemButton } from './Bucket/Bucket-Styles';
+import { ItemButton, MenuItem } from './Bucket/Bucket-Styles';
+import EditItemModal from './EditItemModal';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,8 +16,9 @@ const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
     top: 36,
+    width: 130,
     right: 0,
-    left: 0,
+    //left: 0,
   },
   fake: {
     backgroundColor: grey[200],
@@ -30,14 +33,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function ClickAway() {
   const [open, setOpen] = React.useState(false);
+  const [editOpen, setEditOpen] = React.useState(false);
   const classes = useStyles();
 
   const handleClick = () => {
     setOpen(prev => !prev);
   };
 
-  const handleClickAway = () => {
-    setOpen(false);
+  const handleClickAway = (event) => {
+    if(!editOpen) setOpen(false);
   };
 
   const fake = <div className={classes.fake} />;
@@ -50,11 +54,9 @@ export default function ClickAway() {
           {/* <MoreVertIcon onClick={handleClick}/> */}
           {open ? (
             <Paper className={classes.paper}>
-              {fake}
-              {fake}
-              {fake}
-              {fake}
-              {fake}
+                <MenuItem>Mark Complete</MenuItem>                           
+                <MenuItem><EditItemModal setEditOpen={setEditOpen} editOpen={editOpen} /></MenuItem>                
+                <MenuItem>Delete</MenuItem>                
             </Paper>
           ) : null}
         </div>
