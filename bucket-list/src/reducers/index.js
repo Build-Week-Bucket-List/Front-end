@@ -23,6 +23,9 @@ import {
     SEARCH_FRIENDS_START,
     SEARCH_FRIENDS_SUCCESS,
     SEARCH_FRIENDS_FAIL,
+    EDIT_ITEM_START,
+    EDIT_ITEM_SUCCESS,
+    EDIT_ITEM_FAIL,
     TOGGLE_COMPLETE,
 } from '../actions'
 
@@ -231,7 +234,26 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: action.payload
-            }        
+            } 
+        case EDIT_ITEM_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: '',
+            }
+        case EDIT_ITEM_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                //TODO: Update bucketList based either on payload or in action
+            }
+        case EDIT_ITEM_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
         case TOGGLE_COMPLETE: 
             return {
                 ...state.map(item => {

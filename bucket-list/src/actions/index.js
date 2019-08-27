@@ -22,6 +22,10 @@ export {
     ADD_ITEM_FAIL,
     getList,
     addItem,
+    editItem,
+    EDIT_ITEM_START,
+    EDIT_ITEM_SUCCESS,
+    EDIT_ITEM_FAIL,
     TOGGLE_COMPLETE,
 } from './bucketActions'
 

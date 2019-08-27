@@ -16,7 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import CommentIcon from '@material-ui/icons/Comment';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+
+import ClickAway from '../ListItemMenu';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -62,9 +64,9 @@ const ListItem = props =>
                 </Avatar>
             }
             action={
-                <IconButton aria-label="settings">
-                <MoreVertIcon />
-                </IconButton>
+                // <IconButton aria-label="settings">                
+                 <ClickAway />
+                // </IconButton>
             }
             title={props.item.itemtitle}
             subheader={props.item.dateCreated}
