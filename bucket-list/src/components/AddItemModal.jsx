@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -68,8 +68,8 @@ const ModalFormik = withFormik({
   }),
 
   handleSubmit(values, { props }) {
-    console.log('submitted modal')
     props.addItem({itemtitle: values.title, itemdesc: values.desc})
+    props.setOpen(false)
   }
 })(addItemForm);
 
@@ -141,7 +141,7 @@ export default function AddItemModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <ModalForm />
+            <ModalForm setOpen={setOpen}/>
           </div>
         </Fade>
       </Modal>
