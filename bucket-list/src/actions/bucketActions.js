@@ -16,13 +16,13 @@ export const getList = () => {
     return dispatch => {
         dispatch({ type: GET_LIST_START });
         axiosWithAuth()
-        .get('')
+        .get('https://hypedupharris-bucketlist.herokuapp.com/list/user')
         .then(res => {
             console.log('response from getList', res);
-            dispatch({ type: GET_LIST_SUCCESS, payload: res.data })
+            dispatch({ type: GET_LIST_SUCCESS, payload: res.data.items })
         })
         .catch(err => {
-            console.log('There was an error in getList axios call', err);
+            console.log('There was an error in getList axios call', err.response);
             dispatch({ type: GET_LIST_FAIL, payload: err.response })
         })
     }
@@ -32,7 +32,7 @@ export const addItem = (item) => dispatch =>
 {
     dispatch({ type: {ADD_ITEM_START} })
     axiosWithAuth()
-        .put('')
+        .post('https://hypedupharris-bucketlist.herokuapp.com/list/item', item)
             .then(res =>
                 {
                     console.log("res from addItem", res)

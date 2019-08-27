@@ -17,5 +17,6 @@ export const BucketGrid = styled.div`
     @media (max-width: 550px)
     {
         grid-template-columns: 1fr;
+        margin: 20px auto;
     }
 `;
