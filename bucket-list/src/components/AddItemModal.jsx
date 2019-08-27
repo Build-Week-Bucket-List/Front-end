@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring';
+import AddIcon from '@material-ui/icons/Add';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -56,9 +58,9 @@ export default function SpringModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        react-spring
-      </button>
+      <IconButton aria-label="add new item" color="inherit" onClick={handleOpen}>
+        <AddIcon />
+      </IconButton>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"

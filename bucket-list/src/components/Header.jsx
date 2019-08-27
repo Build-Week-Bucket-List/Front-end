@@ -18,6 +18,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { useDispatch } from 'react-redux'
 import { searchBucketList } from '../actions'
 
+import AddItemModal from './AddItemModal'
+
 const useStyles = makeStyles(theme => ({
     grow: {
         flexGrow: 1,
@@ -201,6 +203,7 @@ export default function PrimarySearchAppBar(props) {
                     name='search'
                 />
                 </div>
+                <AddItemModal />
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                 <IconButton aria-label="show new mails" color="inherit">
