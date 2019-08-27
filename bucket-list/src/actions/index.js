@@ -38,3 +38,13 @@ export {
     requestFriend,
     approveFriend,
 } from './friendActions'
+
+export {
+    RESET_BUCKET_SEARCH,
+    SEARCH_BUCKET_LIST,
+    SEARCH_FRIENDS_START,
+    SEARCH_FRIENDS_SUCCESS,
+    SEARCH_FRIENDS_FAIL,
+    resetBucketSearch,
+    searchBucketList
+} from './searchActions'

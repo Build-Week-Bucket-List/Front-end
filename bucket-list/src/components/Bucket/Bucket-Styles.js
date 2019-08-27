@@ -6,15 +6,15 @@ export const BucketGrid = styled.div`
     grid-gap: 20px;
     /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     grid-template-columns: auto auto auto auto;
-    @media (max-width: 900)
+    @media (max-width: 900px)
     {
         grid-template-columns: 1fr 1fr 1fr;
     }
-    @media (max-width: 700)
+    @media (max-width: 700px)
     {
         grid-template-columns: 1fr 1fr;
     }
-    @media (max-width: 550)
+    @media (max-width: 550px)
     {
         grid-template-columns: 1fr;
     }
