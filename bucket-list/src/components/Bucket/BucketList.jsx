@@ -1,7 +1,9 @@
 import React, {useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import ListItem from './ListItem'
-import {getList} from "../../actions"
+import {getList, resetBucketSearch} from "../../actions"
+import { BucketGrid } from './Bucket-Styles'
+import PrimarySearchAppBar from '../Header'
 
 const BucketList = _ =>
 {
@@ -10,11 +12,17 @@ const BucketList = _ =>
     useEffect(_ =>
         {
             dispatch(getList())
+            dispatch(resetBucketSearch())
         },[])
 
     return (
         <>
-            {state.bucketList.length > 0 ? state.bucketList.map(item => <ListItem key={item.id} item={item} /> ) : null }
+            <PrimarySearchAppBar searchPlaceholder={'Search List...'} page={`bucket`} />
+            <BucketGrid>
+                {state.bucketList.length > 0 ? state.bucketList
+                    .filter(item => item.title.toLowerCase().includes(state.searchBucketString.toLowerCase()))
+                    .map(item => <ListItem key={item.id} item={item} /> ) : null }
+            </BucketGrid>
         </>
     )
 }
