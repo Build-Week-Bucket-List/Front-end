@@ -1,34 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { Form, Field, withFormik } from "formik";
 import { TextField } from "formik-material-ui";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions"
+import { registerUser } from "../../actions";
+import { makeStyles } from "@material-ui/core/styles";
 
-const RegisterForm = (props) => {
-  const { touched, values, errors, status } = props
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "30%",
+    margin: "100px auto"
+  },
+  button: {
+    margin: "25px auto"
+  },
+  textField: {
+    margin: "0 10px",
+    padding: "25px 0"
+  }
+}));
+
+const RegisterForm = () => {
+  const classes = useStyles();
+
   return (
-    <div className="signup">
-      <h1>Register For Bucket List</h1>
+    <div className={classes.container}>
+      <Link to="/">Login</Link>
       <Form>
         <Field
           name="name"
           placeholder="Name"
           component={TextField}
           margin="normal"
-          // fullWidth
           type="text"
+          className={classes.textField}
         />
         <Field
           type="password"
           name="password"
           placeholder="password"
           component={TextField}
-          margin="normal"
-          // fullWidth
+          className={classes.textField}
         />
-        <Button type="submit">
+        <Button 
+          type="submit" 
+          color="primary" 
+          variant="contained"
+          className={classes.button}
+          >
           Submit!
         </Button>
       </Form>
@@ -37,31 +60,40 @@ const RegisterForm = (props) => {
 };
 
 const Register = withFormik({
-  mapPropsToValues({ name, email, password}) {
+  mapPropsToValues({ name, password }) {
     return {
       name: name || "",
-      // email: email || "",
       password: password || ""
     };
   },
 
   validationSchema: Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    // email: Yup.string().required("Email is required"),
     password: Yup.string().required("Password is required")
   }),
 
-  handleSubmit(values, props) {
-    console.log('testSubmit')
-    console.log('username, password, history', values.name, values.password, props.props.history)
-    props.props.registerUser({username: values.name, password: values.password}, props.props.history)
+  handleSubmit(values, { props }) {
+    console.log("testSubmit");
+    console.log(
+      "username, password, history",
+      values.name,
+      values.password,
+      props.history
+    );
+    props.registerUser(
+      { username: values.name, password: values.password },
+      props.history
+    );
   }
 })(RegisterForm);
 
 const mapStateToProps = state => {
-    return {};
-}
+  return {};
+};
 
-const RegisterConnect = connect(mapStateToProps, {registerUser})(Register)
+const RegisterConnect = connect(
+  mapStateToProps,
+  { registerUser }
+)(Register);
 
-export default RegisterConnect
+export default RegisterConnect;
