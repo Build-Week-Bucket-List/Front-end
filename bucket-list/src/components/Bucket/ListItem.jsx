@@ -65,7 +65,7 @@ const ListItem = props =>
                 <MoreVertIcon />
                 </IconButton>
             }
-            title={props.item.title}
+            title={props.item.itemtitle}
             subheader={props.item.dateCreated}
             />
             <CardMedia
