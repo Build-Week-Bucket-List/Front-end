@@ -9,7 +9,7 @@ import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import { TextField } from "formik-material-ui";
-import { addItem } from "../../actions";
+import { addItem } from "../actions";
 import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
