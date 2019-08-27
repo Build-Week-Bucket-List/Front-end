@@ -22,6 +22,8 @@ export {
     ADD_ITEM_FAIL,
     getList,
     addItem,
+    TOGGLE_COMPLETE,
+   
 } from './bucketActions'
 
 export {
