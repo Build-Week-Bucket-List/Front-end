@@ -9,6 +9,8 @@ export const GET_ITEM_FAIL = "GET_ITEM_FAIL"
 export const ADD_ITEM_START = "ADD_ITEM_START"
 export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS"
 export const ADD_ITEM_FAIL = "ADD_ITEM_FAIL"
+export const TOGGLE_COMPLETE = "TOGGLE_COMPLETE"
+
 
 export const getList = () => {
     return dispatch => {
@@ -17,10 +19,10 @@ export const getList = () => {
         .get('https://hypedupharris-bucketlist.herokuapp.com/list/user')
         .then(res => {
             console.log('response from getList', res);
-            dispatch({ type: GET_LIST_SUCCESS, payload: res.data })
+            dispatch({ type: GET_LIST_SUCCESS, payload: res.data.items })
         })
         .catch(err => {
-            console.log('There was an error in getList axios call', err);
+            console.log('There was an error in getList axios call', err.response);
             dispatch({ type: GET_LIST_FAIL, payload: err.response })
         })
     }
@@ -41,4 +43,10 @@ export const addItem = (item) => dispatch =>
                     console.log("err from addItem", err)
                     dispatch({ type: ADD_ITEM_FAIL, payload: err.response })
                 })
+}
+
+export const toggleComplete = () => {
+    return dispatch => {
+        dispatch({ type: TOGGLE_COMPLETE });        
+    }
 }

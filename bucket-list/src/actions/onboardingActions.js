@@ -46,13 +46,13 @@ export function loginUser(creds, history) {
             .then(res =>
                 {
                     console.log("res from loginUser:", res)
-                    localStorage.setItem('token', JSON.stringify(res.data.access_token))
+                    localStorage.setItem('token', res.data.access_token)
                     dispatch({ type: LOGIN_USER_SUCCESS, payload: res })
                     history.push('/home')
                 })
             .catch(err =>
                 {
-                    console.log("err from loginUser", err)
+                    console.log("err from loginUser", err.response)
                     dispatch({ type: LOGIN_USER_FAIL, payload: err })
                 })
     }
