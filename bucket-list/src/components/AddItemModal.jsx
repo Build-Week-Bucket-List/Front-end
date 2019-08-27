@@ -8,6 +8,7 @@ import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import { TextField } from "formik-material-ui";
+import { addItem } from "../../actions";
 import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
@@ -52,7 +53,7 @@ const addItemForm = () => {
   );
 };
 
-const ModalForm = withFormik({
+const ModalFormik = withFormik({
   mapPropsToValues({ title, desc }) {
     return {
       title: title || "",
@@ -65,8 +66,19 @@ const ModalForm = withFormik({
     password: Yup.string().required("A desc is required")
   }),
 
-  handleSubmit(values) {}
+  handleSubmit(values, { props }) {
+    props.addItem({title: values.title, descriptiom: values.desc})
+  }
 })(addItemForm);
+
+const mapStateToProps = state => {
+  return {};
+};
+
+const ModalForm = connect(
+  mapStateToProps,
+  { addItem }
+)(ModalFormik);
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
