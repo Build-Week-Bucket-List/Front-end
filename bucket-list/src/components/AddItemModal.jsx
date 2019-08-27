@@ -63,12 +63,13 @@ const ModalFormik = withFormik({
   },
 
   validationSchema: Yup.object().shape({
-    name: Yup.string().required("A title is required"),
-    password: Yup.string().required("A desc is required")
+    title: Yup.string().required("A title is required"),
+    desc: Yup.string().required("A desc is required")
   }),
 
   handleSubmit(values, { props }) {
-    props.addItem({title: values.title, descriptiom: values.desc})
+    console.log('submitted modal')
+    props.addItem({itemtitle: values.title, itemdesc: values.desc})
   }
 })(addItemForm);
 

@@ -16,7 +16,7 @@ const BucketList = _ =>
             dispatch(getList())
             setLocalBucket(state.bucketList)
             // dispatch(resetBucketSearch())
-        },[state.bucketList, searchString])
+        },[searchString])
 
     return (
         <>

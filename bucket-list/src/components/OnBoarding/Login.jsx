@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions';
 import { Link } from 'react-router-dom'
@@ -24,6 +24,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = props => {
+  useEffect(_ =>
+    {
+      if(localStorage.getItem('token'))
+      {
+        props.history.push('/home')
+      }
+    }, [])
   const [creds, setCreds] = useState({
     username: '',
     password: ''
