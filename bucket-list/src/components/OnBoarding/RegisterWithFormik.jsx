@@ -6,7 +6,8 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions"
 
-const RegisterForm = ({ touched, values, errors, status }) => {
+const RegisterForm = (props) => {
+  const { touched, values, errors, status } = props
   return (
     <div className="signup">
       <h1>Register For Bucket List</h1>
@@ -16,7 +17,8 @@ const RegisterForm = ({ touched, values, errors, status }) => {
           placeholder="Name"
           component={TextField}
           margin="normal"
-          fullWidth
+          // fullWidth
+          type="text"
         />
         <Field
           type="password"
@@ -24,9 +26,9 @@ const RegisterForm = ({ touched, values, errors, status }) => {
           placeholder="password"
           component={TextField}
           margin="normal"
-          fullWidth
+          // fullWidth
         />
-        <Button type="submit" component={Button}>
+        <Button type="submit">
           Submit!
         </Button>
       </Form>
@@ -35,22 +37,24 @@ const RegisterForm = ({ touched, values, errors, status }) => {
 };
 
 const Register = withFormik({
-  mapPropsToValues({ name, email, password, props }) {
+  mapPropsToValues({ name, email, password}) {
     return {
       name: name || "",
-      email: email || "",
+      // email: email || "",
       password: password || ""
     };
   },
 
   validationSchema: Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    email: Yup.string().required("Email is required"),
+    // email: Yup.string().required("Email is required"),
     password: Yup.string().required("Password is required")
   }),
 
   handleSubmit(values, props) {
-    registerUser({username: values.name, password: values.password}, props.history)
+    console.log('testSubmit')
+    console.log('username, password, history', values.name, values.password, props.props.history)
+    props.props.registerUser({username: values.name, password: values.password}, props.props.history)
   }
 })(RegisterForm);
 
@@ -60,4 +64,4 @@ const mapStateToProps = state => {
 
 const RegisterConnect = connect(mapStateToProps, {registerUser})(Register)
 
-export default RegisterConnect;
+export default RegisterConnect

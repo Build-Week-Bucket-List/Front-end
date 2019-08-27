@@ -46,7 +46,7 @@ export function loginUser(creds, history) {
             .then(res =>
                 {
                     console.log("res from loginUser:", res)
-                    localStorage.setItem('token', JSON.stringify(res.data))
+                    localStorage.setItem('token', JSON.stringify(res.data.access_token))
                     dispatch({ type: LOGIN_USER_SUCCESS, payload: res })
                     history.push('/home')
                 })
