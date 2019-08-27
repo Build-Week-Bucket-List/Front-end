@@ -5,7 +5,7 @@ import {getList, resetBucketSearch} from "../../actions"
 import { BucketGrid } from './Bucket-Styles'
 import PrimarySearchAppBar from '../Header'
 
-const BucketList = _ =>
+const BucketList = props =>
 {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
@@ -15,7 +15,6 @@ const BucketList = _ =>
     useEffect(_ => 
         {
             dispatch(getList())
-
         }, [])
     useEffect(_ =>
         {
@@ -26,8 +25,8 @@ const BucketList = _ =>
     return (
         <>
             <PrimarySearchAppBar 
-                searchPlaceholder={'Search List...'} 
-                page={`bucket`}  
+                searchPlaceholder={'Search List...'}   
+                history={props.history}
                 searchString={searchString} 
                 setSearchString={setSearchString}
             />
