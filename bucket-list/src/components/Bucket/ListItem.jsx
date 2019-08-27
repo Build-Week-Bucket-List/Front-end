@@ -74,7 +74,7 @@ const ListItem = props =>
             />
             <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
-                {props.item.description}
+                {props.item.itemdesc}
             </Typography>
             </CardContent>
             <CardActions disableSpacing>

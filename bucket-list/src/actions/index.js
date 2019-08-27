@@ -23,7 +23,6 @@ export {
     getList,
     addItem,
     TOGGLE_COMPLETE,
-   
 } from './bucketActions'
 
 export {
