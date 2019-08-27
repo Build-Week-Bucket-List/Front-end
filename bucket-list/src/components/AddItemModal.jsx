@@ -3,22 +3,60 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring';
+import { Form, Field, withFormik } from 'formik';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
+import { TextField } from "formik-material-ui";
+import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
+    padding: theme.spacing(2, 4, 3)
+  }
 }));
+
+const addItemForm = () => {
+  return (
+    <Form>
+      <Field 
+        component={TextField} 
+        name="title" 
+        label="Title" />
+      <Field
+        component={TextField}
+        name="desc"
+        label="Description"
+        multiline
+        rows="4"
+      />
+    </Form>
+  );
+};
+
+const ModalForm = withFormik({
+  mapPropsToValues({ title, desc }) {
+    return {
+      title: title || "",
+      desc: desc || ""
+    };
+  },
+
+  validationSchema: Yup.object().shape({
+    name: Yup.string().required("A title is required"),
+    password: Yup.string().required("A desc is required")
+  }),
+
+  handleSubmit(values) {
+  }
+})(addItemForm);
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -34,7 +72,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
       if (!open && onExited) {
         onExited();
       }
-    },
+    }
   });
 
   return (
@@ -44,7 +82,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function SpringModal() {
+export default function AddItemModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -58,9 +96,9 @@ export default function SpringModal() {
 
   return (
     <div>
-      <IconButton aria-label="add new item" color="inherit" onClick={handleOpen}>
-        <AddIcon />
-      </IconButton>
+      <button type="button" onClick={handleOpen}>
+        {'react-spring'}
+      </button>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -70,12 +108,12 @@ export default function SpringModal() {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 500
         }}
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            
+            <ModalForm />
           </div>
         </Fade>
       </Modal>
