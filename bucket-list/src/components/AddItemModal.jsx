@@ -1,11 +1,12 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import { useSpring, animated } from 'react-spring';
-import { Form, Field, withFormik } from 'formik';
-import AddIcon from '@material-ui/icons/Add';
-import IconButton from '@material-ui/core/IconButton';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import { useSpring, animated } from "react-spring";
+import { Form, Field, withFormik } from "formik";
+import AddIcon from "@material-ui/icons/Add";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import { TextField } from "formik-material-ui";
 import * as Yup from "yup";
 
@@ -20,23 +21,33 @@ const useStyles = makeStyles(theme => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column"
   }
 }));
 
 const addItemForm = () => {
   return (
     <Form>
-      <Field 
-        component={TextField} 
-        name="title" 
-        label="Title" />
+      <Field component={TextField} name="title" label="Title" fullWidth/>
       <Field
         component={TextField}
         name="desc"
         label="Description"
         multiline
         rows="4"
+        fullWidth
       />
+      <Button
+        type="submit"
+        color="primary"
+        variant="contained"
+        fullWidth
+      >
+        Save
+      </Button>
     </Form>
   );
 };
@@ -54,8 +65,7 @@ const ModalForm = withFormik({
     password: Yup.string().required("A desc is required")
   }),
 
-  handleSubmit(values) {
-  }
+  handleSubmit(values) {}
 })(addItemForm);
 
 const Fade = React.forwardRef(function Fade(props, ref) {
@@ -96,7 +106,11 @@ export default function AddItemModal() {
 
   return (
     <div>
-      <IconButton aria-label="add new item" color="inherit" onClick={handleOpen}>
+      <IconButton
+        aria-label="add new item"
+        color="inherit"
+        onClick={handleOpen}
+      >
         <AddIcon />
       </IconButton>
       <Modal
