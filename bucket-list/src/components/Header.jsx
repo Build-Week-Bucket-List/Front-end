@@ -85,13 +85,11 @@ const useStyles = makeStyles(theme => ({
 export default function PrimarySearchAppBar(props) {
     
     const dispatch = useDispatch()
-    const {searchPlaceholder, page} = props
+    const {searchPlaceholder, page, searchString, setSearchString} = props
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-
-    const [searchInput, setSearchInput] = useState('')
 
 
     const isMenuOpen = Boolean(anchorEl);
@@ -116,11 +114,7 @@ export default function PrimarySearchAppBar(props) {
 
     const handleChange = event =>
     {
-        setSearchInput(event.target.value)
-        if (page === 'bucket')
-        {
-            dispatch(searchBucketList(searchInput))
-        }
+        setSearchString(event.target.value)
     }
 
     const menuId = 'primary-search-account-menu';
@@ -198,7 +192,7 @@ export default function PrimarySearchAppBar(props) {
                     input: classes.inputInput,
                     }}
                     inputProps={{ 'aria-label': 'search' }}
-                    value={searchInput}
+                    value={searchString}
                     onChange={handleChange}
                     name='search'
                 />
