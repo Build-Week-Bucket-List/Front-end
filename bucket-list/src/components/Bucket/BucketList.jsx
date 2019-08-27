@@ -20,7 +20,7 @@ const BucketList = _ =>
             <PrimarySearchAppBar searchPlaceholder={'Search List...'} page={`bucket`} />
             <BucketGrid>
                 {state.bucketList.length > 0 ? state.bucketList
-                    .filter(item => item.title.toLowerCase().includes(state.searchBucketString.toLowerCase()))
+                    .filter(item => item.itemtitle.toLowerCase().includes(state.searchBucketString.toLowerCase()))
                     .map(item => <ListItem key={item.id} item={item} /> ) : null }
             </BucketGrid>
         </>

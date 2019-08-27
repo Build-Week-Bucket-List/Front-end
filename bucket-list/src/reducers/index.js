@@ -32,7 +32,7 @@ const initialState = {
         {
             id: 0,
             isCompleted: false,
-            title: "Finish this App",
+            itemtitle: "Finish this App",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -42,7 +42,7 @@ const initialState = {
         {
             id: 1,
             isCompleted: false,
-            title: "Have a Nap",
+            itemtitle: "Have a Nap",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -52,7 +52,7 @@ const initialState = {
         {
             id: 2,
             isCompleted: false,
-            title: "Meet at 11",
+            itemtitle: "Meet at 11",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -62,7 +62,7 @@ const initialState = {
         {
             id: 3,
             isCompleted: false,
-            title: "Be done in a snap",
+            itemtitle: "Be done in a snap",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -72,7 +72,7 @@ const initialState = {
         {
             id: 4,
             isCompleted: false,
-            title: "Testing some more text",
+            itemtitle: "Testing some more text",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
@@ -82,7 +82,7 @@ const initialState = {
         {
             id: 5,
             isCompleted: false,
-            title: "And now this",
+            itemtitle: "And now this",
             dateCreated: Date.now(),
             image: "https://i.imgur.com/pBmNhc1.jpg",
             description:"We will finish this app before Thursday",
