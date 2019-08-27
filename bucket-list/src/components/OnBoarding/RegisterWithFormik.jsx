@@ -73,13 +73,6 @@ const Register = withFormik({
   }),
 
   handleSubmit(values, { props }) {
-    console.log("testSubmit");
-    console.log(
-      "username, password, history",
-      values.name,
-      values.password,
-      props.history
-    );
     props.registerUser(
       { username: values.name, password: values.password },
       props.history
