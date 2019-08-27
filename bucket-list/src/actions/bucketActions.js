@@ -40,7 +40,7 @@ export const addItem = (item) => dispatch =>
             .then(res =>
                 {
                     console.log("res from addItem", res)
-                    dispatch({ type: ADD_ITEM_SUCCESS, payload: res })
+                    dispatch({ type: ADD_ITEM_SUCCESS, payload: res.data })
                 })
             .catch(err =>
                 {

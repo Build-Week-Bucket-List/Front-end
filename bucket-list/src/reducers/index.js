@@ -227,7 +227,7 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: '',
-                //TODO: Update bucketList based either on payload or in action
+                bucketList: [...state.bucketList, action.payload]
             }
         case ADD_ITEM_FAIL:
             return {
