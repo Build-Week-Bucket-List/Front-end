@@ -30,6 +30,7 @@ const initialState = {
             description:"We will finish this app before Thursday",
             journal: '',
             comments: '',
+            id: 0
         }],
     friends: [],
     isLoading: false,
