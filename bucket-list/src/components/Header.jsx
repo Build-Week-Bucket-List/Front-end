@@ -17,6 +17,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 
 import { useDispatch } from 'react-redux'
 import { searchBucketList } from '../actions'
+import { logoutUser } from '../actions/onboardingActions';
 
 import AddItemModal from './AddItemModal'
 
@@ -130,6 +131,7 @@ export default function PrimarySearchAppBar(props) {
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={_ => dispatch(logoutUser(props.history))}>Logout</MenuItem>
         </Menu>
         );
 

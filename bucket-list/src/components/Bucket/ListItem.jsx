@@ -14,8 +14,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import CommentIcon from '@material-ui/icons/Comment';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
@@ -78,12 +77,9 @@ const ListItem = props =>
             </Typography>
             </CardContent>
             <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-                <ShareIcon />
-            </IconButton>
+            <IconButton aria-label="add comment">
+                <CommentIcon />
+            </IconButton>            
             <IconButton
                 className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
