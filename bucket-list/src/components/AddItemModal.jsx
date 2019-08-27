@@ -96,9 +96,9 @@ export default function AddItemModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        {'react-spring'}
-      </button>
+      <IconButton aria-label="add new item" color="inherit" onClick={handleOpen}>
+        <AddIcon />
+      </IconButton>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
