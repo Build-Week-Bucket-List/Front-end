@@ -60,9 +60,9 @@ export default function ClickAway({item}) {
           {open ? (
             <Paper className={classes.paper}>
                 <MenuItem onClick={_ => dispatch(toggleComplete(item))}>Mark {!item.completed ? `Completed` : `Incomplete`}</MenuItem>                           
-                <MenuItem><EditItemModal setEditOpen={setEditOpen} editOpen={editOpen} /></MenuItem>                
+                <MenuItem><EditItemModal item={item} setEditOpen={setEditOpen} editOpen={editOpen} /></MenuItem>                
                 <MenuItem>Delete</MenuItem>
-                <MenuItem><AddImageModal setImageOpen={setImageOpen} imageOpen={imageOpen} /></MenuItem>                
+                <MenuItem><AddImageModal item={item} setImageOpen={setImageOpen} imageOpen={imageOpen} /></MenuItem>                
             </Paper>
           ) : null}
         </div>
