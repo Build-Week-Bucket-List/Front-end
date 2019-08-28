@@ -3,29 +3,28 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Link, Route, BrowserRouter, Switch } from "react-router-dom";
-import BucketList from './Bucket/BucketList';
-import { Archive } from './Bucket/Archive';
+import { Link } from "react-router-dom";
 
 import HomeIcon from '@material-ui/icons/Home';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-});
+const useStyles = makeStyles(theme => ({
+    root: {
+      flexGrow: 1,
+      backgroundColor: theme.palette.background.paper,
+    },
+  }));
 
-export default function HeaderTabs() {
+export default function HeaderTabs(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(props.history.location.pathname === '/archive' ? 1 : 0);
 
   function handleChange(event, newValue) {
     setValue(newValue);
+    console.log('newValue', newValue)
   }
 
-  return (
-    <BrowserRouter>
+  return (    
         <Paper className={classes.root}>
             <Tabs
                 value={value}
@@ -36,50 +35,7 @@ export default function HeaderTabs() {
             >
                 <Tab icon={<HomeIcon />} component={Link} to='/home' />
                 <Tab icon={<CheckBoxIcon /> } component={Link} to='/archive' />                  
-            </Tabs>
-            {/* <Switch>
-                <Route exact path='/home' />
-                <Route path='/archive' component={Archive} />
-            </Switch> */}
-        </Paper>
-    </BrowserRouter>
+            </Tabs>           
+        </Paper>   
   );
 }
-
-// import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Button from '@material-ui/core/Button';
-// import HomeIcon from '@material-ui/icons/Home';
-// import CheckBoxIcon from '@material-ui/icons/CheckBox';
-
-// const useStyles = makeStyles(theme => ({
-//   button: {
-//     margin: theme.spacing(1),
-//   },
-//   input: {
-//     display: 'none',
-//   },
-// }));
-
-// export default function OutlinedButtons() {
-//   const classes = useStyles();
-
-//   return (
-//     <div>
-//        <input
-//         accept="image/*"
-//         className={classes.input}
-//         id="outlined-button-file"
-//         multiple
-//         type="file"
-//       />
-     
-//       <Button variant="outlined" color="inherit" className={classes.button}>
-//         Home
-//       </Button>
-//       <Button variant="outlined" color="inherit" className={classes.button}>
-//         Complete
-//       </Button>
-//     </div>
-//   );
-// }

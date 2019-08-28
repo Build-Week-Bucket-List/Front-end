@@ -13,26 +13,30 @@ const BucketList = props =>
     const dispatch = useDispatch()
     const [localBucket, setLocalBucket] = useState([])
     const [searchString, setSearchString] = useState('')
+    // user does not need to hit enter to run the search
+    const isEnterReq = false
     
     useEffect(_ => 
         {
             dispatch(getList())
+            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
         }, [])
     useEffect(_ =>
         {
             setLocalBucket(state.bucketList)
+            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
             
         },[searchString, state.bucketList])
 
     return (
         <>
             <PrimarySearchAppBar 
+                isEnterReq={isEnterReq}
                 searchPlaceholder={'Search List...'}   
                 history={props.history}
                 searchString={searchString} 
                 setSearchString={setSearchString}
             />
-            <HeaderTabs />
             <BucketGrid>
                 {localBucket.length > 0 ? localBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))

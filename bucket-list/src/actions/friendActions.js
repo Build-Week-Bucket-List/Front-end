@@ -10,6 +10,7 @@ export const APPROVE_FRIEND_START = "APPROVE_FRIEND_START"
 export const APPROVE_FRIEND_SUCCESS = "APPROVE_FRIEND_SUCCESS"
 export const APPROVE_FRIEND_FAIL = "APPROVE_FRIEND_FAIL"
 
+
 export const searchFriend = (username) => {
     return dispatch => {
         dispatch({ type: SEARCH_FRIEND_START });

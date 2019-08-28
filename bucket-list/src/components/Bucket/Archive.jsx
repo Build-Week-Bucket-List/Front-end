@@ -11,16 +11,19 @@ const Archive = props =>
 {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
-    const [localBucket, setLocalBucket] = useState([])
+    const [archiveBucket, setArchiveBucket] = useState([])
     const [searchString, setSearchString] = useState('')
     
     useEffect(_ => 
         {
+            console.log('history', props.history)
             dispatch(getList())
+            if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
         }, [])
     useEffect(_ =>
         {
-            setLocalBucket(state.bucketList.filter(item => item.completed === true))
+            setArchiveBucket(state.bucketList.filter(item => item.completed === true))
+            console.log('archiveBucket:', archiveBucket)
             
         },[searchString, state.bucketList])
 
@@ -32,9 +35,9 @@ const Archive = props =>
                 searchString={searchString} 
                 setSearchString={setSearchString}
             />
-            <HeaderTabs />
+            {/* <HeaderTabs /> */}
             <BucketGrid>
-                {localBucket.length > 0 ? localBucket
+                {archiveBucket.length > 0 ? archiveBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
                     .map(item => <ListItem key={item.id} item={item} /> ) : null }
             </BucketGrid>

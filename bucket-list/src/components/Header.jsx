@@ -16,7 +16,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 import { useDispatch } from 'react-redux'
-import { searchBucketList } from '../actions'
+import { searchBucketList, searchFriend } from '../actions'
 import { logoutUser } from '../actions/onboardingActions';
 
 import AddItemModal from './AddItemModal'
@@ -87,12 +87,12 @@ const useStyles = makeStyles(theme => ({
 export default function PrimarySearchAppBar(props) {
     
     const dispatch = useDispatch()
-    const {searchPlaceholder, page, searchString, setSearchString} = props
+    const {searchPlaceholder, isEnterReq, searchString, setSearchString} = props
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-
+    
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -118,6 +118,8 @@ export default function PrimarySearchAppBar(props) {
     {
         setSearchString(event.target.value)
     }
+
+    const checkEnter = event => (event.keyCode === 13 && isEnterReq) ? searchFriend(searchString) : null
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -201,7 +203,7 @@ export default function PrimarySearchAppBar(props) {
                 />
                 </div>
                 <AddItemModal />
-                <HeaderTabs />
+                <HeaderTabs history={props.history} />
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                 <IconButton aria-label="show new mails" color="inherit">
