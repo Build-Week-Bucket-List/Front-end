@@ -55,17 +55,17 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function AddImageModal() {
+export default function AddImageModal(props) {
+	const {setImageOpen, imageOpen} = props;
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const [image, setImage] = useState()
 
   const handleOpen = () => {
-    setOpen(true);
+    setImageOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setImageOpen(false);
   };
 
   useEffect(() => {
@@ -73,24 +73,18 @@ export default function AddImageModal() {
 					const data = new FormData()
 					data.append('image', image)
           axios.post('https://imgur-bucketlist.herokuapp.com/upload', data)
-          	.then(res => console.log(res))
+          	.then(res => console.log(res.data))
       }
   })
 
   return (
     <div>
-      <IconButton
-        aria-label="add new item"
-        color="inherit"
-        onClick={handleOpen}
-      >
-        <AddIcon />
-      </IconButton>
+			<div onClick={handleOpen}>Change image</div>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
         className={classes.modal}
-        open={open}
+        open={imageOpen}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -98,7 +92,7 @@ export default function AddImageModal() {
           timeout: 500
         }}
       >
-        <Fade in={open}>
+        <Fade in={imageOpen}>
           <div className={classes.paper}>
             <input
               accept="image/*"
