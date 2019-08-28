@@ -14,15 +14,14 @@ const BucketList = props =>
     // user does not need to hit enter to run the search
     const isEnterReq = false
     
-    // useEffect(_ => 
-    //     {
-    //         dispatch(getList())
-    //         if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
-    //     }, [])
-    useEffect(_ =>
+    useEffect(_ => 
         {
             dispatch(getList())
-            //setLocalBucket(state.bucketList)
+            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
+        }, [])
+    useEffect(_ =>
+        {
+            setLocalBucket(state.bucketList)
             if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
             
         },[searchString, state.bucketList])
