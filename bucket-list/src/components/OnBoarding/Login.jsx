@@ -53,7 +53,7 @@ const Login = props => {
 
   return (
     <div className={ classes.container }>
-      <Link to="/register">Register</Link>
+
       <form onSubmit={ e => handleSubmit(e) }>
         <TextField
           id='username'
