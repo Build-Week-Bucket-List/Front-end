@@ -23,6 +23,7 @@ import {
     SEARCH_FRIENDS_START,
     SEARCH_FRIENDS_SUCCESS,
     SEARCH_FRIENDS_FAIL,
+    CLEAR_FRIEND_SEARCH_RESULTS,
     EDIT_ITEM_START,
     EDIT_ITEM_SUCCESS,
     EDIT_ITEM_FAIL,
@@ -94,7 +95,7 @@ const initialState = {
             comments: '',
         },
     ],
-    friends: [],
+    friends: [{id: 0, name: "Bob"}, {id: 1, name: "Bobby"}, {id: 2, name: "Robert"}, {id: 3, name: "Roberta"}, {id: 4, name: "Bobbert"}],
     isLoading: false,
     error: '',
     curRequestedFriends: [],
@@ -172,13 +173,18 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: '',
-                friendSearchResults: [action.payload]
+                friendSearchResults: action.payload
             }
         case SEARCH_FRIEND_FAIL:
             return {
                 ...state,
                 isLoading: false,
                 error: action.payload
+            }
+        case CLEAR_FRIEND_SEARCH_RESULTS:
+            return {
+                ...state,
+                friendSearchResults: []
             }
         case REQUEST_FRIEND_START:
             return {

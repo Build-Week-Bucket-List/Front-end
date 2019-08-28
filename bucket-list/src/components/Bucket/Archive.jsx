@@ -16,15 +16,14 @@ const Archive = props =>
     
     useEffect(_ => 
         {
-            console.log('history', props.history)
             dispatch(getList())
             if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
         }, [])
-    useEffect(_ =>
+    useEffect( _ =>
         {
+            console.log('state.bucketlist', state.bucketList)
             setArchiveBucket(state.bucketList.filter(item => item.completed === true))
             console.log('archiveBucket:', archiveBucket)
-            
         },[searchString, state.bucketList])
 
     return (
