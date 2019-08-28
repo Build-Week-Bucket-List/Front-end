@@ -80,6 +80,7 @@ export const toggleComplete = (item) => dispatch =>
                     console.log("res from toggleComplete", res)
                     dispatch({ type: TOGGLE_COMPLETE_SUCCESS, payload: {res: res, itemid: item.id} })
                 })
+            .then(_ => dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from toggleComplete", err)
