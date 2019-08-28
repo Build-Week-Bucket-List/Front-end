@@ -94,7 +94,7 @@ const initialState = {
             comments: '',
         },
     ],
-    friends: [],
+    friends: [{id: 0, name: "Bob"}, {id: 1, name: "Bobby"}, {id: 2, name: "Robert"}, {id: 3, name: "Roberta"}, {id: 4, name: "Bobbert"}],
     isLoading: false,
     error: '',
     curRequestedFriends: [],

@@ -118,7 +118,15 @@ export default function PrimarySearchAppBar(props) {
         setSearchString(event.target.value)
     }
 
-    const checkEnter = event => (event.keyCode === 13 && isEnterReq) ? searchFriend(searchString) : null
+    const checkEnter = event => 
+    {
+        if(event.keyCode === 13 && isEnterReq)
+        {
+            dispatch(searchFriend(searchString))
+            setSearchString('')
+            console.log("blah")
+        }
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -198,10 +206,11 @@ export default function PrimarySearchAppBar(props) {
                     inputProps={{ 'aria-label': 'search' }}
                     value={searchString}
                     onChange={handleChange}
+                    onKeyDown={checkEnter}
                     name='search'
                 />
                 </div>
-                <AddItemModal />
+                {!props.isEnterReq && <AddItemModal /> }
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                 <IconButton aria-label="show new mails" color="inherit">
