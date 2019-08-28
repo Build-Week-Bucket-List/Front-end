@@ -5,13 +5,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Link } from "react-router-dom";
 
+
 import HomeIcon from '@material-ui/icons/Home';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
-      backgroundColor: theme.palette.background.paper,
+      backgroundColor: 'theme.palette.background.paper',
+      // backgroundColor: '#3F51B5',
     },
   }));
 

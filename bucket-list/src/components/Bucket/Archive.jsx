@@ -14,16 +14,18 @@ const Archive = props =>
     const [archiveBucket, setArchiveBucket] = useState([])
     const [searchString, setSearchString] = useState('')
     
-    useEffect(_ => 
-        {
-            console.log('history', props.history)
-            dispatch(getList())
-            if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
-        }, [])
+    // useEffect(_ => 
+    //     {
+    //         console.log('history', props.history)
+    //         dispatch(getList())
+    //         if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
+    //     }, [])
     useEffect(_ =>
         {
-            setArchiveBucket(state.bucketList.filter(item => item.completed === true))
-            console.log('archiveBucket:', archiveBucket)
+            dispatch(getList())
+            if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
+            //setArchiveBucket(state.bucketList.filter(item => item.completed === true))
+            //console.log('archiveBucket:', archiveBucket)
             
         },[searchString, state.bucketList])
 
