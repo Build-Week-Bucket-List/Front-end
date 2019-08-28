@@ -9,6 +9,7 @@ import { ItemButton, MenuItem } from './Bucket/Bucket-Styles';
 import EditItemModal from './EditItemModal';
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleComplete } from '../actions'
+import AddImageModal from './AddImageModal'
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,6 +37,7 @@ const useStyles = makeStyles(theme => ({
 export default function ClickAway({item}) {
   const [open, setOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
+  const [imageOpen, setImageOpen] = React.useState(false);
   const classes = useStyles();
 
   const state = useSelector(state => state)
@@ -46,7 +48,7 @@ export default function ClickAway({item}) {
   };
 
   const handleClickAway = (event) => {
-    if(!editOpen) setOpen(false);
+    if(!(imageOpen || editOpen)) setOpen(false);
   };
 
   return (
@@ -59,7 +61,8 @@ export default function ClickAway({item}) {
             <Paper className={classes.paper}>
                 <MenuItem onClick={_ => dispatch(toggleComplete(item))}>Mark {!item.completed ? `Completed` : `Incomplete`}</MenuItem>                           
                 <MenuItem><EditItemModal setEditOpen={setEditOpen} editOpen={editOpen} /></MenuItem>                
-                <MenuItem>Delete</MenuItem>                
+                <MenuItem>Delete</MenuItem>
+                <MenuItem><AddImageModal setImageOpen={setImageOpen} imageOpen={imageOpen} /></MenuItem>                
             </Paper>
           ) : null}
         </div>
