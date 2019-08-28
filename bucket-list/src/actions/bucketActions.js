@@ -12,7 +12,9 @@ export const ADD_ITEM_FAIL = "ADD_ITEM_FAIL"
 export const EDIT_ITEM_START = "EDIT_ITEM_START"
 export const EDIT_ITEM_SUCCESS = "EDIT_ITEM_SUCCESS"
 export const EDIT_ITEM_FAIL = "EDIT_ITEM_FAIL"
-export const TOGGLE_COMPLETE = "TOGGLE_COMPLETE"
+export const TOGGLE_COMPLETE_START = "TOGGLE_COMPLETE_START"
+export const TOGGLE_COMPLETE_SUCCESS = "TOGGLE_COMPLETE_SUCCESS"
+export const TOGGLE_COMPLETE_FAIL = "TOGGLE_COMPLETE_FAIL"
 
 
 export const getList = () => {
@@ -66,8 +68,22 @@ export const editItem = (item) => dispatch =>
                 })
 }
 
-export const toggleComplete = () => {
-    return dispatch => {
-        dispatch({ type: TOGGLE_COMPLETE });        
-    }
+export const toggleComplete = (item) => dispatch =>
+{
+    console.log('item',item)
+    console.log('sent item from toggle complete', { itemtitle: item.itemtitle, completed: !item.completed})
+    dispatch({ type: TOGGLE_COMPLETE_START })
+    axiosWithAuth()
+        .put(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`, { "itemtitle": item.itemtitle, "completed": !item.completed })
+            .then(res =>
+                {
+                    console.log("res from toggleComplete", res)
+                    dispatch({ type: TOGGLE_COMPLETE_SUCCESS, payload: {res: res, itemid: item.id} })
+                })
+            .catch(err =>
+                {
+                    console.log("err from toggleComplete", err)
+                    dispatch({ type: TOGGLE_COMPLETE_FAIL, payload: err.response })
+                })
 }
+

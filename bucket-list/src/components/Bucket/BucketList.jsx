@@ -11,6 +11,8 @@ const BucketList = props =>
     const dispatch = useDispatch()
     const [localBucket, setLocalBucket] = useState([])
     const [searchString, setSearchString] = useState('')
+    // user does not need to hit enter to run the search
+    const isEnterReq = false
     
     useEffect(_ => 
         {
@@ -25,6 +27,7 @@ const BucketList = props =>
     return (
         <>
             <PrimarySearchAppBar 
+                isEnterReq={isEnterReq}
                 searchPlaceholder={'Search List...'}   
                 history={props.history}
                 searchString={searchString} 

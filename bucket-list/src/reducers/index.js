@@ -26,7 +26,9 @@ import {
     EDIT_ITEM_START,
     EDIT_ITEM_SUCCESS,
     EDIT_ITEM_FAIL,
-    TOGGLE_COMPLETE,
+    TOGGLE_COMPLETE_START,
+    TOGGLE_COMPLETE_SUCCESS,
+    TOGGLE_COMPLETE_FAIL
 } from '../actions'
 
 const initialState = {
@@ -254,10 +256,17 @@ export const reducer = (state = initialState, action) =>
                 isLoading: false,
                 error: action.payload
             }
-        case TOGGLE_COMPLETE: 
+        case TOGGLE_COMPLETE_START:
             return {
-                ...state.map(item => {
-                    if (item.id === action.payload) {
+                ...state,
+                isLoading: true,
+                error: '',
+            }
+            case TOGGLE_COMPLETE_SUCCESS: 
+            return {
+                ...state,
+                bucketList: state.bucketList.map(item => {
+                    if (item.id === action.payload.itemid) {
                         item.completed = !item.completed;
                         return item;
                     }
@@ -268,6 +277,12 @@ export const reducer = (state = initialState, action) =>
                 isLoading: false,
                 error: ''
             }
+            case TOGGLE_COMPLETE_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload
+                }
         default:
             return state
     }

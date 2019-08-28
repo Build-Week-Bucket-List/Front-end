@@ -26,7 +26,10 @@ export {
     EDIT_ITEM_START,
     EDIT_ITEM_SUCCESS,
     EDIT_ITEM_FAIL,
-    TOGGLE_COMPLETE,
+    TOGGLE_COMPLETE_START,
+    TOGGLE_COMPLETE_SUCCESS,
+    TOGGLE_COMPLETE_FAIL, 
+    toggleComplete
 } from './bucketActions'
 
 export {
