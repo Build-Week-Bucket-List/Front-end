@@ -28,7 +28,7 @@ const RegisterForm = () => {
 
   return (
     <div className={classes.container}>
-      <Link to="/">Login</Link>
+
       <Form>
         <Field
           name="name"
@@ -45,9 +45,9 @@ const RegisterForm = () => {
           component={TextField}
           className={classes.textField}
         />
-        <Button 
-          type="submit" 
-          color="primary" 
+        <Button
+          type="submit"
+          color="primary"
           variant="contained"
           className={classes.button}
           >

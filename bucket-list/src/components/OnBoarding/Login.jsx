@@ -53,12 +53,13 @@ const Login = props => {
 
   return (
     <div className={ classes.container }>
-      <Link to="/register">Register</Link>
+
       <form onSubmit={ e => handleSubmit(e) }>
         <TextField
           id='username'
           name='username'
           label='Username'
+          type='text'
           className={ classes.textField }
           onChange={ e => handleChange(e) }
         />
@@ -66,6 +67,7 @@ const Login = props => {
           id='password'
           name='password'
           label='Password'
+          type='password'
           className={ classes.textField }
           onChange={ e => handleChange(e) }
         />

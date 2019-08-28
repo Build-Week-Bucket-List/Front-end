@@ -20,6 +20,7 @@ import { searchBucketList, searchFriend } from '../actions'
 import { logoutUser } from '../actions/onboardingActions';
 
 import AddItemModal from './AddItemModal'
+import HeaderTabs from './HeaderTabs'
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -91,7 +92,7 @@ export default function PrimarySearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-
+    
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -188,7 +189,7 @@ export default function PrimarySearchAppBar(props) {
                 color="inherit"
                 aria-label="open drawer"
                 >
-                <MenuIcon />
+                {/* <MenuIcon /> */}
                 </IconButton>
                 <Typography className={classes.title} variant="h6" noWrap>
                     Bucket List
@@ -210,7 +211,8 @@ export default function PrimarySearchAppBar(props) {
                     name='search'
                 />
                 </div>
-                {!props.isEnterReq && <AddItemModal /> }
+                {!props.isEnterReq && <AddItemModal />}
+                <HeaderTabs history={props.history} />
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                 <IconButton aria-label="show new mails" color="inherit">
