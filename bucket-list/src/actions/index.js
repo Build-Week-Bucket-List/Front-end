@@ -42,9 +42,11 @@ export {
     APPROVE_FRIEND_START,
     APPROVE_FRIEND_SUCCESS,
     APPROVE_FRIEND_FAIL,
+    CLEAR_FRIEND_SEARCH_RESULTS,
     searchFriend,
     requestFriend,
     approveFriend,
+    clearFriendSearchResults
 } from './friendActions'
 
 export {

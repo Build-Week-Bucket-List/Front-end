@@ -125,7 +125,6 @@ export default function PrimarySearchAppBar(props) {
         {
             dispatch(searchFriend(searchString))
             setSearchString('')
-            console.log("blah")
         }
     }
 
@@ -212,7 +211,8 @@ export default function PrimarySearchAppBar(props) {
                 />
                 </div>
                 {!props.isEnterReq && <AddItemModal />}
-                <HeaderTabs history={props.history} />
+                {!props.isEnterReq && <HeaderTabs history={props.history} />}
+                
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                 <IconButton aria-label="show new mails" color="inherit">

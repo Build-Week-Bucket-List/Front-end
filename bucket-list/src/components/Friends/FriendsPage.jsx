@@ -10,6 +10,7 @@ const FriendsPage = props =>
     const dispatch = useDispatch()
     const state = useSelector(state => state)
     const [searchString, setSearchString] = useState('')
+    
     // user hits enter to run the search
     const isEnterReq = true
 

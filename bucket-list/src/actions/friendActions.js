@@ -9,16 +9,16 @@ export const REQUEST_FRIEND_FAIL = "REQUEST_FRIEND_FAIL"
 export const APPROVE_FRIEND_START = "APPROVE_FRIEND_START"
 export const APPROVE_FRIEND_SUCCESS = "APPROVE_FRIEND_SUCCESS"
 export const APPROVE_FRIEND_FAIL = "APPROVE_FRIEND_FAIL"
-
+export const CLEAR_FRIEND_SEARCH_RESULTS = "CLEAR_FRIEND_SEARCH_RESULTS"
 
 export const searchFriend = (searchString) => {
     return dispatch => {
         dispatch({ type: SEARCH_FRIEND_START });
         axiosWithAuth()
-        .get(`https://hypedupharris-bucketlist.herokuapp.com/users/user`)
+        .get(`https://hypedupharris-bucketlist.herokuapp.com/users/search/${searchString}`)
         .then(res => {
             console.log('response from searchFriend', res)
-            // dispatch({ type: SEARCH_FRIEND_SUCCESS, payload: res.data })
+            dispatch({ type: SEARCH_FRIEND_SUCCESS, payload: res.data })
         })
         .catch(err => {
             console.log('There was an error in searchFriend axios call', err)
@@ -57,4 +57,9 @@ export const approveFriend = (username) => {
             dispatch({ type: APPROVE_FRIEND_FAIL, payload: err.response })
         })
     }
+}
+
+export const clearFriendSearchResults = _ => dispatch =>
+{
+    dispatch({ type: CLEAR_FRIEND_SEARCH_RESULTS })
 }
