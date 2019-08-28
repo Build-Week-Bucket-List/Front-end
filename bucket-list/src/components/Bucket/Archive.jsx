@@ -7,38 +7,37 @@ import PrimarySearchAppBar from '../Header'
 
 import HeaderTabs from '../HeaderTabs'
 
-const BucketList = props =>
+const Archive = props =>
 {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
-    const [localBucket, setLocalBucket] = useState([])
+    const [archiveBucket, setArchiveBucket] = useState([])
     const [searchString, setSearchString] = useState('')
-    // user does not need to hit enter to run the search
-    const isEnterReq = false
     
     useEffect(_ => 
         {
+            console.log('history', props.history)
             dispatch(getList())
-            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
+            if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
         }, [])
     useEffect(_ =>
         {
-            setLocalBucket(state.bucketList)
-            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
+            setArchiveBucket(state.bucketList.filter(item => item.completed === true))
+            console.log('archiveBucket:', archiveBucket)
             
         },[searchString, state.bucketList])
 
     return (
         <>
             <PrimarySearchAppBar 
-                isEnterReq={isEnterReq}
                 searchPlaceholder={'Search List...'}   
                 history={props.history}
                 searchString={searchString} 
                 setSearchString={setSearchString}
             />
+            {/* <HeaderTabs /> */}
             <BucketGrid>
-                {localBucket.length > 0 ? localBucket
+                {archiveBucket.length > 0 ? archiveBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
                     .map(item => <ListItem key={item.id} item={item} /> ) : null }
             </BucketGrid>
@@ -46,4 +45,4 @@ const BucketList = props =>
     )
 }
 
-export default BucketList
+export default Archive
