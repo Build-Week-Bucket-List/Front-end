@@ -47,7 +47,7 @@ const ListItem = props =>
 {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
-    
+    // console.log("props from listitem",props)
     const state = useSelector(state => state)
 
     function handleExpandClick() {
@@ -65,7 +65,7 @@ const ListItem = props =>
             }
             action={
                 // <IconButton aria-label="settings">                
-                 <ClickAway />
+                <ClickAway item={props.item}/>
                 // </IconButton>
             }
             title={props.item.itemtitle}

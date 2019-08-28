@@ -7,6 +7,8 @@ import { grey } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { ItemButton, MenuItem } from './Bucket/Bucket-Styles';
 import EditItemModal from './EditItemModal';
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleComplete } from '../actions'
 
 
 const useStyles = makeStyles(theme => ({
@@ -31,10 +33,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ClickAway() {
+export default function ClickAway({item}) {
   const [open, setOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
   const classes = useStyles();
+
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
 
   const handleClick = () => {
     setOpen(prev => !prev);
@@ -44,8 +49,6 @@ export default function ClickAway() {
     if(!editOpen) setOpen(false);
   };
 
-  const fake = <div className={classes.fake} />;
-
   return (
     <div className={classes.root}>
       <ClickAwayListener onClickAway={handleClickAway}>
@@ -54,7 +57,7 @@ export default function ClickAway() {
           {/* <MoreVertIcon onClick={handleClick}/> */}
           {open ? (
             <Paper className={classes.paper}>
-                <MenuItem>Mark Complete</MenuItem>                           
+                <MenuItem onClick={_ => dispatch(toggleComplete(item))}>Mark {!item.completed ? `Completed` : `Incomplete`}</MenuItem>                           
                 <MenuItem><EditItemModal setEditOpen={setEditOpen} editOpen={editOpen} /></MenuItem>                
                 <MenuItem>Delete</MenuItem>                
             </Paper>
