@@ -6,6 +6,7 @@ import RegisterWithFormik from './components/OnBoarding/RegisterWithFormik'
 import BucketList from './components/Bucket/BucketList'
 import PrivateRoute from './components/OnBoarding/PrivateRoute'
 import './App.css';
+import Archive from './components/Bucket/Archive';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route exact path="/" component={Login} />
       <Route path="/register" component={RegisterWithFormik} />
       <PrivateRoute path="/home" component={BucketList} />
+      <PrivateRoute path='/archive' component={Archive} />
     </div>
   );
 }

@@ -7,7 +7,7 @@ import PrimarySearchAppBar from '../Header'
 
 import HeaderTabs from '../HeaderTabs'
 
-const BucketList = props =>
+const Archive = props =>
 {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const BucketList = props =>
         }, [])
     useEffect(_ =>
         {
-            setLocalBucket(state.bucketList)
+            setLocalBucket(state.bucketList.filter(item => item.completed === true))
             
         },[searchString, state.bucketList])
 
@@ -42,4 +42,4 @@ const BucketList = props =>
     )
 }
 
-export default BucketList
+export default Archive

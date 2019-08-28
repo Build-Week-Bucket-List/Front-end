@@ -59,6 +59,7 @@ const Login = props => {
           id='username'
           name='username'
           label='Username'
+          type='text'
           className={ classes.textField }
           onChange={ e => handleChange(e) }
         />
@@ -66,6 +67,7 @@ const Login = props => {
           id='password'
           name='password'
           label='Password'
+          type='password'
           className={ classes.textField }
           onChange={ e => handleChange(e) }
         />
