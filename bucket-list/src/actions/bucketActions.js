@@ -55,7 +55,7 @@ export const editItem = (item) => dispatch =>
     dispatch({ type: EDIT_ITEM_START })
     console.log('item from editItem', item)
     axiosWithAuth()
-        .put('https://hypedupharris-bucketlist.herokuapp.com/list/item', item)
+        .put(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`, item)
             .then(res =>
                 {
                     console.log("res from editItem", res)
@@ -71,10 +71,10 @@ export const editItem = (item) => dispatch =>
 export const toggleComplete = (item) => dispatch =>
 {
     console.log('item',item)
-    console.log('sent item from toggle complete', { itemtitle: item.itemtitle, completed: !item.completed})
+    console.log('sent item from toggle complete',  { ...item, completed: !item.completed })
     dispatch({ type: TOGGLE_COMPLETE_START })
     axiosWithAuth()
-        .put(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`, { "itemtitle": item.itemtitle, "completed": !item.completed })
+        .put(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`, { ...item, completed: !item.completed })
             .then(res =>
                 {
                     console.log("res from toggleComplete", res)

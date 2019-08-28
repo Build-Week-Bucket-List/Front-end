@@ -3,14 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Form, Field, withFormik } from "formik";
 import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import axios from 'axios';
 import { TextField } from "formik-material-ui";
-import { addItem } from "../actions";
+import { editItem } from "../actions";
 import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +58,8 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 export default function AddImageModal(props) {
 	const {setImageOpen, imageOpen} = props;
   const classes = useStyles();
-  const [image, setImage] = useState()
+	const [image, setImage] = useState()
+	const dispatch = useDispatch();
 
   const handleOpen = () => {
     setImageOpen(true);
@@ -73,9 +74,8 @@ export default function AddImageModal(props) {
 					const data = new FormData()
 					data.append('image', image)
           axios.post('https://imgur-bucketlist.herokuapp.com/upload', data)
-          	.then(res => console.log(res.data))
-      }
-  })
+          	.then(res => dispatch(editItem({...props.item, image: res.data})));
+      }}, [image])
 
   return (
     <div>
