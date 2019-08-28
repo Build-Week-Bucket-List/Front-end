@@ -73,7 +73,7 @@ export default function AddImageModal() {
 					const data = new FormData()
 					data.append('image', image)
           axios.post('https://imgur-bucketlist.herokuapp.com/upload', data)
-          .then(res => console.log(res))
+          	.then(res => console.log(res))
       }
   })
 
