@@ -73,7 +73,7 @@ const ListItem = props =>
             />
             <CardMedia
             className={classes.media}
-            image={props.item.image ? props.item.image : 'https://i.imgur.com/pBmNhc1.jpg'}
+            image={props.item.image ? props.item.image : 'https://i.imgur.com/DqfeGXM.jpg'}
             />
             <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
