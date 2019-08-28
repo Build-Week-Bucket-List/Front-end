@@ -68,7 +68,7 @@ const ModalFormik = withFormik({
 
   handleSubmit(values, { props }) {
     console.log('submitted modal', values)
-    props.editItem({itemtitle: values.title, itemdesc: values.desc})
+    props.editItem({...props.item, itemtitle: values.title, itemdesc: values.desc})
     props.setOpen(false)
   }
 })(editItemForm);
@@ -144,7 +144,7 @@ export default function EditItemModal(props) {
       >
         <Fade in={props.editOpen}>
           <div className={classes.paper}>
-            <ModalForm setOpen={props.setEditOpen}/>
+            <ModalForm item={props.item} setOpen={props.setEditOpen}/>
           </div>
         </Fade>
       </Modal>
