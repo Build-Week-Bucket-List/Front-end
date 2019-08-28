@@ -1,20 +1,22 @@
 import styled from 'styled-components'
 
 export const BucketGrid = styled.div`
-    margin: 20px 20px;
+    margin: 20px auto;
     display: grid;
     grid-gap: 20px;
-    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
-    grid-template-columns: auto auto auto auto;
-    @media (max-width: 900px)
+    justify-items: center;
+    /* align-items: center; */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* grid-template-columns: auto auto auto auto; */
+    @media (max-width: 1500px)
     {
         grid-template-columns: 1fr 1fr 1fr;
     }
-    @media (max-width: 700px)
+    @media (max-width: 1150px)
     {
         grid-template-columns: 1fr 1fr;
     }
-    @media (max-width: 550px)
+    @media (max-width: 760px)
     {
         grid-template-columns: 1fr;
         margin: 20px auto;
