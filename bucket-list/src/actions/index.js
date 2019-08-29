@@ -29,7 +29,11 @@ export {
     TOGGLE_COMPLETE_START,
     TOGGLE_COMPLETE_SUCCESS,
     TOGGLE_COMPLETE_FAIL, 
-    toggleComplete
+    toggleComplete,
+    DELETE_ITEM_START,
+    DELETE_ITEM_SUCCESS,
+    DELETE_ITEM_FAIL,
+    deleteItem
 } from './bucketActions'
 
 export {
@@ -43,10 +47,15 @@ export {
     APPROVE_FRIEND_SUCCESS,
     APPROVE_FRIEND_FAIL,
     CLEAR_FRIEND_SEARCH_RESULTS,
+    VIEW_FRIEND_START,
+    VIEW_FRIEND_SUCCESS,
+    VIEW_FRIEND_FAIL,
     searchFriend,
     requestFriend,
     approveFriend,
-    clearFriendSearchResults
+    clearFriendSearchResults,
+    viewFriend,
+    
 } from './friendActions'
 
 export {

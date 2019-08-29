@@ -15,6 +15,10 @@ export const EDIT_ITEM_FAIL = "EDIT_ITEM_FAIL"
 export const TOGGLE_COMPLETE_START = "TOGGLE_COMPLETE_START"
 export const TOGGLE_COMPLETE_SUCCESS = "TOGGLE_COMPLETE_SUCCESS"
 export const TOGGLE_COMPLETE_FAIL = "TOGGLE_COMPLETE_FAIL"
+export const DELETE_ITEM_START = "DELETE_ITEM_START"
+export const DELETE_ITEM_SUCCESS = "DELETE_ITEM_SUCCESS"
+export const DELETE_ITEM_FAIL = "DELETE_ITEM_FAIL"
+
 
 
 export const getList = () => {
@@ -28,7 +32,8 @@ export const getList = () => {
             dispatch({ type: GET_LIST_SUCCESS, payload: { 
                 items: res.data.items, 
                 friendRequests: res.data.requests,
-                friends: res.data.friends.filter(friend => friend.accepted === true)
+                friends: res.data.friends.filter(friend => friend.accepted === true),
+                username: res.data.username
             }})
         })
         .catch(err => {
@@ -66,6 +71,7 @@ export const editItem = (item) => dispatch =>
                     console.log("res from editItem", res)
                     dispatch({ type: EDIT_ITEM_SUCCESS, payload: res })
                 })
+            // .then(dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from editItem", err)
@@ -85,7 +91,7 @@ export const toggleComplete = (item) => dispatch =>
                     console.log("res from toggleComplete", res)
                     dispatch({ type: TOGGLE_COMPLETE_SUCCESS, payload: {res: res, itemid: item.id} })
                 })
-            .then(_ => dispatch(getList()))
+            // .then(dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from toggleComplete", err)
@@ -93,3 +99,20 @@ export const toggleComplete = (item) => dispatch =>
                 })
 }
 
+export const deleteItem = (item) => dispatch =>
+{
+    dispatch({type: DELETE_ITEM_START})
+    axiosWithAuth()
+    .delete(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`)
+    .then(res => 
+        {
+            console.log('response from deleteItem', res)
+            dispatch({ type: DELETE_ITEM_SUCCESS, payload: item })
+        })
+    //.then(dispatch(getList()))
+    .catch(err => 
+        {
+            console.log('There was in error from deleteItem', err)
+            dispatch({ type: DELETE_ITEM_FAIL, payload: err.response })
+        })
+}

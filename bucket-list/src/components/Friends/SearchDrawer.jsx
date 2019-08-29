@@ -23,9 +23,7 @@ const useStyles = makeStyles({
 
 export default function SwipeableTemporaryDrawer(props) {
     
-    const friendSearchResults = useSelector(state => state.friendSearchResults)
-    
-
+    const state = useSelector(state => state)
 
     const classes = useStyles();
     const [drawerState, setDrawerState] = React.useState({
@@ -57,7 +55,6 @@ export default function SwipeableTemporaryDrawer(props) {
     };
 
     const sideList = props => {
-        console.log('friend search results', friendSearchResults)
         return (
         <div
             className={classes.list}
@@ -66,7 +63,9 @@ export default function SwipeableTemporaryDrawer(props) {
             // onKeyDown={toggleDrawer(false)}
             >
             <List>
-                {friendSearchResults.map((el, index) => (
+                {state.friendSearchResults
+                .filter(el => el !== state.username)
+                .map((el, index) => (
                 <div key={index}>
                     <ListItem button>
                         <ListItemText primary={el} />

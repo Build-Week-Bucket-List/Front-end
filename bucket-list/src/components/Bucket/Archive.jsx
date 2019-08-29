@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import ListItem from './ListItem'
-import {getList, resetBucketSearch} from "../../actions"
+import {getList, resetBucketSearch, } from "../../actions"
 import { BucketGrid } from './Bucket-Styles'
 import PrimarySearchAppBar from '../Header'
 
@@ -21,7 +21,6 @@ const Archive = props =>
         }, [])
     useEffect( _ =>
         {
-            console.log('state.bucketlist', state.bucketList)
             setArchiveBucket(state.bucketList.filter(item => item.completed === true))
             console.log('archiveBucket:', archiveBucket)
         },[searchString, state.bucketList])

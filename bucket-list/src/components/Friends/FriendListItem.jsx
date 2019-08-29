@@ -14,12 +14,9 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-
+import CommentIcon from '@material-ui/icons/Comment';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AddJournalModal from './AddJournalModal';
 
-
-import ClickAway from '../ListItemMenu';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -61,13 +58,8 @@ const ListItem = props =>
             <CardHeader
             avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
-                    { state.username ? state.username[0] : '' }
+                    {props.friendName ? props.friendName[0] : ''}
                 </Avatar>
-            }
-            action={
-                // <IconButton aria-label="settings">                
-                <ClickAway item={props.item}/>
-                // </IconButton>
             }
             title={props.item.itemtitle}
             subheader={props.item.dateCreated}
@@ -82,7 +74,9 @@ const ListItem = props =>
             </Typography>
             </CardContent>
             <CardActions disableSpacing>
-            <AddJournalModal item={props.item} />            
+            <IconButton aria-label="add comment">
+                <CommentIcon />
+            </IconButton>            
             <IconButton
                 className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,

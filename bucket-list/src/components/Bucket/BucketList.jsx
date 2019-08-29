@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import ListItem from './ListItem'
-import {getList, resetBucketSearch} from "../../actions"
+import {getList, resetBucketSearch, deleteItem} from "../../actions"
 import { BucketGrid } from './Bucket-Styles'
 import PrimarySearchAppBar from '../Header'
-
-import HeaderTabs from '../HeaderTabs'
 
 const BucketList = props =>
 {
