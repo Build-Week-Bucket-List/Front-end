@@ -168,20 +168,40 @@ export default function PrimarySearchAppBar(props) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >           
-                <Badge badgeContent={state.curRequestedFriends.length} color="secondary">
+            {/* <Badge badgeContent={state.curRequestedFriends.length} color="secondary" >
+                <NotificationMenu />
+            </Badge>             */}
+            <MenuItem onClick={ () => {return null}} style={{overflow: 'auto'}}>
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
                     <NotificationMenu />
-                </Badge>            
-            <p>Notifications</p>            
+                </IconButton>
+            </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-                aria-label="account of current user"
-                aria-controls="primary-search-account-menu"
-                aria-haspopup="true"
-                color="inherit"
-            >
-                <AccountCircle />
-            </IconButton>
-            <p>Profile</p>
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                <p>Profile</p>
+            </MenuItem>
+            <MenuItem onClick={_ => props.history.push('/friends')}>
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <PeopleIcon />
+                </IconButton>
+                <p>Friends</p>
             </MenuItem>
         </Menu>
     );

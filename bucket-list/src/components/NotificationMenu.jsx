@@ -15,11 +15,16 @@ const useStyles = makeStyles(theme => ({
         position: 'relative',
     },
     paper: {
+        '@media (max-width: 900px)' : {
+            top: 36,
+            width: 100,
+            left: 0
+        },
         position: 'absolute',
         top: 36,
         width: 130,
         right: 0,
-        //left: 0,
+        zIndex: 5,
     },
     fake: {
     backgroundColor: grey[200],
