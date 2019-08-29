@@ -31,7 +31,7 @@ export const requestFriend = (username) => {
     return dispatch => {
         dispatch({ type: REQUEST_FRIEND_START });
         axiosWithAuth()
-        .get('', username)
+        .post(`https://hypedupharris-bucketlist.herokuapp.com/users/add/${username}`, username)
         .then(res => {
             console.log('response from requestFriend', res)
             dispatch({ type: REQUEST_FRIEND_SUCCESS, payload: res.data })
