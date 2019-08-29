@@ -49,7 +49,7 @@ export const getList = () => {
 export const addItem = (item) => dispatch =>
 {
     dispatch({ type: ADD_ITEM_START })
-    console.log('item from addItem', item)
+    
     axiosWithAuth()
         .post('https://hypedupharris-bucketlist.herokuapp.com/list/item', item)
             .then(res =>
