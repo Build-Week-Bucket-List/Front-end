@@ -1,31 +1,30 @@
 import React, {useEffect, useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
-import ListItem from './ListItem'
-import {getList, resetBucketSearch, deleteItem} from "../../actions"
-import { BucketGrid } from './Bucket-Styles'
+import FriendListItem from './FriendListItem'
+import {viewFriend, resetBucketSearch} from "../../actions"
+import { BucketGrid } from '../Bucket/Bucket-Styles'
 import PrimarySearchAppBar from '../Header'
 
-const BucketList = props =>
+const ViewFriend = props =>
 {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
     const [localBucket, setLocalBucket] = useState([])
     const [searchString, setSearchString] = useState('')
     // user does not need to hit enter to run the search
-    const isEnterReq = false
+    const isEnterReq = true
     
     useEffect(_ => 
         {
-            dispatch(getList())
-            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
+            // dispatch(viewFriend())
+            if(state.friendBucket.length > 0) setLocalBucket(state.friendBucket.filter(item => item.completed === false))
         }, [])
     useEffect(_ =>
         {
-            console.log('a')
-            setLocalBucket(state.bucketList)
-            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
+            setLocalBucket(state.friendBucket)
+            if(state.friendBucket.length > 0) setLocalBucket(state.friendBucket.filter(item => item.completed === false))
             
-        },[searchString, state.bucketList])
+        },[searchString, state.friendBucket])
 
     return (
         <>
@@ -39,10 +38,10 @@ const BucketList = props =>
             <BucketGrid>
                 {localBucket.length > 0 ? localBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
-                    .map((item, index) => <ListItem key={index} item={item} /> ) : null }
+                    .map((item, index) => <FriendListItem key={index} item={item} friendName={props.match.params.username} /> ) : null }
             </BucketGrid>
         </>
     )
 }
 
-export default BucketList
+export default ViewFriend

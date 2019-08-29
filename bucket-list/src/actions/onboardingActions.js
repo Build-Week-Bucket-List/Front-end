@@ -8,42 +8,54 @@ export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS"
 export const LOGIN_USER_FAIL = "LOGIN_USER_FAIL"
 export const LOGOUT_USER = "LOGOUT_USER"
 
-const endPoint = ""
 
-export const registerUser = regInfo => dispatch =>
+export const registerUser = (regInfo, history) => dispatch =>
 {
     dispatch({ type: REGISTER_USER_START })
 
     axios
-        .post(`${endPoint}/register`, regInfo)
+        .post(`https://hypedupharris-bucketlist.herokuapp.com/signup`, regInfo)
         .then(res =>
             {
                 console.log("res from registerUser:", res)
                 dispatch({ type: REGISTER_USER_SUCCESS, payload: res })
+                history.push("/")
             })
+        // .then(dispatch(loginUser(regInfo, history)))
+
         .catch(err =>
             {
                 console.log("err from registerUser", err)
-                dispatch({ type: REGISTER_USER_FAIL, payload: err })
+                dispatch({ type: REGISTER_USER_FAIL, payload: err.response })
             })
 }
 
-export const loginUser = creds => dispatch =>
-{
-    dispatch({ type: LOGIN_USER_START })
+export function loginUser(creds, history) {
 
-    axios
-        .post(`${endPoint}/login`, creds)
-        .then(res =>
-            {
-                console.log("res from loginUser:", res)
-                dispatch({ type: LOGIN_USER_SUCCESS, payload: res })
+    return dispatch =>
+    {
+        dispatch({ type: LOGIN_USER_START })
+
+        axios
+            .post(`https://hypedupharris-bucketlist.herokuapp.com/login`, `grant_type=password&username=${creds.username}&password=${creds.password}`, {
+                headers: {
+                    Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                    }
             })
-        .catch(err =>
-            {
-                console.log("err from loginUser", err)
-                dispatch({ type: LOGIN_USER_FAIL, payload: err })
-            })
+            .then(res =>
+                {
+                    console.log("res from loginUser:", res)
+                    localStorage.setItem('token', res.data.access_token)
+                    dispatch({ type: LOGIN_USER_SUCCESS, payload: res })
+                    history.push('/home')
+                })
+            .catch(err =>
+                {
+                    console.log("err from loginUser", err.response)
+                    dispatch({ type: LOGIN_USER_FAIL, payload: err })
+                })
+    }
 }
 
 export const logoutUser = history => dispatch =>

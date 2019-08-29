@@ -1,5 +1,7 @@
 import React from "react"
 import {useDispatch, useSelector} from "react-redux"
+// import {action} from "../../actions"
+
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -11,16 +13,14 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-
+import { red } from '@material-ui/core/colors';
+import CommentIcon from '@material-ui/icons/Comment';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AddJournalModal from './AddJournalModal';
 
 
-import ClickAway from './ListItemMenu';
-
-const useStyles = makeStyles(theme => ({    
+const useStyles = makeStyles(theme => ({
     card: {
-        width: 345,               
+        width: 345,
     },
     media: {
         height: 0,
@@ -37,12 +37,8 @@ const useStyles = makeStyles(theme => ({
         transform: 'rotate(180deg)',
     },
     avatar: {
-        backgroundColor: "#da9417",
+        backgroundColor: red[500],
     },
-    desc: {
-        // overflow: "auto",      
-        // width: 300
-    }
 }));
 
 const ListItem = props =>
@@ -62,28 +58,23 @@ const ListItem = props =>
             <CardHeader
             avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
-                    { state.username ? state.username[0] : '' }
+                    {props.friendName ? props.friendName[0] : ''}
                 </Avatar>
-            }
-            action={
-                // <IconButton aria-label="settings">                
-                <ClickAway item={props.item}/>
-                // </IconButton>
             }
             title={props.item.itemtitle}
             subheader={props.item.dateCreated}
+            style={{paddingRight: '70px'}}
             />
             <CardMedia
             className={classes.media}
             image={props.item.image ? props.item.image : 'https://i.imgur.com/DqfeGXM.jpg'}
             />
             <CardContent>
-            <Typography variant="body2" className={classes.desc} color="textSecondary" component="p" noWrap>
+            <Typography variant="body2" color="textSecondary" component="p">
                 {props.item.itemdesc}
             </Typography>
             </CardContent>
-            <CardActions disableSpacing>
-            <AddJournalModal item={props.item} />            
+            <CardActions disableSpacing>         
             <IconButton
                 className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
@@ -99,7 +90,7 @@ const ListItem = props =>
             <CardContent>
                 <Typography paragraph>Journal:</Typography>
                 <Typography paragraph>
-                    {props.item.journal && props.item.journal.map((entry, i )=> <p key={i}>{entry.entry}</p>)}
+                    {props.item.journal}
                 </Typography>
             </CardContent>
             </Collapse>

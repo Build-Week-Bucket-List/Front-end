@@ -1,3 +1,4 @@
 export {
-    axiosWithauth,
+    axiosWithAuth,
+    axiosWithAuthFriend
 } from './axiosWithAuth'

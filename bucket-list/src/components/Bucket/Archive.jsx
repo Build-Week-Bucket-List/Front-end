@@ -1,43 +1,41 @@
 import React, {useEffect, useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import ListItem from './ListItem'
-import {getList, resetBucketSearch, deleteItem} from "../../actions"
+import {getList, resetBucketSearch, } from "../../actions"
 import { BucketGrid } from './Bucket-Styles'
 import PrimarySearchAppBar from '../Header'
 
-const BucketList = props =>
+import HeaderTabs from '../HeaderTabs'
+
+const Archive = props =>
 {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
-    const [localBucket, setLocalBucket] = useState([])
+    const [archiveBucket, setArchiveBucket] = useState([])
     const [searchString, setSearchString] = useState('')
-    // user does not need to hit enter to run the search
-    const isEnterReq = false
     
     useEffect(_ => 
         {
             dispatch(getList())
-            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
+            if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
         }, [])
-    useEffect(_ =>
+    useEffect( _ =>
         {
-            console.log('a')
-            setLocalBucket(state.bucketList)
-            if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
-            
+            setArchiveBucket(state.bucketList.filter(item => item.completed === true))
+            console.log('archiveBucket:', archiveBucket)
         },[searchString, state.bucketList])
 
     return (
         <>
             <PrimarySearchAppBar 
-                isEnterReq={isEnterReq}
                 searchPlaceholder={'Search List...'}   
                 history={props.history}
                 searchString={searchString} 
                 setSearchString={setSearchString}
             />
+            {/* <HeaderTabs /> */}
             <BucketGrid>
-                {localBucket.length > 0 ? localBucket
+                {archiveBucket.length > 0 ? archiveBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
                     .map((item, index) => <ListItem key={index} item={item} /> ) : null }
             </BucketGrid>
@@ -45,4 +43,4 @@ const BucketList = props =>
     )
 }
 
-export default BucketList
+export default Archive
