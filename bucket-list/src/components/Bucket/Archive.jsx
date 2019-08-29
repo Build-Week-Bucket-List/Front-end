@@ -38,7 +38,7 @@ const Archive = props =>
             <BucketGrid>
                 {archiveBucket.length > 0 ? archiveBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
-                    .map(item => <ListItem key={item.id} item={item} /> ) : null }
+                    .map((item, index) => <ListItem key={index} item={item} /> ) : null }
             </BucketGrid>
         </>
     )

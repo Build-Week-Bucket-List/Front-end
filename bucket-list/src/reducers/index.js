@@ -20,9 +20,6 @@ import {
     ADD_ITEM_START,
     ADD_ITEM_SUCCESS,
     ADD_ITEM_FAIL,
-    SEARCH_FRIENDS_START,
-    SEARCH_FRIENDS_SUCCESS,
-    SEARCH_FRIENDS_FAIL,
     CLEAR_FRIEND_SEARCH_RESULTS,
     EDIT_ITEM_START,
     EDIT_ITEM_SUCCESS,
@@ -154,7 +151,9 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: '',
-                bucketList: action.payload
+                bucketList: action.payload.items,
+                curRequestedFriends: action.payload.friendRequests,
+                friends: action.payload.friends
             }
         case GET_LIST_FAIL:
             return {

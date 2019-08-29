@@ -70,7 +70,7 @@ export default function SwipeableTemporaryDrawer(props) {
                 <div key={index}>
                     <ListItem button>
                         <ListItemText primary={el} />
-                        <ListItemIcon><AddIcon /></ListItemIcon>
+                        <ListItemIcon><AddIcon onClick={_ => dispatch(requestFriend(el))}/></ListItemIcon>
                     </ListItem>
                     <Divider />
                 </div>
