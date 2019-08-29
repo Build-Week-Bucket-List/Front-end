@@ -205,7 +205,7 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 error: '',
-                //TODO: Update bucketList based either on payload or in action
+                bucketList: state.bucketList.map(el => el.itemid === action.payload.itemid ? action.payload : el)
             }
         case EDIT_ITEM_FAIL:
             return {
