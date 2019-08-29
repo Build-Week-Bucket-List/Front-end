@@ -23,6 +23,7 @@ const BucketList = props =>
         }, [])
     useEffect(_ =>
         {
+            console.log('should update from bucketlist')
             setLocalBucket(state.bucketList)
             if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
             
