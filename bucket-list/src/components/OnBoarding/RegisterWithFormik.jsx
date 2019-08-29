@@ -34,7 +34,7 @@ const RegisterForm = () => {
       <Form>
         <Field
           name="name"
-          label="Name"
+          label="Username"
           component={TextField}
           margin="normal"
           type="text"
