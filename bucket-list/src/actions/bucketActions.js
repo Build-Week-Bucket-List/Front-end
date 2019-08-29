@@ -24,7 +24,7 @@ export const getList = () => {
         .get('https://hypedupharris-bucketlist.herokuapp.com/list/user')
         .then(res => {
             console.log('response from getList', res);
-            dispatch({ type: GET_LIST_SUCCESS, payload: res.data.items })
+            dispatch({ type: GET_LIST_SUCCESS, payload: { items: res.data.items, friendRequests: res.data.requests }})
         })
         .catch(err => {
             console.log('There was an error in getList axios call', err.response);

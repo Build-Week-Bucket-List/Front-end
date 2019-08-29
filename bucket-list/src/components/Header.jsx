@@ -17,12 +17,13 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {Link} from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { searchBucketList, searchFriend } from '../actions'
 import { logoutUser } from '../actions/onboardingActions';
 
 import AddItemModal from './AddItemModal'
 import HeaderTabs from './HeaderTabs'
+import NotificationMenu from './NotificationMenu'
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -89,12 +90,12 @@ const useStyles = makeStyles(theme => ({
 export default function PrimarySearchAppBar(props) {
     
     const dispatch = useDispatch()
+    const state = useSelector(state => state)
     const {searchPlaceholder, isEnterReq, searchString, setSearchString} = props
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -158,14 +159,14 @@ export default function PrimarySearchAppBar(props) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-            <IconButton aria-label="show new notifications" color="inherit">
-                <Badge badgeContent={11} color="secondary">
-                <NotificationsIcon />
+            {/* <MenuItem> */}
+            {/* <IconButton aria-label="show new notifications" color="inherit"> */}
+                <Badge badgeContent={state.curRequestedFriends.length} color="secondary">
+                    <NotificationMenu />
                 </Badge>
-            </IconButton>
+            {/* </IconButton> */}
             <p>Notifications</p>
-            </MenuItem>
+            {/* </MenuItem> */}
             <MenuItem onClick={handleProfileMenuOpen}>
             <IconButton
                 aria-label="account of current user"
@@ -221,14 +222,14 @@ export default function PrimarySearchAppBar(props) {
                 <div className={classes.sectionDesktop}>
                 <IconButton aria-label="show friends" color="inherit" onClick={_ => props.history.push('/friends')}>
                     <Badge badgeContent={null} color="secondary">
-                    <PeopleIcon />
+                        <PeopleIcon />
                     </Badge>
                 </IconButton>
-                <IconButton aria-label="show new notifications" color="inherit">
-                    <Badge badgeContent={null} color="secondary">
-                    <NotificationsIcon />
+                {/* <IconButton aria-label="show new notifications" color="inherit"> */}
+                    <Badge badgeContent={state.curRequestedFriends.length} color="secondary">
+                        <NotificationMenu />
                     </Badge>
-                </IconButton>
+                {/* </IconButton> */}
                 <IconButton
                     edge="end"
                     aria-label="account of current user"
