@@ -90,3 +90,21 @@ export const viewFriend = (username, history) => dispatch =>
                 dispatch({ type: VIEW_FRIEND_FAIL, payload: err })
             })
 }
+
+export const deleteFriend = (reqid) => dispatch =>
+{
+    dispatch({ type: DELETE_FRIEND_START })
+
+    axiosWithAuthFriend()
+    .delete(`https://hypedupharris-bucketlist.herokuapp.com/users/friends/${reqid}`)
+        .then(res =>
+            {
+                console.log('res from delete friend', res)
+                dispatch({ type: DELETE_FRIEND_SUCCESS, payload: reqid })
+            })
+        .catch(err =>
+            {
+                console.log('err from delete friend')
+                dispatch({ type: DELETE_FRIEND_FAIL })
+            })
+}
