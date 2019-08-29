@@ -26,7 +26,10 @@ import {
     EDIT_ITEM_FAIL,
     TOGGLE_COMPLETE_START,
     TOGGLE_COMPLETE_SUCCESS,
-    TOGGLE_COMPLETE_FAIL
+    TOGGLE_COMPLETE_FAIL,
+    VIEW_FRIEND_START,
+    VIEW_FRIEND_SUCCESS,
+    VIEW_FRIEND_FAIL,
 } from '../actions'
 
 const initialState = {
@@ -98,6 +101,7 @@ const initialState = {
     curRequestedFriends: [],
     friendSearchResults: [],
     username: 'Qwerty4',
+    friendBucket: []
 }
 
 export const reducer = (state = initialState, action) =>
@@ -288,6 +292,26 @@ export const reducer = (state = initialState, action) =>
                     isLoading: false,
                     error: action.payload
                 }
+            case VIEW_FRIEND_START:
+                return {
+                    ...state,
+                    isLoading: true,
+                    error: '',
+                }
+            case VIEW_FRIEND_SUCCESS:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: '',
+                    friendBucket: action.payload
+                }
+            case VIEW_FRIEND_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload
+                }
+
         default:
             return state
     }

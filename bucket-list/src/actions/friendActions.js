@@ -70,15 +70,16 @@ export const clearFriendSearchResults = _ => dispatch =>
     dispatch({ type: CLEAR_FRIEND_SEARCH_RESULTS })
 }
 
-export const viewFriend = username => dispatch =>
+export const viewFriend = (username, history) => dispatch =>
 {
     dispatch({ type: VIEW_FRIEND_START })
     axiosWithAuth()
-    .get(`https://hypedupharris-bucketlist.herokuapp.com/users/username/${username}`)
+    .get(`https://hypedupharris-bucketlist.herokuapp.com/list/username/${username}`)
         .then(res =>
             {
                 console.log('res from viewFriend', res)
-                dispatch({ type: VIEW_FRIEND_SUCCESS, payload: res })
+                dispatch({ type: VIEW_FRIEND_SUCCESS, payload: res.data })
+                history.push(`/friend/${username}`)
             })
         .catch(err =>
             {

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import PrimarySearchAppBar from '../Header'
-import { getList } from '../../actions'
+import { getList, viewFriend } from '../../actions'
 import { FriendDiv, FriendFlex } from './FriendStyles'
 import SwipeableTemporaryDrawer from './SearchDrawer'
 
@@ -17,10 +17,11 @@ const FriendsPage = props =>
     useEffect(_ =>
         {
             console.log('c',state.friends)
-            if(state.friends.length === 0)
-            {
+            // if(state.friends.length === 0)
+            // {
                 dispatch(getList())
-            }
+                setSearchString('')
+            // }
         }, [])
 
     return (
@@ -31,11 +32,12 @@ const FriendsPage = props =>
                 history={props.history}
                 searchString={searchString} 
                 setSearchString={setSearchString}
+                
             />
             <FriendFlex>
                 {state.friends.length > 0 ? state.friends
-                    .map((friend, index) => <FriendDiv key={index} >
-                        {friend.friendusername}
+                    .map((friend, index) => <FriendDiv key={index} onClick={_ => dispatch(viewFriend(friend.requester, props.history))} >
+                        {friend.requester}
                     </FriendDiv>) 
                     : null}
             </FriendFlex>
