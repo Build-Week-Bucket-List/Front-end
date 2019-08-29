@@ -1,15 +1,11 @@
 import React, {useState} from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring";
-import { connect } from "react-redux";
-import { Form, Field, withFormik } from "formik";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import { TextField } from "formik-material-ui";
+import { Button, TextField } from "@material-ui/core";
 import { editItem } from "../../actions";
-import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -28,59 +24,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column"
   }
 }));
-
-const editItemForm = () => {
-  return (
-    <Form>
-      <Field component={TextField} name="title" label="Title" fullWidth/>
-      <Field
-        component={TextField}
-        name="desc"
-        label="Description"
-        multiline
-        rows="4"
-        fullWidth
-      />
-      <Button
-        type="submit"
-        color="primary"
-        variant="contained"
-        fullWidth
-      >
-        Save
-      </Button>
-    </Form>
-  );
-};
-
-const ModalFormik = withFormik({
-  mapPropsToValues({ title, desc }) {
-    return {
-      title: title || "",
-      desc: desc || ""
-    };
-  },
-
-  validationSchema: Yup.object().shape({
-    title: Yup.string().required("A title is required"),
-    desc: Yup.string().required("A desc is required")
-  }),
-
-  handleSubmit(values, { props }) {
-    console.log('submitted modal', values)
-    props.editItem({...props.item, itemtitle: values.title, itemdesc: values.desc})
-    props.setOpen(false)
-  }
-})(editItemForm);
-
-const mapStateToProps = state => {
-  return {};
-};
-
-const ModalForm = connect(
-  mapStateToProps,
-  { editItem }
-)(ModalFormik);
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -106,30 +49,28 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function EditItemModal(props) {
+export default function EditItemModal({item, ...props}) {
+  const [values, setValues] = useState({title: item.itemtitle, desc: item.itemdesc})
   const classes = useStyles();
-//   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
-    // setOpen(true);
     props.setEditOpen(true);
   };
 
   const handleClose = () => {
-    // setOpen(false);
     props.setEditOpen(false);
   };
 
+  const handleSubmit = e => {
+		e.preventDefault()
+		dispatch(editItem({...item, itemtitle: values.title, itemdesc: values.desc}))
+		handleClose();
+	}
+
   return (
     <div>
-      {/* <IconButton
-        aria-label="edit old item"
-        color="inherit"
-        onClick={handleOpen}
-      > */}
       <div onClick={handleOpen}>Edit Item</div>
-        
-      {/* </IconButton> */}
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -144,7 +85,27 @@ export default function EditItemModal(props) {
       >
         <Fade in={props.editOpen}>
           <div className={classes.paper}>
-            <ModalForm item={props.item} setOpen={props.setEditOpen}/>
+          <form onSubmit={handleSubmit} >
+              <TextField
+                name="title"
+                label="Title"
+                onChange={e => setValues({...values, title: e.target.value})}
+                value={values.title}
+                fullWidth
+              />
+              <TextField
+                name="description"
+                label="Description"
+                multiline
+								rows="4"
+								value={values.desc}
+								fullWidth
+								onChange={e => setValues({...values, desc: e.target.value})}
+              />
+							<Button type="submit" variant="contained" color="primary" fullWidth>
+								Save Edit
+							</Button>
+            </form>
           </div>
         </Fade>
       </Modal>

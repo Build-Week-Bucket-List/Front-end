@@ -55,7 +55,6 @@ export default function AddImageModal(props) {
 	const [journal, setJournal] = useState("");
   const [journalOpen, setJournalOpen] = useState(false);
   const classes = useStyles();
-  const [image, setImage] = useState();
   const dispatch = useDispatch();
 
   const handleOpen = () => {

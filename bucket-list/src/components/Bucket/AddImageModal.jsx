@@ -58,7 +58,8 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 export default function AddImageModal(props) {
 	const {setImageOpen, imageOpen} = props;
   const classes = useStyles();
-	const [image, setImage] = useState()
+  const [image, setImage] = useState()
+  const [status, setStatus] = useState(false)
 	const dispatch = useDispatch();
 
   const handleOpen = () => {
@@ -74,7 +75,10 @@ export default function AddImageModal(props) {
 					const data = new FormData()
 					data.append('image', image)
           axios.post('https://imgur-bucketlist.herokuapp.com/upload', data)
-          	.then(res => dispatch(editItem({...props.item, image: res.data})));
+          	.then(res => {
+              dispatch(editItem({...props.item, image: res.data}));
+              handleClose();
+            });
       }}, [image])
 
   return (
