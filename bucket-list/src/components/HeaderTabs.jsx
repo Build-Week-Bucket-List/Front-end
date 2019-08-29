@@ -12,10 +12,11 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
-      backgroundColor: 'theme.palette.background.paper',
-      // backgroundColor: '#3F51B5',
+      backgroundColor: 'inherit',
     },
   }));
+
+
 
 export default function HeaderTabs(props) {
   const classes = useStyles();
@@ -26,17 +27,25 @@ export default function HeaderTabs(props) {
     console.log('newValue', newValue)
   }
 
+  const indicatorStyle = {
+    backgroundColor: "#DA9417"
+  }
+
+  const style = {
+    color: "#FFFFFF"
+  }
+
   return (    
         <Paper className={classes.root}>
             <Tabs
                 value={value}
-                onChange={handleChange}
-                indicatorColor="primary"
+                onChange={handleChange}                
                 textColor="primary"
                 centered
+                TabIndicatorProps={{style:indicatorStyle}}
             >
-                <Tab icon={<HomeIcon />} component={Link} to='/home' />
-                <Tab icon={<CheckBoxIcon /> } component={Link} to='/archive' />                  
+                <Tab icon={<HomeIcon />} component={Link} to='/home' style={style}/>
+                <Tab icon={<CheckBoxIcon /> } component={Link} to='/archive' style={style} />                  
             </Tabs>           
         </Paper>   
   );
