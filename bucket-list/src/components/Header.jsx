@@ -29,6 +29,12 @@ const useStyles = makeStyles(theme => ({
     grow: {
         flexGrow: 1,
     },
+    bar: {
+        backgroundColor: '#000000'
+    },
+    title: {
+        fontFamily: "Cinzel, serif !important"
+    },
     menuButton: {
         marginRight: theme.spacing(2),
     },
@@ -87,6 +93,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const style = {
+    fontFamily: "'Cinzel', serif"
+}
+
 export default function PrimarySearchAppBar(props) {
     
     const dispatch = useDispatch()
@@ -142,8 +152,7 @@ export default function PrimarySearchAppBar(props) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={_ => props.history.push('/home')}>Profile</MenuItem>
             <MenuItem onClick={_ => dispatch(logoutUser(props.history))}>Logout</MenuItem>
         </Menu>
         );
@@ -158,15 +167,11 @@ export default function PrimarySearchAppBar(props) {
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
-        >
-            {/* <MenuItem> */}
-            {/* <IconButton aria-label="show new notifications" color="inherit"> */}
+        >           
                 <Badge badgeContent={state.curRequestedFriends.length} color="secondary">
                     <NotificationMenu />
-                </Badge>
-            {/* </IconButton> */}
-            <p>Notifications</p>
-            {/* </MenuItem> */}
+                </Badge>            
+            <p>Notifications</p>            
             <MenuItem onClick={handleProfileMenuOpen}>
             <IconButton
                 aria-label="account of current user"
@@ -183,7 +188,7 @@ export default function PrimarySearchAppBar(props) {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
+            <AppBar position="static" className={classes.bar}>
             <Toolbar>
                 <IconButton
                 edge="start"
@@ -191,9 +196,8 @@ export default function PrimarySearchAppBar(props) {
                 color="inherit"
                 aria-label="open drawer"
                 >
-                {/* <MenuIcon /> */}
                 </IconButton>
-                <Typography className={classes.title} variant="h6" noWrap >
+                <Typography className={classes.title} style={style} variant="h6" noWrap >
                     <Link to='/home' style={{textDecoration: 'none', color: 'inherit'}}>
                         Bucket List
                     </Link>

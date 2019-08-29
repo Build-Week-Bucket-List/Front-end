@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     margin: "100px auto"
   },
   button: {
-    margin: "25px auto"
+    margin: "25px auto",
+    backgroundColor: "#DA9417"
   },
   textField: {
     margin: "0 10px"
@@ -64,7 +65,6 @@ const Register = props => {
         />
         <Button
           type="submit"
-          color="primary"
           variant="contained"
           className={classes.button}
         >
