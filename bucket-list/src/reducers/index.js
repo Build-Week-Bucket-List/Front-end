@@ -26,78 +26,21 @@ import {
     EDIT_ITEM_FAIL,
     TOGGLE_COMPLETE_START,
     TOGGLE_COMPLETE_SUCCESS,
-    TOGGLE_COMPLETE_FAIL
+    TOGGLE_COMPLETE_FAIL,
+    VIEW_FRIEND_START,
+    VIEW_FRIEND_SUCCESS,
+    VIEW_FRIEND_FAIL,
 } from '../actions'
 
 const initialState = {
-    bucketList: [
-        {
-            id: 0,
-            completed: false,
-            itemtitle: "Finish this App",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 1,
-            completed: false,
-            itemtitle: "Have a Nap",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 2,
-            completed: false,
-            itemtitle: "Meet at 11",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 3,
-            completed: false,
-            itemtitle: "Be done in a snap",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 4,
-            completed: false,
-            itemtitle: "Testing some more text",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 5,
-            completed: false,
-            itemtitle: "And now this",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-    ],
-    friends: [{id: 0, name: "Bob"}, {id: 1, name: "Bobby"}, {id: 2, name: "Robert"}, {id: 3, name: "Roberta"}, {id: 4, name: "Bobbert"}],
+    bucketList: [],
+    friends: [],
     isLoading: false,
     error: '',
     curRequestedFriends: [],
     friendSearchResults: [],
-    username: 'Qwerty4',
+    username: '',
+    friendBucket: []
 }
 
 export const reducer = (state = initialState, action) =>
@@ -153,7 +96,8 @@ export const reducer = (state = initialState, action) =>
                 error: '',
                 bucketList: action.payload.items,
                 curRequestedFriends: action.payload.friendRequests,
-                friends: action.payload.friends
+                friends: action.payload.friends,
+                username: action.payload.username
             }
         case GET_LIST_FAIL:
             return {
@@ -196,7 +140,6 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: '',
-                curRequestedFriends: [...state.curRequestedFriends, action.payload]
             }
         case REQUEST_FRIEND_FAIL:
             return {
@@ -288,6 +231,26 @@ export const reducer = (state = initialState, action) =>
                     isLoading: false,
                     error: action.payload
                 }
+            case VIEW_FRIEND_START:
+                return {
+                    ...state,
+                    isLoading: true,
+                    error: '',
+                }
+            case VIEW_FRIEND_SUCCESS:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: '',
+                    friendBucket: action.payload
+                }
+            case VIEW_FRIEND_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload
+                }
+
         default:
             return state
     }

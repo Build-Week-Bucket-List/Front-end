@@ -28,7 +28,8 @@ export const getList = () => {
             dispatch({ type: GET_LIST_SUCCESS, payload: { 
                 items: res.data.items, 
                 friendRequests: res.data.requests,
-                friends: res.data.friends.filter(friend => friend.accepted === true)
+                friends: res.data.friends.filter(friend => friend.accepted === true),
+                username: res.data.username
             }})
         })
         .catch(err => {
@@ -66,6 +67,7 @@ export const editItem = (item) => dispatch =>
                     console.log("res from editItem", res)
                     dispatch({ type: EDIT_ITEM_SUCCESS, payload: res })
                 })
+            // .then(dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from editItem", err)
@@ -85,7 +87,7 @@ export const toggleComplete = (item) => dispatch =>
                     console.log("res from toggleComplete", res)
                     dispatch({ type: TOGGLE_COMPLETE_SUCCESS, payload: {res: res, itemid: item.id} })
                 })
-            .then(_ => dispatch(getList()))
+            // .then(dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from toggleComplete", err)

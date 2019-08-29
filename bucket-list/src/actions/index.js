@@ -43,10 +43,15 @@ export {
     APPROVE_FRIEND_SUCCESS,
     APPROVE_FRIEND_FAIL,
     CLEAR_FRIEND_SEARCH_RESULTS,
+    VIEW_FRIEND_START,
+    VIEW_FRIEND_SUCCESS,
+    VIEW_FRIEND_FAIL,
     searchFriend,
     requestFriend,
     approveFriend,
-    clearFriendSearchResults
+    clearFriendSearchResults,
+    viewFriend,
+    
 } from './friendActions'
 
 export {
