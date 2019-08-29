@@ -21,6 +21,7 @@ const BucketList = props =>
         }, [])
     useEffect(_ =>
         {
+            console.log('a')
             setLocalBucket(state.bucketList)
             if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
             
