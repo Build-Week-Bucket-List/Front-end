@@ -10,7 +10,7 @@ import {
     GET_LIST_FAIL,
     SEARCH_FRIEND_START,
     SEARCH_FRIEND_SUCCESS,
-    SEARCH_FRIEND_FAIL, 
+    SEARCH_FRIEND_FAIL,
     REQUEST_FRIEND_START,
     REQUEST_FRIEND_SUCCESS,
     REQUEST_FRIEND_FAIL,
@@ -33,6 +33,9 @@ import {
     VIEW_FRIEND_START,
     VIEW_FRIEND_SUCCESS,
     VIEW_FRIEND_FAIL,
+    ADD_JOURNAL_START,
+    ADD_JOURNAL_SUCCESS,
+    ADD_JOURNAL_FAIL
 } from '../actions'
 
 const initialState = {
@@ -46,10 +49,8 @@ const initialState = {
     friendBucket: []
 }
 
-export const reducer = (state = initialState, action) =>
-{
-    switch(action.type)
-    {
+export const reducer = (state = initialState, action) => {
+    switch (action.type) {
         case REGISTER_USER_START:
             return {
                 ...state,
@@ -187,7 +188,7 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: action.payload
-            } 
+            }
         case EDIT_ITEM_START:
             return {
                 ...state,
@@ -213,7 +214,7 @@ export const reducer = (state = initialState, action) =>
                 isLoading: true,
                 error: '',
             }
-            case TOGGLE_COMPLETE_SUCCESS: 
+        case TOGGLE_COMPLETE_SUCCESS:
             return {
                 ...state,
                 bucketList: state.bucketList.map(item => {
@@ -228,51 +229,71 @@ export const reducer = (state = initialState, action) =>
                 isLoading: false,
                 error: ''
             }
-            case TOGGLE_COMPLETE_FAIL:
-                return {
-                    ...state,
-                    isLoading: false,
-                    error: action.payload
-                }
-            case DELETE_ITEM_START:
-                return {
-                    ...state,
-                    isLoading: false,
-                    error: ''
-                }
-            case DELETE_ITEM_SUCCESS:
-                console.log('delete item success', action.payload)
-                return {
-                    ...state,
-                    bucketList: state.bucketList.filter(item => item.itemid !== action.payload.itemid),
-                    isLoading: false,
-                    error: ''
-                }
-            case DELETE_ITEM_FAIL:
-                return {
-                    ...state,
-                    isLoading: false,
-                    error: action.payload
-                }
-            case VIEW_FRIEND_START:
-                return {
-                    ...state,
-                    isLoading: true,
-                    error: '',
-                }
-            case VIEW_FRIEND_SUCCESS:
-                return {
-                    ...state,
-                    isLoading: false,
-                    error: '',
-                    friendBucket: action.payload
-                }
-            case VIEW_FRIEND_FAIL:
-                return {
-                    ...state,
-                    isLoading: false,
-                    error: action.payload
-                }
+        case TOGGLE_COMPLETE_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case DELETE_ITEM_START:
+            return {
+                ...state,
+                isLoading: false,
+                error: ''
+            }
+        case DELETE_ITEM_SUCCESS:
+            console.log('delete item success', action.payload)
+            return {
+                ...state,
+                bucketList: state.bucketList.filter(item => item.itemid !== action.payload.itemid),
+                isLoading: false,
+                error: ''
+            }
+        case DELETE_ITEM_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case VIEW_FRIEND_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: '',
+            }
+        case VIEW_FRIEND_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                friendBucket: action.payload
+            }
+        case VIEW_FRIEND_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case ADD_JOURNAL_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: '',
+            }
+        case ADD_JOURNAL_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                bucketList: state.bucketList.map(el => el.itemid === action.payload.itemid ?
+                    { ...el, journal: action.payload.journalEntry } : el)
+            }
+        case ADD_JOURNAL_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
         default:
             return state
     }

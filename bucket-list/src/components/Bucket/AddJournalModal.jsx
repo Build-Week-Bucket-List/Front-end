@@ -69,7 +69,7 @@ export default function AddImageModal(props) {
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		//dispatch(addJournal({...props.item, journal: journal}))
+		dispatch(addJournal(props.item.itemid, journal))
 		handleClose();
 		setJournal("");
 	}

@@ -28,12 +28,16 @@ export {
     EDIT_ITEM_FAIL,
     TOGGLE_COMPLETE_START,
     TOGGLE_COMPLETE_SUCCESS,
-    TOGGLE_COMPLETE_FAIL, 
+    TOGGLE_COMPLETE_FAIL,
     toggleComplete,
     DELETE_ITEM_START,
     DELETE_ITEM_SUCCESS,
     DELETE_ITEM_FAIL,
-    deleteItem
+    deleteItem,
+    ADD_JOURNAL_START,
+    ADD_JOURNAL_SUCCESS,
+    ADD_JOURNAL_FAIL,
+    addJournal
 } from './bucketActions'
 
 export {
@@ -55,7 +59,7 @@ export {
     approveFriend,
     clearFriendSearchResults,
     viewFriend,
-    
+
 } from './friendActions'
 
 export {

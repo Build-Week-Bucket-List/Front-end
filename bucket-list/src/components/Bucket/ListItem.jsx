@@ -100,10 +100,6 @@ const ListItem = props =>
                 <Typography paragraph>
                     {props.item.journal}
                 </Typography>
-                <Typography paragraph>Comments:</Typography>
-                <Typography paragraph>
-                    {props.item.comments}
-                </Typography>
             </CardContent>
             </Collapse>
         </Card>
