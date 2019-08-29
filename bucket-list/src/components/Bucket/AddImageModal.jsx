@@ -1,14 +1,16 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Form, Field, withFormik } from "formik";
+import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
+import axios from 'axios';
 import { TextField } from "formik-material-ui";
-import { editItem } from "../actions";
+import { editItem } from "../../actions";
 import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
@@ -28,59 +30,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column"
   }
 }));
-
-const editItemForm = () => {
-  return (
-    <Form>
-      <Field component={TextField} name="title" label="Title" fullWidth/>
-      <Field
-        component={TextField}
-        name="desc"
-        label="Description"
-        multiline
-        rows="4"
-        fullWidth
-      />
-      <Button
-        type="submit"
-        color="primary"
-        variant="contained"
-        fullWidth
-      >
-        Save
-      </Button>
-    </Form>
-  );
-};
-
-const ModalFormik = withFormik({
-  mapPropsToValues({ title, desc }) {
-    return {
-      title: title || "",
-      desc: desc || ""
-    };
-  },
-
-  validationSchema: Yup.object().shape({
-    title: Yup.string().required("A title is required"),
-    desc: Yup.string().required("A desc is required")
-  }),
-
-  handleSubmit(values, { props }) {
-    console.log('submitted modal', values)
-    props.editItem({...props.item, itemtitle: values.title, itemdesc: values.desc})
-    props.setOpen(false)
-  }
-})(editItemForm);
-
-const mapStateToProps = state => {
-  return {};
-};
-
-const ModalForm = connect(
-  mapStateToProps,
-  { editItem }
-)(ModalFormik);
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -106,35 +55,36 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function EditItemModal(props) {
+export default function AddImageModal(props) {
+	const {setImageOpen, imageOpen} = props;
   const classes = useStyles();
-//   const [open, setOpen] = React.useState(false);
+	const [image, setImage] = useState()
+	const dispatch = useDispatch();
 
   const handleOpen = () => {
-    // setOpen(true);
-    props.setEditOpen(true);
+    setImageOpen(true);
   };
 
   const handleClose = () => {
-    // setOpen(false);
-    props.setEditOpen(false);
+    setImageOpen(false);
   };
+
+  useEffect(() => {
+      if  (image) {
+					const data = new FormData()
+					data.append('image', image)
+          axios.post('https://imgur-bucketlist.herokuapp.com/upload', data)
+          	.then(res => dispatch(editItem({...props.item, image: res.data})));
+      }}, [image])
 
   return (
     <div>
-      {/* <IconButton
-        aria-label="edit old item"
-        color="inherit"
-        onClick={handleOpen}
-      > */}
-      <div onClick={handleOpen}>Edit Item</div>
-        
-      {/* </IconButton> */}
+			<div onClick={handleOpen}>Change image</div>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
         className={classes.modal}
-        open={props.editOpen}
+        open={imageOpen}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -142,9 +92,26 @@ export default function EditItemModal(props) {
           timeout: 500
         }}
       >
-        <Fade in={props.editOpen}>
+        <Fade in={imageOpen}>
           <div className={classes.paper}>
-            <ModalForm item={props.item} setOpen={props.setEditOpen}/>
+            <input
+              accept="image/*"
+              className={classes.input}
+              style={{ display: "none" }}
+              id="raised-button-file"
+              multiple
+              type="file"
+              onChange={e => setImage(e.target.files[0])}
+            />
+            <label htmlFor="raised-button-file">
+              <Button
+                variant="contained"
+                component="span"
+                className={classes.button}
+              >
+                Upload
+              </Button>
+            </label>
           </div>
         </Fade>
       </Modal>

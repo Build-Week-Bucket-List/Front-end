@@ -5,11 +5,10 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring";
 import { connect } from "react-redux";
 import { Form, Field, withFormik } from "formik";
-import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import { TextField } from "formik-material-ui";
-import { addItem } from "../actions";
+import { editItem } from "../../actions";
 import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
@@ -30,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const addItemForm = () => {
+const editItemForm = () => {
   return (
     <Form>
       <Field component={TextField} name="title" label="Title" fullWidth/>
@@ -69,10 +68,10 @@ const ModalFormik = withFormik({
 
   handleSubmit(values, { props }) {
     console.log('submitted modal', values)
-    props.addItem({itemtitle: values.title, itemdesc: values.desc})
+    props.editItem({...props.item, itemtitle: values.title, itemdesc: values.desc})
     props.setOpen(false)
   }
-})(addItemForm);
+})(editItemForm);
 
 const mapStateToProps = state => {
   return {};
@@ -80,7 +79,7 @@ const mapStateToProps = state => {
 
 const ModalForm = connect(
   mapStateToProps,
-  { addItem }
+  { editItem }
 )(ModalFormik);
 
 const Fade = React.forwardRef(function Fade(props, ref) {
@@ -107,32 +106,35 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function AddItemModal() {
+export default function EditItemModal(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+//   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
-    setOpen(true);
+    // setOpen(true);
+    props.setEditOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    // setOpen(false);
+    props.setEditOpen(false);
   };
 
   return (
     <div>
-      <IconButton
-        aria-label="add new item"
+      {/* <IconButton
+        aria-label="edit old item"
         color="inherit"
         onClick={handleOpen}
-      >
-        <AddIcon />
-      </IconButton>
+      > */}
+      <div onClick={handleOpen}>Edit Item</div>
+        
+      {/* </IconButton> */}
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
         className={classes.modal}
-        open={open}
+        open={props.editOpen}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -140,9 +142,9 @@ export default function AddItemModal() {
           timeout: 500
         }}
       >
-        <Fade in={open}>
+        <Fade in={props.editOpen}>
           <div className={classes.paper}>
-            <ModalForm setOpen={setOpen}/>
+            <ModalForm item={props.item} setOpen={props.setEditOpen}/>
           </div>
         </Fade>
       </Modal>
