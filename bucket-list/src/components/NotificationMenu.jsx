@@ -50,7 +50,8 @@ export default function NotificationMenu(props) {
         <div className={classes.root}>
         <ClickAwayListener onClickAway={handleClickAway}>
             <div>
-            <Button onClick={handleClick}><NotificationsIcon /></Button>
+            {/* <Button onClick={handleClick}><NotificationsIcon /></Button> */}
+            <NotificationsIcon style={{position: 'relative', top: '10px'}} onClick={handleClick}/>
             {open ? (
                 <Paper className={classes.paper}>
                     { state.curRequestedFriends.length === 0 ? null :

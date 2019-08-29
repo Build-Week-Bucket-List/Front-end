@@ -8,6 +8,7 @@ export const FriendDiv = styled.div`
     font-size: 20px;
     line-height: 40px;
     margin: 10px;
+    width: 80%;
 `;
 
 export const FriendFlex = styled.div`
@@ -15,4 +16,9 @@ export const FriendFlex = styled.div`
     flex-flow: column nowrap;
     width: 500px;
     margin: 20px auto;
+`;
+
+export const FriendRowDiv = styled.div`
+    display: flex;
+    align-items: center;
 `;

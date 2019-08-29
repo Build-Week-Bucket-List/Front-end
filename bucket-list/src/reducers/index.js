@@ -201,7 +201,6 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: '',
-                curRequestedFriends: [...state.curRequestedFriends, action.payload]
             }
         case REQUEST_FRIEND_FAIL:
             return {
