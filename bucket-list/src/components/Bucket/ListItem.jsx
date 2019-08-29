@@ -19,7 +19,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddJournalModal from './AddJournalModal';
 
 
-import ClickAway from '../ListItemMenu';
+import ClickAway from './ListItemMenu';
 
 const useStyles = makeStyles(theme => ({
     card: {

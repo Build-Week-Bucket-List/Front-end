@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { Form, Field, withFormik } from "formik";
 import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
-import axios from 'axios';
 import { TextField } from "formik-material-ui";
-import { editItem } from "../actions";
+import { addItem } from "../../actions";
 import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
@@ -30,6 +29,59 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column"
   }
 }));
+
+const addItemForm = () => {
+  return (
+    <Form>
+      <Field component={TextField} name="title" label="Title" fullWidth/>
+      <Field
+        component={TextField}
+        name="desc"
+        label="Description"
+        multiline
+        rows="4"
+        fullWidth
+      />
+      <Button
+        type="submit"
+        color="primary"
+        variant="contained"
+        fullWidth
+      >
+        Save
+      </Button>
+    </Form>
+  );
+};
+
+const ModalFormik = withFormik({
+  mapPropsToValues({ title, desc }) {
+    return {
+      title: title || "",
+      desc: desc || ""
+    };
+  },
+
+  validationSchema: Yup.object().shape({
+    title: Yup.string().required("A title is required"),
+    desc: Yup.string().required("A desc is required")
+  }),
+
+  handleSubmit(values, { props }) {
+    console.log('submitted modal', values)
+    props.addItem({itemtitle: values.title, itemdesc: values.desc})
+    props.setOpen(false)
+  }
+})(addItemForm);
+
+const mapStateToProps = state => {
+  return {};
+};
+
+const ModalForm = connect(
+  mapStateToProps,
+  { addItem }
+)(ModalFormik);
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -55,36 +107,32 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function AddImageModal(props) {
-	const {setImageOpen, imageOpen} = props;
+export default function AddItemModal() {
   const classes = useStyles();
-	const [image, setImage] = useState()
-	const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
-    setImageOpen(true);
+    setOpen(true);
   };
 
   const handleClose = () => {
-    setImageOpen(false);
+    setOpen(false);
   };
-
-  useEffect(() => {
-      if  (image) {
-					const data = new FormData()
-					data.append('image', image)
-          axios.post('https://imgur-bucketlist.herokuapp.com/upload', data)
-          	.then(res => dispatch(editItem({...props.item, image: res.data})));
-      }}, [image])
 
   return (
     <div>
-			<div onClick={handleOpen}>Change image</div>
+      <IconButton
+        aria-label="add new item"
+        color="inherit"
+        onClick={handleOpen}
+      >
+        <AddIcon />
+      </IconButton>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
         className={classes.modal}
-        open={imageOpen}
+        open={open}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -92,26 +140,9 @@ export default function AddImageModal(props) {
           timeout: 500
         }}
       >
-        <Fade in={imageOpen}>
+        <Fade in={open}>
           <div className={classes.paper}>
-            <input
-              accept="image/*"
-              className={classes.input}
-              style={{ display: "none" }}
-              id="raised-button-file"
-              multiple
-              type="file"
-              onChange={e => setImage(e.target.files[0])}
-            />
-            <label htmlFor="raised-button-file">
-              <Button
-                variant="contained"
-                component="span"
-                className={classes.button}
-              >
-                Upload
-              </Button>
-            </label>
+            <ModalForm setOpen={setOpen}/>
           </div>
         </Fade>
       </Modal>

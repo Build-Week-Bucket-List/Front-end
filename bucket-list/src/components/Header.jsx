@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { searchBucketList, searchFriend } from '../actions'
 import { logoutUser } from '../actions/onboardingActions';
 
-import AddItemModal from './AddItemModal'
+import AddItemModal from './Bucket/AddItemModal'
 import HeaderTabs from './HeaderTabs'
 import NotificationMenu from './NotificationMenu'
 

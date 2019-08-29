@@ -5,10 +5,10 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { grey } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { ItemButton, MenuItem } from './Bucket/Bucket-Styles';
+import { ItemButton, MenuItem } from './Bucket-Styles';
 import EditItemModal from './EditItemModal';
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleComplete, deleteItem } from '../actions'
+import { toggleComplete, deleteItem } from '../../actions'
 import AddImageModal from './AddImageModal'
 ;
 
