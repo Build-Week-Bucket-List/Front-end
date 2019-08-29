@@ -35,7 +35,8 @@ export const getList = () => {
                 items: res.data.items, 
                 friendRequests: res.data.requests,
                 friends: res.data.friends.filter(friend => friend.accepted === true),
-                username: res.data.username
+                username: res.data.username,
+                journal: res.data.journal
             }})
         })
         .catch(err => {

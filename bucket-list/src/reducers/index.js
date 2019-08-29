@@ -46,7 +46,8 @@ const initialState = {
     curRequestedFriends: [],
     friendSearchResults: [],
     username: '',
-    friendBucket: []
+    friendBucket: [],
+    journal: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -101,7 +102,8 @@ export const reducer = (state = initialState, action) => {
                 bucketList: action.payload.items,
                 curRequestedFriends: action.payload.friendRequests,
                 friends: action.payload.friends,
-                username: action.payload.username
+                username: action.payload.username,
+                journal: action.payload.journal
             }
         case GET_LIST_FAIL:
             return {
@@ -286,7 +288,7 @@ export const reducer = (state = initialState, action) => {
                 isLoading: false,
                 error: '',
                 bucketList: state.bucketList.map(el => el.itemid === action.payload.itemid ?
-                    { ...el, journal: action.payload.journalEntry } : el)
+                    { ...el, journal: [...state.journal, {entry: action.payload.journalEntry}] } : el)
             }
         case ADD_JOURNAL_FAIL:
             return {

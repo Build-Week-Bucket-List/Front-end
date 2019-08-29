@@ -53,7 +53,8 @@ export default function ClickAway({item}) {
   };
   
   const handleDelete = () => {
-    
+    dispatch(deleteItem(item))
+    setOpen(false)
   }
 
   return (
@@ -66,7 +67,7 @@ export default function ClickAway({item}) {
             <Paper className={classes.paper}>
                 <MenuItem onClick={_ => dispatch(toggleComplete(item))}>Mark {!item.completed ? `Completed` : `Incomplete`}</MenuItem>                           
                 <MenuItem><EditItemModal item={item} setEditOpen={setEditOpen} editOpen={editOpen} /></MenuItem>                
-                <MenuItem onClick={_ => dispatch(deleteItem(item))}>Delete</MenuItem>
+                <MenuItem onClick={handleDelete}>Delete</MenuItem>
                 <MenuItem><AddImageModal item={item} setImageOpen={setImageOpen} imageOpen={imageOpen} /></MenuItem>                
             </Paper>
           ) : null}
