@@ -1,5 +1,5 @@
-import { axiosWithAuth } from '../utils';
-import axios from 'axios'
+import { axiosWithAuth, axiosWithAuthFriend } from '../utils';
+
 
 export const SEARCH_FRIEND_START = "SEARCH_FRIEND_START"
 export const SEARCH_FRIEND_SUCCESS = "SEARCH_FRIEND_SUCCESS"
@@ -32,7 +32,7 @@ export const requestFriend = (username) => {
     return dispatch => {
         dispatch({ type: REQUEST_FRIEND_START });
         console.log('username from requestUser',username)
-        axiosWithAuth()
+        axiosWithAuthFriend()
         .post(`https://hypedupharris-bucketlist.herokuapp.com/users/add`, username)
         .then(res => {
             console.log('response from requestFriend', res)
@@ -48,7 +48,7 @@ export const requestFriend = (username) => {
 export const approveFriend = (username) => {
     return dispatch => {
         dispatch({ type: APPROVE_FRIEND_START });
-        axiosWithAuth()
+        axiosWithAuthFriend()
         .put('', username)
         .then(res => {
             console.log('response from approveFriend', res)

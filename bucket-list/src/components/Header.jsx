@@ -9,11 +9,13 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
+import PeopleIcon from '@material-ui/icons/People';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import {Link} from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
 import { searchBucketList, searchFriend } from '../actions'
@@ -190,8 +192,10 @@ export default function PrimarySearchAppBar(props) {
                 >
                 {/* <MenuIcon /> */}
                 </IconButton>
-                <Typography className={classes.title} variant="h6" noWrap>
-                    Bucket List
+                <Typography className={classes.title} variant="h6" noWrap >
+                    <Link to='/home' style={{textDecoration: 'none', color: 'inherit'}}>
+                        Bucket List
+                    </Link>
                 </Typography>
                 <div className={classes.search}>
                 <div className={classes.searchIcon}>
@@ -215,9 +219,9 @@ export default function PrimarySearchAppBar(props) {
                 
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
-                <IconButton aria-label="show new mails" color="inherit">
+                <IconButton aria-label="show friends" color="inherit" onClick={_ => props.history.push('/friends')}>
                     <Badge badgeContent={null} color="secondary">
-                    <MailIcon />
+                    <PeopleIcon />
                     </Badge>
                 </IconButton>
                 <IconButton aria-label="show new notifications" color="inherit">
