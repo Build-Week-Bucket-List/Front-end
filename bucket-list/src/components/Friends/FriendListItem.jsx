@@ -63,6 +63,7 @@ const ListItem = props =>
             }
             title={props.item.itemtitle}
             subheader={props.item.dateCreated}
+            style={{paddingRight: '70px'}}
             />
             <CardMedia
             className={classes.media}
@@ -73,10 +74,7 @@ const ListItem = props =>
                 {props.item.itemdesc}
             </Typography>
             </CardContent>
-            <CardActions disableSpacing>
-            <IconButton aria-label="add comment">
-                <CommentIcon />
-            </IconButton>            
+            <CardActions disableSpacing>         
             <IconButton
                 className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
@@ -93,10 +91,6 @@ const ListItem = props =>
                 <Typography paragraph>Journal:</Typography>
                 <Typography paragraph>
                     {props.item.journal}
-                </Typography>
-                <Typography paragraph>Comments:</Typography>
-                <Typography paragraph>
-                    {props.item.comments}
                 </Typography>
             </CardContent>
             </Collapse>
