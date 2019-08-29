@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#000000'
     },
     title: {
-        fontFamily: "Cinzel, serif !important"
+        fontFamily: "Cinzel, serif"
     },
     menuButton: {
         marginRight: theme.spacing(2),

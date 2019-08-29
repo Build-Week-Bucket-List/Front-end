@@ -30,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const style = {
+  backgroundColor: "#DA9417"
+}
+
 const addItemForm = () => {
   return (
     <Form>
@@ -47,6 +51,7 @@ const addItemForm = () => {
         color="primary"
         variant="contained"
         fullWidth
+        style={style}
       >
         Save
       </Button>

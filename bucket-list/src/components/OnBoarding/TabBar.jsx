@@ -4,11 +4,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TabPanel from './TabPanel';
+import Typography from '@material-ui/core/Typography';
 
 import Login from './Login';
 import RegisterWithFormik from './RegisterWithFormik';
 
 import { makeStyles } from '@material-ui/core/styles';
+
 
 function a11yProps(index) {
   return {
@@ -19,7 +21,15 @@ function a11yProps(index) {
 
 const useStyles = makeStyles(theme => ({
   tabs: {
-    border: "#DA9417"
+    border: "#DA9417",
+  },
+  title: {
+    left: 52,
+    position: "absolute",
+    fontFamily: "Cinzel, serif"
+  },
+  appBar: {
+   height: 64
   }
 }))
 
@@ -31,30 +41,37 @@ const TabBar = props => {
   };
 
   const style = {
-    backgroundColor: "#000000",    
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "#000000",
   }
 
   const indicatorStyle = {
     backgroundColor: "#DA9417"
   }
- 
+
 
 
 
   return (
     <div>
-      <AppBar position='static' style={style}>
-        <Tabs value={ value } onChange={ handleChange } centered className={classes.tabs} TabIndicatorProps={{style:indicatorStyle}}>
+      <AppBar position='static' style={style} className={classes.appBar}>
+        <div className='title-container'>
+        <Typography className={classes.title} variant="h6" noWrap >
+          Bucket List
+        </Typography>
+        <Tabs value={value} onChange={handleChange} centered className={classes.tabs} TabIndicatorProps={{ style: indicatorStyle }}>
           <Tab label='Register' {...a11yProps(0)} />
           <Tab label='Login' {...a11yProps(1)} />
         </Tabs>
-      </AppBar>
-      <TabPanel value={ value } index={ 0 }>
-        <RegisterWithFormik history={ props.history } />
+        </div>
+      </AppBar>      
+      <TabPanel value={value} index={0}>
+        <RegisterWithFormik history={props.history} />
       </TabPanel>
 
-      <TabPanel value={ value } index={ 1 }>
-        <Login history={ props.history } />
+      <TabPanel value={value} index={1}>
+        <Login history={props.history} />
       </TabPanel>
     </div>
   )

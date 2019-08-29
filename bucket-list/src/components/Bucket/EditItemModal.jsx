@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const style = {
+  backgroundColor: "#DA9417"
+}
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
   const style = useSpring({
@@ -102,7 +105,7 @@ export default function EditItemModal({item, ...props}) {
 								fullWidth
 								onChange={e => setValues({...values, desc: e.target.value})}
               />
-							<Button type="submit" variant="contained" color="primary" fullWidth>
+							<Button type="submit" variant="contained" color="primary" fullWidth style={style}>
 								Save Edit
 							</Button>
             </form>

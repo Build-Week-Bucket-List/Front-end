@@ -4,3 +4,8 @@
   text-align: center;  
 }
 
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

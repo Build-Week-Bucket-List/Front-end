@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const style = {
+  backgroundColor: "#DA9417"
+}
+
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
   const style = useSpring({
@@ -101,7 +105,7 @@ export default function AddImageModal(props) {
 								fullWidth
 								onChange={e => setJournal(e.target.value)}
               />
-							<Button type="submit" variant="contained" color="primary" fullWidth>
+							<Button type="submit" variant="contained" color="primary" fullWidth style={style}>
 								Add Entry
 							</Button>
             </form>
