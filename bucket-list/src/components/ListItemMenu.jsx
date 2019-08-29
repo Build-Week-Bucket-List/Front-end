@@ -8,8 +8,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { ItemButton, MenuItem } from './Bucket/Bucket-Styles';
 import EditItemModal from './EditItemModal';
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleComplete } from '../actions'
+import { toggleComplete, deleteItem } from '../actions'
 import AddImageModal from './AddImageModal'
+;
 
 
 const useStyles = makeStyles(theme => ({
@@ -50,6 +51,10 @@ export default function ClickAway({item}) {
   const handleClickAway = (event) => {
     if(!(imageOpen || editOpen)) setOpen(false);
   };
+  
+  const handleDelete = () => {
+    
+  }
 
   return (
     <div className={classes.root}>
@@ -61,7 +66,7 @@ export default function ClickAway({item}) {
             <Paper className={classes.paper}>
                 <MenuItem onClick={_ => dispatch(toggleComplete(item))}>Mark {!item.completed ? `Completed` : `Incomplete`}</MenuItem>                           
                 <MenuItem><EditItemModal item={item} setEditOpen={setEditOpen} editOpen={editOpen} /></MenuItem>                
-                <MenuItem>Delete</MenuItem>
+                <MenuItem onClick={_ => dispatch(deleteItem(item))}>Delete</MenuItem>
                 <MenuItem><AddImageModal item={item} setImageOpen={setImageOpen} imageOpen={imageOpen} /></MenuItem>                
             </Paper>
           ) : null}

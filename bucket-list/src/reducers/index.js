@@ -27,6 +27,9 @@ import {
     TOGGLE_COMPLETE_START,
     TOGGLE_COMPLETE_SUCCESS,
     TOGGLE_COMPLETE_FAIL,
+    DELETE_ITEM_START,
+    DELETE_ITEM_SUCCESS,
+    DELETE_ITEM_FAIL,
     VIEW_FRIEND_START,
     VIEW_FRIEND_SUCCESS,
     VIEW_FRIEND_FAIL,
@@ -231,6 +234,26 @@ export const reducer = (state = initialState, action) =>
                     isLoading: false,
                     error: action.payload
                 }
+            case DELETE_ITEM_START:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: ''
+                }
+            case DELETE_ITEM_SUCCESS:
+                console.log('delete item success', action.payload)
+                return {
+                    ...state,
+                    bucketList: state.bucketList.filter(item => item.itemid !== action.payload.itemid),
+                    isLoading: false,
+                    error: ''
+                }
+            case DELETE_ITEM_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload
+                }
             case VIEW_FRIEND_START:
                 return {
                     ...state,
@@ -250,7 +273,6 @@ export const reducer = (state = initialState, action) =>
                     isLoading: false,
                     error: action.payload
                 }
-
         default:
             return state
     }

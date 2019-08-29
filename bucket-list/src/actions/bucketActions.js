@@ -15,6 +15,10 @@ export const EDIT_ITEM_FAIL = "EDIT_ITEM_FAIL"
 export const TOGGLE_COMPLETE_START = "TOGGLE_COMPLETE_START"
 export const TOGGLE_COMPLETE_SUCCESS = "TOGGLE_COMPLETE_SUCCESS"
 export const TOGGLE_COMPLETE_FAIL = "TOGGLE_COMPLETE_FAIL"
+export const DELETE_ITEM_START = "DELETE_ITEM_START"
+export const DELETE_ITEM_SUCCESS = "DELETE_ITEM_SUCCESS"
+export const DELETE_ITEM_FAIL = "DELETE_ITEM_FAIL"
+
 
 
 export const getList = () => {
@@ -95,3 +99,20 @@ export const toggleComplete = (item) => dispatch =>
                 })
 }
 
+export const deleteItem = (item) => dispatch =>
+{
+    dispatch({type: DELETE_ITEM_START})
+    axiosWithAuth()
+    .delete(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`)
+    .then(res => 
+        {
+            console.log('response from deleteItem', res)
+            dispatch({ type: DELETE_ITEM_SUCCESS, payload: item })
+        })
+    //.then(dispatch(getList()))
+    .catch(err => 
+        {
+            console.log('There was in error from deleteItem', err)
+            dispatch({ type: DELETE_ITEM_FAIL, payload: err.response })
+        })
+}
