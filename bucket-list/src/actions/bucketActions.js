@@ -67,8 +67,11 @@ export const editItem = (item) => dispatch =>
 {
     dispatch({ type: EDIT_ITEM_START })
     console.log('item from editItem', item)
+    let sendItem = Object.keys(item).reduce((acc, prop) => {
+        return prop === 'journal' ? acc : {...acc, [prop]:item[prop]}
+    }, {})
     axiosWithAuth()
-        .put(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`, item)
+        .put(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`, sendItem)
             .then(res =>
                 {
                     console.log("res from editItem", res)
@@ -87,8 +90,11 @@ export const toggleComplete = (item) => dispatch =>
     console.log('item',item)
     console.log('sent item from toggle complete',  { ...item, completed: !item.completed })
     dispatch({ type: TOGGLE_COMPLETE_START })
+    let sendItem = Object.keys(item).reduce((acc, prop) => {
+        return prop === 'journal' ? acc : {...acc, [prop]:item[prop]}
+    }, {})
     axiosWithAuth()
-        .put(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`, { ...item, completed: !item.completed })
+        .put(`https://hypedupharris-bucketlist.herokuapp.com/list/item/${item.itemid}`, { ...sendItem, completed: !item.completed })
             .then(res =>
                 {
                     console.log("res from toggleComplete", res)
@@ -119,6 +125,7 @@ export const deleteItem = (item) => dispatch =>
             dispatch({ type: DELETE_ITEM_FAIL, payload: err.response })
         })
 }
+
 export const addJournal = (itemid, journalEntry) => dispatch =>
 {
     dispatch({ type: ADD_JOURNAL_START })
