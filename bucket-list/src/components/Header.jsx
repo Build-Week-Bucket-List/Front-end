@@ -11,7 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
+import GroupIcon from '@material-ui/icons/Group';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
@@ -208,7 +208,7 @@ export default function PrimarySearchAppBar(props) {
                 <div className={classes.sectionDesktop}>
                 <IconButton aria-label="show new mails" color="inherit">
                     <Badge badgeContent={null} color="secondary">
-                    <MailIcon />
+                    <GroupIcon />
                     </Badge>
                 </IconButton>
                 <IconButton aria-label="show new notifications" color="inherit">

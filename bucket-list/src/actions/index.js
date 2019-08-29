@@ -29,7 +29,11 @@ export {
     TOGGLE_COMPLETE_START,
     TOGGLE_COMPLETE_SUCCESS,
     TOGGLE_COMPLETE_FAIL, 
-    toggleComplete
+    toggleComplete,
+    DELETE_ITEM_START,
+    DELETE_ITEM_SUCCESS,
+    DELETE_ITEM_FAIL,
+    deleteItem
 } from './bucketActions'
 
 export {

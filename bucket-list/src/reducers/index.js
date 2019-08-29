@@ -28,7 +28,10 @@ import {
     EDIT_ITEM_FAIL,
     TOGGLE_COMPLETE_START,
     TOGGLE_COMPLETE_SUCCESS,
-    TOGGLE_COMPLETE_FAIL
+    TOGGLE_COMPLETE_FAIL,
+    DELETE_ITEM_START,
+    DELETE_ITEM_SUCCESS,
+    DELETE_ITEM_FAIL,
 } from '../actions'
 
 const initialState = {
@@ -278,6 +281,26 @@ export const reducer = (state = initialState, action) =>
                 error: ''
             }
             case TOGGLE_COMPLETE_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload
+                }
+            case DELETE_ITEM_START:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: ''
+                }
+            case DELETE_ITEM_SUCCESS:
+                console.log('delete item success', action.payload)
+                return {
+                    ...state,
+                    bucketList: state.bucketList.filter(item => item.itemid !== action.payload.itemid),
+                    isLoading: false,
+                    error: ''
+                }
+            case DELETE_ITEM_FAIL:
                 return {
                     ...state,
                     isLoading: false,
