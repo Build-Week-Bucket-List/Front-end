@@ -152,7 +152,8 @@ export const reducer = (state = initialState, action) =>
                 isLoading: false,
                 error: '',
                 bucketList: action.payload.items,
-                curRequestedFriends: action.payload.friendRequests
+                curRequestedFriends: action.payload.friendRequests,
+                friends: action.payload.friends
             }
         case GET_LIST_FAIL:
             return {

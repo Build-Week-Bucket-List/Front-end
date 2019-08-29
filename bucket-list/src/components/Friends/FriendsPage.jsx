@@ -16,6 +16,7 @@ const FriendsPage = props =>
 
     useEffect(_ =>
         {
+            console.log('c',state.friends)
             if(state.friends.length === 0)
             {
                 dispatch(getList())
@@ -32,7 +33,11 @@ const FriendsPage = props =>
                 setSearchString={setSearchString}
             />
             <FriendFlex>
-                {state.friends.length > 0 ? state.friends.map(friend => <FriendDiv key={friend.id}>{friend.name}</FriendDiv>) : null}
+                {state.friends.length > 0 ? state.friends
+                    .map((friend, index) => <FriendDiv key={index} >
+                        {friend.friendusername}
+                    </FriendDiv>) 
+                    : null}
             </FriendFlex>
             <SwipeableTemporaryDrawer />
         </>

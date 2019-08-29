@@ -1,6 +1,5 @@
 import { axiosWithAuth, axiosWithAuthFriend } from '../utils';
 
-
 export const SEARCH_FRIEND_START = "SEARCH_FRIEND_START"
 export const SEARCH_FRIEND_SUCCESS = "SEARCH_FRIEND_SUCCESS"
 export const SEARCH_FRIEND_FAIL = "SEARCH_FRIEND_FAIL"
@@ -11,6 +10,10 @@ export const APPROVE_FRIEND_START = "APPROVE_FRIEND_START"
 export const APPROVE_FRIEND_SUCCESS = "APPROVE_FRIEND_SUCCESS"
 export const APPROVE_FRIEND_FAIL = "APPROVE_FRIEND_FAIL"
 export const CLEAR_FRIEND_SEARCH_RESULTS = "CLEAR_FRIEND_SEARCH_RESULTS"
+export const VIEW_FRIEND_START = "VIEW_FRIEND_START"
+export const VIEW_FRIEND_SUCCESS = "VIEW_FRIEND_SUCCESS"
+export const VIEW_FRIEND_FAIL = "VIEW_FRIEND_FAIL"
+
 
 export const searchFriend = (searchString) => {
     return dispatch => {
@@ -65,4 +68,21 @@ export const approveFriend = (requestid) => {
 export const clearFriendSearchResults = _ => dispatch =>
 {
     dispatch({ type: CLEAR_FRIEND_SEARCH_RESULTS })
+}
+
+export const viewFriend = username => dispatch =>
+{
+    dispatch({ type: VIEW_FRIEND_START })
+    axiosWithAuth()
+    .get(`https://hypedupharris-bucketlist.herokuapp.com/users/username/${username}`)
+        .then(res =>
+            {
+                console.log('res from viewFriend', res)
+                dispatch({ type: VIEW_FRIEND_SUCCESS, payload: res })
+            })
+        .catch(err =>
+            {
+                console.log('err from viewFriend', err)
+                dispatch({ type: VIEW_FRIEND_FAIL, payload: err })
+            })
 }
