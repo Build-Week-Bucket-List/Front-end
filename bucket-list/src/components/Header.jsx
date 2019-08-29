@@ -126,7 +126,7 @@ export default function PrimarySearchAppBar(props) {
     {
         if(event.keyCode === 13 && isEnterReq)
         {
-            dispatch(searchFriend(searchString))
+            dispatch(searchFriend(searchString.toLowerCase()))
             setSearchString('')
         }
     }
