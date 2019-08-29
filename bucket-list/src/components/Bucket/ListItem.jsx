@@ -14,8 +14,9 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import CommentIcon from '@material-ui/icons/Comment';
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AddJournalModal from './AddJournalModal';
 
 
 import ClickAway from '../ListItemMenu';
@@ -81,9 +82,7 @@ const ListItem = props =>
             </Typography>
             </CardContent>
             <CardActions disableSpacing>
-            <IconButton aria-label="add comment">
-                <CommentIcon />
-            </IconButton>            
+            <AddJournalModal item={props.item} />            
             <IconButton
                 className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
