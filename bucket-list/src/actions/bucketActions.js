@@ -18,7 +18,9 @@ export const TOGGLE_COMPLETE_FAIL = "TOGGLE_COMPLETE_FAIL"
 export const DELETE_ITEM_START = "DELETE_ITEM_START"
 export const DELETE_ITEM_SUCCESS = "DELETE_ITEM_SUCCESS"
 export const DELETE_ITEM_FAIL = "DELETE_ITEM_FAIL"
-
+export const ADD_JOURNAL_START = "ADD_JOURNAL_START"
+export const ADD_JOURNAL_SUCCESS = "ADD_JOURNAL_SUCCESS"
+export const ADD_JOURNAL_FAIL = "ADD_JOURNAL_FAIL"
 
 
 export const getList = () => {
@@ -33,7 +35,8 @@ export const getList = () => {
                 items: res.data.items, 
                 friendRequests: res.data.requests,
                 friends: res.data.friends.filter(friend => friend.accepted === true),
-                username: res.data.username
+                username: res.data.username,
+                journal: res.data.journal
             }})
         })
         .catch(err => {
@@ -115,4 +118,20 @@ export const deleteItem = (item) => dispatch =>
             console.log('There was in error from deleteItem', err)
             dispatch({ type: DELETE_ITEM_FAIL, payload: err.response })
         })
+}
+export const addJournal = (itemid, journalEntry) => dispatch =>
+{
+    dispatch({ type: ADD_JOURNAL_START })
+    axiosWithAuth()
+        .post(`https://hypedupharris-bucketlist.herokuapp.com/list/journal/${itemid}`, journalEntry)
+            .then(res =>
+                {
+                    console.log("res from addJournal", res)
+                    dispatch({ type: ADD_JOURNAL_SUCCESS, payload: {itemid: itemid, journalEntry: journalEntry} })
+                })
+            .catch(err =>
+                {
+                    console.log("err from addJournal", err)
+                    dispatch({ type: ADD_JOURNAL_FAIL, payload: err.response })
+                })
 }
