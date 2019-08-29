@@ -60,7 +60,7 @@ const ListItem = props =>
             <CardHeader
             avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
-                    {state.username[0]}
+                    { state.username ? state.username[0] : '' }
                 </Avatar>
             }
             action={

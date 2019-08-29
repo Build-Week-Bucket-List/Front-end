@@ -58,7 +58,7 @@ const ListItem = props =>
             <CardHeader
             avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
-                    {state.username[0]}
+                    {props.friendName ? props.friendName[0] : ''}
                 </Avatar>
             }
             title={props.item.itemtitle}

@@ -100,7 +100,7 @@ const initialState = {
     error: '',
     curRequestedFriends: [],
     friendSearchResults: [],
-    username: 'Qwerty4',
+    username: '',
     friendBucket: []
 }
 
@@ -157,7 +157,8 @@ export const reducer = (state = initialState, action) =>
                 error: '',
                 bucketList: action.payload.items,
                 curRequestedFriends: action.payload.friendRequests,
-                friends: action.payload.friends
+                friends: action.payload.friends,
+                username: action.payload.username
             }
         case GET_LIST_FAIL:
             return {

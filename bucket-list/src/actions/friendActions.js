@@ -48,12 +48,12 @@ export const requestFriend = (username) => {
     }
 }
 
-export const approveFriend = (requestid) => {
+export const approveFriend = (req) => {
     return dispatch => {
-        console.log('request id from approveFriend', requestid)
+        console.log('request id from approveFriend', req.requestid)
         dispatch({ type: APPROVE_FRIEND_START });
         axiosWithAuth()
-        .put(`https://hypedupharris-bucketlist.herokuapp.com/users/add/${requestid}`, true)
+        .put(`https://hypedupharris-bucketlist.herokuapp.com/users/add/${req.requestid}`, {...req, accepted: true})
         .then(res => {
             console.log('response from approveFriend', res)
             dispatch({ type: APPROVE_FRIEND_SUCCESS, payload: res.data })

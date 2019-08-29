@@ -28,7 +28,8 @@ export const getList = () => {
             dispatch({ type: GET_LIST_SUCCESS, payload: { 
                 items: res.data.items, 
                 friendRequests: res.data.requests,
-                friends: res.data.friends.filter(friend => friend.accepted === true)
+                friends: res.data.friends.filter(friend => friend.accepted === true),
+                username: res.data.username
             }})
         })
         .catch(err => {

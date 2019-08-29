@@ -16,7 +16,7 @@ const ViewFriend = props =>
     
     useEffect(_ => 
         {
-            dispatch(viewFriend())
+            // dispatch(viewFriend())
             if(state.friendBucket.length > 0) setLocalBucket(state.friendBucket.filter(item => item.completed === false))
         }, [])
     useEffect(_ =>
@@ -38,7 +38,7 @@ const ViewFriend = props =>
             <BucketGrid>
                 {localBucket.length > 0 ? localBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
-                    .map((item, index) => <FriendListItem key={index} item={item} /> ) : null }
+                    .map((item, index) => <FriendListItem key={index} item={item} friendName={props.match.params.username} /> ) : null }
             </BucketGrid>
         </>
     )

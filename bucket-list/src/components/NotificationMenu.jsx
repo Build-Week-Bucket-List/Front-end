@@ -55,7 +55,7 @@ export default function NotificationMenu(props) {
                 <Paper className={classes.paper}>
                     { state.curRequestedFriends.length === 0 ? null :
                         state.curRequestedFriends
-                        .map((req, index) => <MenuItem key={index} onClick={_ => dispatch(approveFriend(req.requestid))}>
+                        .map((req, index) => <MenuItem key={index} onClick={_ => dispatch(approveFriend(req))}>
                             {req.requester}
                         </MenuItem>)
                     }
