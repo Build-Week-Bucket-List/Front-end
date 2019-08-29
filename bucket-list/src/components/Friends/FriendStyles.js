@@ -9,6 +9,7 @@ export const FriendDiv = styled.div`
     line-height: 40px;
     margin: 10px;
     width: 80%;
+    cursor: pointer;
 `;
 
 export const FriendFlex = styled.div`
