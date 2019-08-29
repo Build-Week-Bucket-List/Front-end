@@ -1,4 +1,5 @@
 import { axiosWithAuth } from '../utils';
+import axios from 'axios'
 
 export const SEARCH_FRIEND_START = "SEARCH_FRIEND_START"
 export const SEARCH_FRIEND_SUCCESS = "SEARCH_FRIEND_SUCCESS"
@@ -30,8 +31,9 @@ export const searchFriend = (searchString) => {
 export const requestFriend = (username) => {
     return dispatch => {
         dispatch({ type: REQUEST_FRIEND_START });
+        console.log('username from requestUser',username)
         axiosWithAuth()
-        .post(`https://hypedupharris-bucketlist.herokuapp.com/users/add/${username}`, username)
+        .post(`https://hypedupharris-bucketlist.herokuapp.com/users/add`, username)
         .then(res => {
             console.log('response from requestFriend', res)
             dispatch({ type: REQUEST_FRIEND_SUCCESS, payload: res.data })
