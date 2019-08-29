@@ -57,6 +57,12 @@ export default function ClickAway({item}) {
     setOpen(false)
   }
 
+  const handleToggleComplete = _ =>
+  {
+    dispatch(toggleComplete(item))
+    setOpen(false)
+  }
+
   return (
     <div className={classes.root}>
       <ClickAwayListener onClickAway={handleClickAway}>
@@ -65,7 +71,7 @@ export default function ClickAway({item}) {
           {/* <MoreVertIcon onClick={handleClick}/> */}
           {open ? (
             <Paper className={classes.paper}>
-                <MenuItem onClick={_ => dispatch(toggleComplete(item))}>Mark {!item.completed ? `Completed` : `Incomplete`}</MenuItem>                           
+                <MenuItem onClick={handleToggleComplete}>Mark {!item.completed ? `Completed` : `Incomplete`}</MenuItem>                           
                 <MenuItem><EditItemModal item={item} setEditOpen={setEditOpen} editOpen={editOpen} /></MenuItem>                
                 <MenuItem onClick={handleDelete}>Delete</MenuItem>
                 <MenuItem><AddImageModal item={item} setImageOpen={setImageOpen} imageOpen={imageOpen} /></MenuItem>                

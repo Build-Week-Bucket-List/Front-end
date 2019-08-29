@@ -223,7 +223,7 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 bucketList: state.bucketList.map(item => {
-                    if (item.id === action.payload.itemid) {
+                    if (item.itemid === action.payload.itemid) {
                         item.completed = !item.completed;
                         return item;
                     }
