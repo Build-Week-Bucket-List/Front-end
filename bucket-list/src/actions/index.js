@@ -54,12 +54,15 @@ export {
     VIEW_FRIEND_START,
     VIEW_FRIEND_SUCCESS,
     VIEW_FRIEND_FAIL,
+    DELETE_FRIEND_START,
+    DELETE_FRIEND_SUCCESS,
+    DELETE_FRIEND_FAIL,
     searchFriend,
     requestFriend,
     approveFriend,
     clearFriendSearchResults,
     viewFriend,
-
+    deleteFriend
 } from './friendActions'
 
 export {

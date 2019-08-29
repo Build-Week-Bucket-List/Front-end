@@ -46,6 +46,11 @@ const FriendsPage = props =>
             // }
         }, [])
 
+    const handleDelete = reqid =>
+    {
+        dispatch(deleteFriend(reqid))
+    }
+
     return (
         <>
             <PrimarySearchAppBar 
@@ -62,13 +67,13 @@ const FriendsPage = props =>
                         .filter(friend => friend.friendusername !== state.username)
                         .map((friend, index) => <FriendRowDiv key={index}><FriendDiv  onClick={_ => dispatch(viewFriend(friend.friendusername, props.history))} >
                             {friend.friendusername}
-                        </FriendDiv> <DeleteForeverIcon /> </FriendRowDiv>) 
+                        </FriendDiv> <DeleteForeverIcon onClick={_ => handleDelete(friend.requestid)}/> </FriendRowDiv>) 
                         : null}
                     {state.friends.length > 0 ? state.friends
                         .filter(friend => friend.friendusername === state.username)
                         .map((friend, index) => <FriendRowDiv key={index}><FriendDiv onClick={_ => dispatch(viewFriend(friend.requester, props.history))} >
                             {friend.requester}
-                        </FriendDiv> <DeleteForeverIcon /> </FriendRowDiv>) 
+                        </FriendDiv> <DeleteForeverIcon onClick={_ => handleDelete(friend.requestid)} /> </FriendRowDiv>) 
                         : null}
             </FriendFlex>
             <SwipeableTemporaryDrawer />

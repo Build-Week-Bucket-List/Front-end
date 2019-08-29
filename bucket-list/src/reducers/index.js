@@ -35,7 +35,10 @@ import {
     VIEW_FRIEND_FAIL,
     ADD_JOURNAL_START,
     ADD_JOURNAL_SUCCESS,
-    ADD_JOURNAL_FAIL
+    ADD_JOURNAL_FAIL,
+    DELETE_FRIEND_START,
+    DELETE_FRIEND_SUCCESS,
+    DELETE_FRIEND_FAIL,
 } from '../actions'
 
 const initialState = {
@@ -291,6 +294,26 @@ export const reducer = (state = initialState, action) => {
                     { ...el, journal: [...state.journal, {entry: action.payload.journalEntry}] } : el)
             }
         case ADD_JOURNAL_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case DELETE_FRIEND_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: '',
+            }
+        case DELETE_FRIEND_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                friends: state.friends.filter(el => el.requestid !== action.payload ),
+                curRequestedFriends: state.curRequestedFriends.filter(el => el.requestid !== action.payload ),
+            }
+        case DELETE_FRIEND_FAIL:
             return {
                 ...state,
                 isLoading: false,
