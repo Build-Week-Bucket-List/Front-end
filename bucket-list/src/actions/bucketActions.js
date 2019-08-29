@@ -67,6 +67,7 @@ export const editItem = (item) => dispatch =>
                     console.log("res from editItem", res)
                     dispatch({ type: EDIT_ITEM_SUCCESS, payload: res })
                 })
+            .then(dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from editItem", err)
@@ -86,6 +87,7 @@ export const toggleComplete = (item) => dispatch =>
                     console.log("res from toggleComplete", res)
                     dispatch({ type: TOGGLE_COMPLETE_SUCCESS, payload: {res: res, itemid: item.id} })
                 })
+            .then(dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from toggleComplete", err)
