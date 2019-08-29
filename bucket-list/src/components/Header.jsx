@@ -9,18 +9,21 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
+import PeopleIcon from '@material-ui/icons/People';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import GroupIcon from '@material-ui/icons/Group';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import {Link} from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { searchBucketList, searchFriend } from '../actions'
 import { logoutUser } from '../actions/onboardingActions';
 
 import AddItemModal from './AddItemModal'
 import HeaderTabs from './HeaderTabs'
+import NotificationMenu from './NotificationMenu'
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -87,12 +90,12 @@ const useStyles = makeStyles(theme => ({
 export default function PrimarySearchAppBar(props) {
     
     const dispatch = useDispatch()
+    const state = useSelector(state => state)
     const {searchPlaceholder, isEnterReq, searchString, setSearchString} = props
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -119,7 +122,14 @@ export default function PrimarySearchAppBar(props) {
         setSearchString(event.target.value)
     }
 
-    const checkEnter = event => (event.keyCode === 13 && isEnterReq) ? searchFriend(searchString) : null
+    const checkEnter = event => 
+    {
+        if(event.keyCode === 13 && isEnterReq)
+        {
+            dispatch(searchFriend(searchString))
+            setSearchString('')
+        }
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -149,14 +159,14 @@ export default function PrimarySearchAppBar(props) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-            <IconButton aria-label="show new notifications" color="inherit">
-                <Badge badgeContent={11} color="secondary">
-                <NotificationsIcon />
+            {/* <MenuItem> */}
+            {/* <IconButton aria-label="show new notifications" color="inherit"> */}
+                <Badge badgeContent={state.curRequestedFriends.length} color="secondary">
+                    <NotificationMenu />
                 </Badge>
-            </IconButton>
+            {/* </IconButton> */}
             <p>Notifications</p>
-            </MenuItem>
+            {/* </MenuItem> */}
             <MenuItem onClick={handleProfileMenuOpen}>
             <IconButton
                 aria-label="account of current user"
@@ -183,8 +193,10 @@ export default function PrimarySearchAppBar(props) {
                 >
                 {/* <MenuIcon /> */}
                 </IconButton>
-                <Typography className={classes.title} variant="h6" noWrap>
-                    Bucket List
+                <Typography className={classes.title} variant="h6" noWrap >
+                    <Link to='/home' style={{textDecoration: 'none', color: 'inherit'}}>
+                        Bucket List
+                    </Link>
                 </Typography>
                 <div className={classes.search}>
                 <div className={classes.searchIcon}>
@@ -199,23 +211,25 @@ export default function PrimarySearchAppBar(props) {
                     inputProps={{ 'aria-label': 'search' }}
                     value={searchString}
                     onChange={handleChange}
+                    onKeyDown={checkEnter}
                     name='search'
                 />
                 </div>
-                <AddItemModal />
-                <HeaderTabs history={props.history} />
+                {!props.isEnterReq && <AddItemModal />}
+                {!props.isEnterReq && <HeaderTabs history={props.history} />}
+                
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
-                <IconButton aria-label="show new mails" color="inherit">
+                <IconButton aria-label="show friends" color="inherit" onClick={_ => props.history.push('/friends')}>
                     <Badge badgeContent={null} color="secondary">
-                    <GroupIcon />
+                        <PeopleIcon />
                     </Badge>
                 </IconButton>
-                <IconButton aria-label="show new notifications" color="inherit">
-                    <Badge badgeContent={null} color="secondary">
-                    <NotificationsIcon />
+                {/* <IconButton aria-label="show new notifications" color="inherit"> */}
+                    <Badge badgeContent={state.curRequestedFriends.length} color="secondary">
+                        <NotificationMenu />
                     </Badge>
-                </IconButton>
+                {/* </IconButton> */}
                 <IconButton
                     edge="end"
                     aria-label="account of current user"

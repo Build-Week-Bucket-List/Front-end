@@ -28,7 +28,13 @@ export const getList = () => {
         .get('https://hypedupharris-bucketlist.herokuapp.com/list/user')
         .then(res => {
             console.log('response from getList', res);
-            dispatch({ type: GET_LIST_SUCCESS, payload: res.data.items })
+            console.log('fgl', res.data.friends.filter(friend => friend.accepted === true))
+            dispatch({ type: GET_LIST_SUCCESS, payload: { 
+                items: res.data.items, 
+                friendRequests: res.data.requests,
+                friends: res.data.friends.filter(friend => friend.accepted === true),
+                username: res.data.username
+            }})
         })
         .catch(err => {
             console.log('There was an error in getList axios call', err.response);
@@ -65,6 +71,7 @@ export const editItem = (item) => dispatch =>
                     console.log("res from editItem", res)
                     dispatch({ type: EDIT_ITEM_SUCCESS, payload: res })
                 })
+            // .then(dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from editItem", err)
@@ -84,6 +91,7 @@ export const toggleComplete = (item) => dispatch =>
                     console.log("res from toggleComplete", res)
                     dispatch({ type: TOGGLE_COMPLETE_SUCCESS, payload: {res: res, itemid: item.id} })
                 })
+            // .then(dispatch(getList()))
             .catch(err =>
                 {
                     console.log("err from toggleComplete", err)

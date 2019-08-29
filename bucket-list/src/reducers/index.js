@@ -20,9 +20,7 @@ import {
     ADD_ITEM_START,
     ADD_ITEM_SUCCESS,
     ADD_ITEM_FAIL,
-    SEARCH_FRIENDS_START,
-    SEARCH_FRIENDS_SUCCESS,
-    SEARCH_FRIENDS_FAIL,
+    CLEAR_FRIEND_SEARCH_RESULTS,
     EDIT_ITEM_START,
     EDIT_ITEM_SUCCESS,
     EDIT_ITEM_FAIL,
@@ -32,77 +30,20 @@ import {
     DELETE_ITEM_START,
     DELETE_ITEM_SUCCESS,
     DELETE_ITEM_FAIL,
+    VIEW_FRIEND_START,
+    VIEW_FRIEND_SUCCESS,
+    VIEW_FRIEND_FAIL,
 } from '../actions'
 
 const initialState = {
-    bucketList: [
-        {
-            id: 0,
-            completed: false,
-            itemtitle: "Finish this App",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 1,
-            completed: false,
-            itemtitle: "Have a Nap",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 2,
-            completed: false,
-            itemtitle: "Meet at 11",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 3,
-            completed: false,
-            itemtitle: "Be done in a snap",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 4,
-            completed: false,
-            itemtitle: "Testing some more text",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-        {
-            id: 5,
-            completed: false,
-            itemtitle: "And now this",
-            dateCreated: Date.now(),
-            image: "https://i.imgur.com/pBmNhc1.jpg",
-            itemdesc:"We will finish this app before Thursday",
-            journal: '',
-            comments: '',
-        },
-    ],
+    bucketList: [],
     friends: [],
     isLoading: false,
     error: '',
     curRequestedFriends: [],
     friendSearchResults: [],
-    username: 'Qwerty4',
+    username: '',
+    friendBucket: []
 }
 
 export const reducer = (state = initialState, action) =>
@@ -156,7 +97,10 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: '',
-                bucketList: action.payload
+                bucketList: action.payload.items,
+                curRequestedFriends: action.payload.friendRequests,
+                friends: action.payload.friends,
+                username: action.payload.username
             }
         case GET_LIST_FAIL:
             return {
@@ -175,13 +119,18 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: '',
-                friendSearchResults: [action.payload]
+                friendSearchResults: action.payload
             }
         case SEARCH_FRIEND_FAIL:
             return {
                 ...state,
                 isLoading: false,
                 error: action.payload
+            }
+        case CLEAR_FRIEND_SEARCH_RESULTS:
+            return {
+                ...state,
+                friendSearchResults: []
             }
         case REQUEST_FRIEND_START:
             return {
@@ -194,7 +143,6 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isLoading: false,
                 error: '',
-                curRequestedFriends: [...state.curRequestedFriends, action.payload]
             }
         case REQUEST_FRIEND_FAIL:
             return {
@@ -301,6 +249,25 @@ export const reducer = (state = initialState, action) =>
                     error: ''
                 }
             case DELETE_ITEM_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload
+                }
+            case VIEW_FRIEND_START:
+                return {
+                    ...state,
+                    isLoading: true,
+                    error: '',
+                }
+            case VIEW_FRIEND_SUCCESS:
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: '',
+                    friendBucket: action.payload
+                }
+            case VIEW_FRIEND_FAIL:
                 return {
                     ...state,
                     isLoading: false,

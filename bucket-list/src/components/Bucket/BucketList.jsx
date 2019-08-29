@@ -21,7 +21,6 @@ const BucketList = props =>
         }, [])
     useEffect(_ =>
         {
-            console.log('did useEffect run')
             setLocalBucket(state.bucketList)
             if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
             
@@ -39,7 +38,7 @@ const BucketList = props =>
             <BucketGrid>
                 {localBucket.length > 0 ? localBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
-                    .map(item => <ListItem key={item.id} item={item} /> ) : null }
+                    .map((item, index) => <ListItem key={index} item={item} /> ) : null }
             </BucketGrid>
         </>
     )

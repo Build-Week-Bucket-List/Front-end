@@ -16,16 +16,13 @@ const Archive = props =>
     
     useEffect(_ => 
         {
-            console.log('history', props.history)
             dispatch(getList())
             if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
         }, [])
-    useEffect(_ =>
+    useEffect( _ =>
         {
-            if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
             setArchiveBucket(state.bucketList.filter(item => item.completed === true))
             console.log('archiveBucket:', archiveBucket)
-            
         },[searchString, state.bucketList])
 
     return (
@@ -40,7 +37,7 @@ const Archive = props =>
             <BucketGrid>
                 {archiveBucket.length > 0 ? archiveBucket
                     .filter(item => item.itemtitle.toLowerCase().includes(searchString.toLowerCase()))
-                    .map(item => <ListItem key={item.id} item={item} /> ) : null }
+                    .map((item, index) => <ListItem key={index} item={item} /> ) : null }
             </BucketGrid>
         </>
     )

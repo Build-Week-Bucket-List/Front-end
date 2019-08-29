@@ -18,8 +18,6 @@ import CommentIcon from '@material-ui/icons/Comment';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
-import ClickAway from '../ListItemMenu';
-
 const useStyles = makeStyles(theme => ({
     card: {
         width: 345,
@@ -60,13 +58,8 @@ const ListItem = props =>
             <CardHeader
             avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
-                    { state.username ? state.username[0] : '' }
+                    {props.friendName ? props.friendName[0] : ''}
                 </Avatar>
-            }
-            action={
-                // <IconButton aria-label="settings">                
-                <ClickAway item={props.item}/>
-                // </IconButton>
             }
             title={props.item.itemtitle}
             subheader={props.item.dateCreated}
