@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import ListItem from './ListItem'
-import {getList, resetBucketSearch, deleteItem} from "../../actions"
+import {getList} from "../../actions"
 import { BucketGrid } from './Bucket-Styles'
 import PrimarySearchAppBar from '../Header'
 
@@ -18,7 +18,7 @@ const BucketList = props =>
         {
             dispatch(getList())
             if(state.bucketList.length > 0) setLocalBucket(state.bucketList.filter(item => item.completed === false))
-        }, [])
+        }, []) //eslint-disable-line
     useEffect(_ =>
         {
             console.log('a')

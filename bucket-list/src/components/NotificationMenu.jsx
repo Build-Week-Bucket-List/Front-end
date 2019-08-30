@@ -1,11 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { grey } from '@material-ui/core/colors';
-import { ItemButton, MenuItem } from './Bucket/Bucket-Styles';
+import { MenuItem } from './Bucket/Bucket-Styles';
 import { useSelector, useDispatch } from 'react-redux'
 import { approveFriend } from '../actions'
 

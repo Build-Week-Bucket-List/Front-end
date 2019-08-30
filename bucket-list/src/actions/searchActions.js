@@ -1,4 +1,3 @@
-import axiosWithAuth from '../utils'
 
 export const RESET_BUCKET_SEARCH = "RESET_BUCKET_SEARCH"
 export const RESET_FRIEND_SEARCH = "RESET_FRIEND_SEARCH"

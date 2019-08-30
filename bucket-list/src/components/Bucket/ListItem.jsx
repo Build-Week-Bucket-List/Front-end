@@ -1,5 +1,5 @@
 import React from "react"
-import {useDispatch, useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -98,9 +98,7 @@ const ListItem = props =>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
                 <Typography paragraph>Journal:</Typography>
-                <Typography paragraph>
-                    {props.item.journal && props.item.journal.map((entry, i )=> <p key={i}>{entry.entry}</p>)}
-                </Typography>
+                {props.item.journal && props.item.journal.map((entry, i )=> <Typography paragraph key={i}>{entry.entry}</Typography>)}
             </CardContent>
             </Collapse>
         </Card>

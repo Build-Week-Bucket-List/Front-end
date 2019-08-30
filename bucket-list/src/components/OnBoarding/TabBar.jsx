@@ -7,7 +7,7 @@ import TabPanel from './TabPanel';
 import Typography from '@material-ui/core/Typography';
 
 import Login from './Login';
-import RegisterWithFormik from './RegisterWithFormik';
+import Register from './Register';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -67,7 +67,7 @@ const TabBar = props => {
         </div>
       </AppBar>      
       <TabPanel value={value} index={0}>
-        <RegisterWithFormik history={props.history} />
+        <Register history={props.history} />
       </TabPanel>
 
       <TabPanel value={value} index={1}>

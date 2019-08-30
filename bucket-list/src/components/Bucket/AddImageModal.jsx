@@ -4,14 +4,9 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring";
 import { useDispatch } from "react-redux";
-import { Form, Field, withFormik } from "formik";
-import AddIcon from "@material-ui/icons/Add";
-import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import axios from 'axios';
-import { TextField } from "formik-material-ui";
 import { editItem } from "../../actions";
-import * as Yup from "yup";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -59,7 +54,6 @@ export default function AddImageModal(props) {
 	const {setImageOpen, imageOpen} = props;
   const classes = useStyles();
   const [image, setImage] = useState()
-  const [status, setStatus] = useState(false)
 	const dispatch = useDispatch();
 
   const handleOpen = () => {
@@ -79,7 +73,7 @@ export default function AddImageModal(props) {
               dispatch(editItem({...props.item, image: res.data}));
               handleClose();
             });
-      }}, [image])
+      }}, [image]) //eslint-disable-line
 
   return (
     <div>

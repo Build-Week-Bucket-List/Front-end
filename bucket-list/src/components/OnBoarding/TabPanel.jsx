@@ -3,9 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 
-import Login from './Login';
-import RegisterWithFormik from './RegisterWithFormik';
-
 
 const TabPanel = props => {
   const { value, index, children, ...other} = props;

@@ -8,17 +8,14 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import GroupIcon from '@material-ui/icons/Group';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {Link} from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { searchBucketList, searchFriend } from '../actions'
+import { searchFriend } from '../actions'
 import { logoutUser } from '../actions/onboardingActions';
 
 import AddItemModal from './Bucket/AddItemModal'
@@ -33,16 +30,14 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#000000'
     },
     title: {
-        fontFamily: "Cinzel, serif"
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
+        fontFamily: "Cinzel, serif",
         display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
     },
     search: {
         position: 'relative',

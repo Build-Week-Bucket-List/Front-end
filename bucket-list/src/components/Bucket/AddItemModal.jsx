@@ -114,7 +114,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 
 export default function AddItemModal() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
