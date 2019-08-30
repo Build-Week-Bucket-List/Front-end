@@ -84,7 +84,7 @@ const ListItem = props =>
             <CardContent>
                 <Typography paragraph>Journal:</Typography>
                 <Typography paragraph>
-                    {props.item.journal}
+                    {props.item.journal && props.item.journal.map((entry, i )=> <span key={i}>{entry.entry}</span>)}
                 </Typography>
             </CardContent>
             </Collapse>
