@@ -98,9 +98,7 @@ const ListItem = props =>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
                 <Typography paragraph>Journal:</Typography>
-                <Typography paragraph>
-                    {props.item.journal && props.item.journal.map((entry, i )=> <p key={i}>{entry.entry}</p>)}
-                </Typography>
+                {props.item.journal && props.item.journal.map((entry, i )=> <Typography paragraph key={i}>{entry.entry}</Typography>)}
             </CardContent>
             </Collapse>
         </Card>
