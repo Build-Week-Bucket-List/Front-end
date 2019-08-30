@@ -1,8 +1,6 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom'
-import Login from './components/OnBoarding/Login'
-import Register from './components/OnBoarding/Register'
-import RegisterWithFormik from './components/OnBoarding/RegisterWithFormik'
+import { Route } from 'react-router-dom'
+import RegisterWithFormik from './components/OnBoarding/Register'
 import BucketList from './components/Bucket/BucketList'
 import FriendsPage from './components/Friends/FriendsPage'
 import PrivateRoute from './components/OnBoarding/PrivateRoute'

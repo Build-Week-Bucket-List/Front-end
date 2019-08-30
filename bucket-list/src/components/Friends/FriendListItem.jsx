@@ -1,7 +1,4 @@
 import React from "react"
-import {useDispatch, useSelector} from "react-redux"
-// import {action} from "../../actions"
-
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -14,7 +11,6 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import CommentIcon from '@material-ui/icons/Comment';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
@@ -45,8 +41,6 @@ const ListItem = props =>
 {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
-    // console.log("props from listitem",props)
-    const state = useSelector(state => state)
 
     function handleExpandClick() {
 

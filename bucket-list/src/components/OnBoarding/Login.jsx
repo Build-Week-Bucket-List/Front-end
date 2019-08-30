@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions';
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -21,18 +20,19 @@ const useStyles = makeStyles(theme => ({
   
   },
   textField: {
-    margin: '0 10px'
+    margin: '0'
   }
 }));
 
 const Login = props => {
-  useEffect(_ =>
+  useEffect(() =>
     {
       if(localStorage.getItem('token'))
       {
         props.history.push('/home')
       }
-    }, [])
+    }, []) //eslint-disable-line
+
   const [creds, setCreds] = useState({
     username: '',
     password: ''
@@ -64,6 +64,7 @@ const Login = props => {
           type='text'
           className={ classes.textField }
           onChange={ e => handleChange(e) }
+          fullWidth
         />
         <TextField
           id='password'
@@ -72,11 +73,13 @@ const Login = props => {
           type='password'
           className={ classes.textField }
           onChange={ e => handleChange(e) }
+          fullWidth
         />
         <Button
           type='submit'
           variant='contained'
           className={ classes.button }
+          fullWidth
         >
           Log In
         </Button>

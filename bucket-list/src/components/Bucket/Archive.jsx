@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import ListItem from './ListItem'
-import {getList, resetBucketSearch, } from "../../actions"
+import {getList} from "../../actions"
 import { BucketGrid } from './Bucket-Styles'
 import PrimarySearchAppBar from '../Header'
-
-import HeaderTabs from '../HeaderTabs'
 
 const Archive = props =>
 {
@@ -18,12 +16,12 @@ const Archive = props =>
         {
             dispatch(getList())
             if(state.bucketList.length > 0) setArchiveBucket(state.bucketList.filter(item => item.completed === true))
-        }, [])
+        }, []) //eslint-disable-line
     useEffect( _ =>
         {
             setArchiveBucket(state.bucketList.filter(item => item.completed === true))
             console.log('archiveBucket:', archiveBucket)
-        },[searchString, state.bucketList])
+        },[searchString, state.bucketList]) //eslint-disable-line
 
     return (
         <>
