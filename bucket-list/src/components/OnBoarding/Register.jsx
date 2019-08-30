@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../../actions";
-import { Link } from 'react-router-dom'
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import React from "react";
+import * as Yup from "yup";
+import { Form, Field, withFormik } from "formik";
+import { TextField } from "formik-material-ui";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,64 +15,80 @@ const useStyles = makeStyles(theme => ({
     margin: "100px auto"
   },
   button: {
-    margin: "25px auto",
+    margin: "25px 0",
     backgroundColor: "#DA9417"
+    
   },
   textField: {
-    margin: "0 10px"
+    margin: "0",
   }
 }));
 
-const Register = props => {
-	const dispatch = useDispatch();
-  const [creds, setCreds] = useState({
-    username: "",
-    password: ""
-  });
+const RegisterForm = () => {
   const classes = useStyles();
-
-  const handleChange = e => {
-    setCreds({
-      ...creds,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-		dispatch(registerUser(creds, props.history))
-	};
 
   return (
     <div className={classes.container}>
-      <Link to="/">
-        Login
-      </Link>
-      <form onSubmit={e => handleSubmit(e)}>
-        <TextField
-          id="username"
-          name="username"
+
+      <Form>
+        <Field
+          name="name"
           label="Username"
+          component={TextField}
+          margin="normal"
+          type="text"
           className={classes.textField}
-          onChange={e => handleChange(e)}
+          fullWidth
         />
-        <TextField
-          id="password"
+        <Field
+          type="password"
           name="password"
           label="Password"
-          type="password"
+          component={TextField}
           className={classes.textField}
-          onChange={e => handleChange(e)}
+          fullWidth
         />
         <Button
           type="submit"
           variant="contained"
           className={classes.button}
-        >
+          fullWidth
+          >
           Register
         </Button>
-      </form>
+      </Form>
     </div>
   );
 };
-export default Register;
+
+const Register = withFormik({
+  mapPropsToValues({ name, password }) {
+    return {
+      name: name || "",
+      password: password || ""
+    };
+  },
+
+  validationSchema: Yup.object().shape({
+    name: Yup.string().required("Name is required"),
+    password: Yup.string().required("Password is required")
+  }),
+
+  handleSubmit(values, { props }) {
+    props.registerUser(
+      { username: values.name, password: values.password },
+      props.history
+    );
+  }
+})(RegisterForm);
+
+const mapStateToProps = state => {
+  return {};
+};
+
+const RegisterConnect = connect(
+  mapStateToProps,
+  { registerUser }
+)(Register);
+
+export default RegisterConnect;

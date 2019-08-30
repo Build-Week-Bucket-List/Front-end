@@ -4,11 +4,9 @@ import PrimarySearchAppBar from '../Header'
 import { getList, viewFriend, clearFriendSearchResults, deleteFriend } from '../../actions'
 import { FriendDiv, FriendFlex, FriendRowDiv } from './FriendStyles'
 import SwipeableTemporaryDrawer from './SearchDrawer'
-import { makeStyles } from '@material-ui/core/styles';
-import { blue, red } from '@material-ui/core/colors';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-const useStyles = makeStyles(theme => ({
+/* const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         justifyContent: 'center',
@@ -23,7 +21,7 @@ const useStyles = makeStyles(theme => ({
             color: red[800],
         },
     },
-}));
+})); */
 
 
 const FriendsPage = props =>
@@ -44,7 +42,7 @@ const FriendsPage = props =>
                 setSearchString('')
                 dispatch(clearFriendSearchResults())
             // }
-        }, [])
+        }, []) //eslint-disable-line
 
     const handleDelete = reqid =>
     {

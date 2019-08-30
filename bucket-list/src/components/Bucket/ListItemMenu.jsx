@@ -5,12 +5,11 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { grey } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { ItemButton, MenuItem } from './Bucket-Styles';
+import { MenuItem } from './Bucket-Styles';
 import EditItemModal from './EditItemModal';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { toggleComplete, deleteItem } from '../../actions'
-import AddImageModal from './AddImageModal'
-;
+import AddImageModal from './AddImageModal';
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,7 +40,6 @@ export default function ClickAway({item}) {
   const [imageOpen, setImageOpen] = React.useState(false);
   const classes = useStyles();
 
-  const state = useSelector(state => state)
   const dispatch = useDispatch()
 
   const handleClick = () => {
