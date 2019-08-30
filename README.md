@@ -1,4 +1,4 @@
-![Logo](https://i.imgur.com/zlYAVGt.png) Bucket List, an app to track, manage, and detail your bucket list.
+# ![Logo](https://i.imgur.com/GAtv4ES.png) Bucket List, an app to track, manage, and detail your bucket list.
 ## <a href="https://bw-bucketlist.netlify.com/">Live Site</a>
 
 ## To Use the App
@@ -14,5 +14,19 @@ You can upload pictures, change the title/description, mark the item complete, o
 
 By tabbing to the archive, indicated by ![Archive](https://i.imgur.com/rFSpbR4.jpg), you can view your completed items.
 
-The ![Journal](https://i.imgur.com/BiE6X6C.jpg) button enables you to add to your list item journal.
+The [Journal](https://i.imgur.com/BiE6X6C.jpg) button enables you to add to your list item journal.
 
+## View Your Friends' Lists
+By clicking on the [Friends](https://i.imgur.com/oCjc3YL.jpg) icon, you can see your friends page. Search for users, and send them a friend request.
+
+Once they accept you, you can visit their list, and see how it's going.
+
+## Web View
+
+[Web View](https://i.imgur.com/fczZhQB.jpg)
+
+## Mobile View
+
+[Mobile View](https://i.imgur.com/jr3Bw2v.jpg)
+
+# Start Adding Items Today!
